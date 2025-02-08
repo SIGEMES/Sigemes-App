@@ -24,5 +24,5 @@ data class VerifyOtpRequest(
 
 data class ChangePasswordRequest(
     val email: String,
-    val password: String
+    val new_password: String
 )

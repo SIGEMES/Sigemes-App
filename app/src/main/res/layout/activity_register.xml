@@ -10,8 +10,8 @@
 
     <ImageView
         android:id="@+id/logo_pemkot"
-        android:layout_width="169dp"
-        android:layout_height="174dp"
+        android:layout_width="149dp"
+        android:layout_height="154dp"
         android:contentDescription="@string/logo_pemkot"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -72,7 +72,7 @@
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/person_24">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.android.sigemesapp.presentation.customview.CustomFullnameValid
                     android:id="@+id/ed_register_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -100,7 +100,7 @@
                 android:layout_height="wrap_content"
                 app:startIconDrawable="@drawable/phone_24">
 
-                <com.google.android.material.textfield.TextInputEditText
+                <com.android.sigemesapp.presentation.customview.CustomPhoneNumberValid
                     android:id="@+id/ed_register_pnum"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"

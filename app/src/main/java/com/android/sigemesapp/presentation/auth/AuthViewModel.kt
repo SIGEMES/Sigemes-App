@@ -98,7 +98,7 @@ class AuthViewModel @Inject constructor(
         }
     }
 
-    fun verifyOtpForgotPasswod(email: String, otp: String) {
+    fun verifyOtpForgotPassword(email: String, otp: String) {
         viewModelScope.launch {
             authRepository.verifyOtpForgotPassword(email, otp)
                 .collect{ result ->
