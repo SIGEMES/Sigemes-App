@@ -7,7 +7,7 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatEditText
 import com.android.sigemesapp.R
 
-class CustomPasswordValid : AppCompatEditText {
+class CustomFullnameValid : AppCompatEditText {
 
     constructor(context: Context) : super(context) {
         init()
@@ -33,7 +33,7 @@ class CustomPasswordValid : AppCompatEditText {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 s.toString()
                 error = if ((s?.length ?: 0) < 8) {
-                    context.getString(R.string.name_too_short)
+                    context.getString(R.string.password_too_short)
                 } else {
                     null
                 }

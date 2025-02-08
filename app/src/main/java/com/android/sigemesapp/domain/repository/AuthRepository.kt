@@ -145,7 +145,7 @@ class AuthRepository @Inject constructor (
         emit(Result.Loading)
         try{
             val request = VerifyOtpRequest(email = email, otp = otp)
-            val response = apiService.verifyEmailOtp(request)
+            val response = apiService.verifyOtpForgotPassword(request)
             if (response.status){
                 emit(Result.Success(response))
             } else {
@@ -157,10 +157,10 @@ class AuthRepository @Inject constructor (
         }
     }
 
-    fun changePassword(email: String, password: String): Flow<Result<ChangePasswordResponse>> = flow {
+    fun changePassword(email: String, new_password: String): Flow<Result<ChangePasswordResponse>> = flow {
         emit(Result.Loading)
         try{
-            val request = ChangePasswordRequest(email = email, password = password)
+            val request = ChangePasswordRequest(email = email, new_password = new_password)
             val response = apiService.changePassword(request)
             emit(Result.Success(response))
         } catch (e: Exception) {

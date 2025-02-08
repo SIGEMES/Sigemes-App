@@ -12,6 +12,7 @@ import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
 import retrofit2.http.Body
 import retrofit2.http.POST
+import retrofit2.http.PUT
 
 interface ApiService {
 
@@ -45,7 +46,7 @@ interface ApiService {
         @Body verifyOtpRequest: VerifyOtpRequest
     ): VerifyEmailResponse
 
-    @POST("renters/forgot-password/change-password")
+    @PUT("renters/forgot-password/change-password")
     suspend fun changePassword(
         @Body changePassword: ChangePasswordRequest
     ): ChangePasswordResponse

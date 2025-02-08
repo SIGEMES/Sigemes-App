@@ -3,6 +3,8 @@ package com.android.sigemesapp.presentation.auth.register
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -11,18 +13,27 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
 import dagger.hilt.android.AndroidEntryPoint
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.databinding.ActivityEmailVerificationOtpBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
+import com.android.sigemesapp.presentation.auth.changePassword.ChangePasswordActivity
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
+import com.android.sigemesapp.utils.dialog.FailedDialog
+import com.android.sigemesapp.utils.dialog.LoadingDialog
+import com.android.sigemesapp.utils.dialog.SuccessDialog
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class EmailVerificationOtpActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityEmailVerificationOtpBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private val loadingDialog = LoadingDialog(this)
+    private val successDialog = SuccessDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -71,26 +82,32 @@ class EmailVerificationOtpActivity : AppCompatActivity() {
             authViewModel.verifyOtpResult.observe(this) { result ->
                 when (result) {
                     is Result.Loading -> {
-//                        loadingDialog.startLoadingDialog()
+                        loadingDialog.startLoadingDialog()
                     }
 
                     is Result.Success -> {
-//                        loadingDialog.dismissDialog()
-//                        successDialog.startSuccessDialog(getString(R.string.otp_verified))
-                        navigateToLogin()
+                        loadingDialog.dismissDialog()
+                        successDialog.startSuccessDialog(getString(R.string.otp_verified))
+                        lifecycleScope.launch {
+                            delay(2000)
+                            navigateToLogin()
+                        }
                     }
 
                     is Result.Error -> {
-//                        loadingDialog.dismissDialog()
-//                        val failedDialog = FailedDialog(this)
-//                        failedDialog.startFailedDialog(getString(R.string.otp_verification_failed))
+                        loadingDialog.dismissDialog()
+                        val failedDialog = FailedDialog(this)
+                        failedDialog.startFailedDialog(getString(R.string.otp_verification_failed))
+                        lifecycleScope.launch {
+                            delay(2000)
+                            failedDialog.dismissDialog()
+                        }
                     }
                 }
             }
         } else {
             Toast.makeText(this, R.string.otp_empty, Toast.LENGTH_SHORT).show()
         }
-
     }
 
     private fun navigateToLogin() {

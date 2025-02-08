@@ -12,14 +12,18 @@ import android.widget.Toast
 import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.ActivityRegisterBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
-import dagger.hilt.android.AndroidEntryPoint
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.dialog.FailedDialog
+import com.android.sigemesapp.utils.dialog.LoadingDialog
+import com.android.sigemesapp.utils.dialog.SuccessDialog
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class RegisterActivity : AppCompatActivity() {
@@ -27,6 +31,8 @@ class RegisterActivity : AppCompatActivity() {
     private lateinit var binding: ActivityRegisterBinding
     private val authViewModel: AuthViewModel by viewModels()
     private lateinit var genderSpinner: Spinner
+    private val successDialog = SuccessDialog(this)
+    private val loadingDialog = LoadingDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -34,11 +40,6 @@ class RegisterActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         enableEdgeToEdge()
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.register)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
-        }
 
         genderSpinner = binding.spinnerCrops
         setupView()
@@ -96,23 +97,29 @@ class RegisterActivity : AppCompatActivity() {
     }
 
     private fun registerUser(fullname: String, email: String, password: String, phoneNumber: String, gender: String) {
-//        val loadingDialog = LoadingDialog(this)
 
         authViewModel.register(email, password, fullname, phoneNumber, gender)
         authViewModel.registerResult.observe(this@RegisterActivity) { result ->
             when (result) {
                 is Result.Loading -> {
-//                    loadingDialog.startLoadingDialog()
+                    loadingDialog.startLoadingDialog()
                 }
                 is Result.Success -> {
-//                    loadingDialog.dismissDialog()
-//                    successDialog.startSuccessDialog(getString(R.string.register_success))
-                    sendOtpEmailVerif(email)
+                    loadingDialog.dismissDialog()
+                    successDialog.startSuccessDialog(getString(R.string.register_success))
+                    lifecycleScope.launch {
+                        delay(2000)
+                        sendOtpEmailVerif(email)
+                    }
                 }
                 is Result.Error -> {
-//                    loadingDialog.dismissDialog()
-//                    val failedDialog = FailedDialog(this)
-//                    failedDialog.startFailedDialog(getString(R.string.register_failed))
+                    loadingDialog.dismissDialog()
+                    val failedDialog = FailedDialog(this)
+                    failedDialog.startFailedDialog(getString(R.string.register_failed))
+                    lifecycleScope.launch {
+                        delay(2000)
+                        failedDialog.dismissDialog()
+                    }
                 }
             }
         }
@@ -125,24 +132,34 @@ class RegisterActivity : AppCompatActivity() {
         authViewModel.sendOtpResult.observe(this) { result ->
             when(result) {
                 is Result.Loading -> {
-
+                    loadingDialog.startLoadingDialog()
                 }
                 is Result.Success -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        navigateToVerificationEmail(email)
-                    }, 2000)
+                    loadingDialog.dismissDialog()
+                    val successDialog = SuccessDialog(this)
+                    successDialog.startSuccessDialog(getString(R.string.otp_sent_success))
+                    navigateToVerificationEmail(email)
                 }
                 is Result.Error -> {
-
+                    val failedDialog = FailedDialog(this)
+                    failedDialog.startFailedDialog(getString(R.string.otp_sent_failed))
+                    lifecycleScope.launch {
+                        delay(2000)
+                        failedDialog.dismissDialog()
+                    }
                 }
             }
         }
     }
 
     private fun navigateToVerificationEmail(email: String) {
-        Intent(this@RegisterActivity, EmailVerificationOtpActivity::class.java).also {
-            it.putExtra("EMAIL", email)
-            startActivity(it)
+        lifecycleScope.launch {
+            delay(2000)
+            successDialog.dismissDialog()
+            Intent(this@RegisterActivity, EmailVerificationOtpActivity::class.java).also {
+                it.putExtra("EMAIL", email)
+                startActivity(it)
+            }
         }
     }
 }

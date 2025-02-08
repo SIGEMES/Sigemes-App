@@ -8,6 +8,8 @@
     <string name="riwayat">Riwayat</string>
     <string name="akun">Akun</string>
     <string name="password_too_short">Kata sandi terlalu pendek, harus lebih dari 8 karakter</string>
+    <string name="name_too_short">Karakter nama terlalu pendek, harus lebih dari 2 karakter</string>
+    <string name="phoneNum_too_short">Nomor handphone terlalu pendek, harus lebih dari 9 karakter</string>
     <string name="invalid_email">Email tidak valid, format: nama@domain.com</string>
     <string name="welcome">Selamat Datang!</string>
     <string name="please_login_with_your_information">Silahkan login dengan informasi anda</string>
@@ -60,6 +62,11 @@
     <string name="login_failed">Login Gagal!</string>
     <string name="all_req">Semua field harus diisi!</string>
     <string name="verifikasi_email_anda">Verifikasi Email Anda</string>
+    <string name="failed">Gagal</string>
+    <string name="please_wait">Harap tunggu..</string>
+    <string name="success">Berhasil!</string>
+    <string name="register_success">Akun berhasil didaftarkan!</string>
+    <string name="register_failed">Akun tidak berhasil didaftarkan..</string>
     <string-array name="gender_options">
         <item>Laki-Laki</item>
         <item>Perempuan</item>

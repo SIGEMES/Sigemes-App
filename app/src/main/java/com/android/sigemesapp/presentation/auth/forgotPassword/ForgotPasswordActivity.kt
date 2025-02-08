@@ -13,17 +13,27 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
+import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.databinding.ActivityForgotPasswordBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
 import com.android.sigemesapp.presentation.auth.otp.OtpVerificationActivity
+import com.android.sigemesapp.utils.dialog.FailedDialog
+import com.android.sigemesapp.utils.dialog.LoadingDialog
+import com.android.sigemesapp.utils.dialog.SuccessDialog
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 
+@AndroidEntryPoint
 class ForgotPasswordActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityForgotPasswordBinding
     private val authViewModel: AuthViewModel by viewModels()
+    private val loadingDialog = LoadingDialog(this)
+    private val successDialog = SuccessDialog(this)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -75,28 +85,37 @@ class ForgotPasswordActivity : AppCompatActivity() {
 
     private fun sendForgotPasswordOtp(email: String) {
         authViewModel.sendOtpForgotPassword(email)
-
         authViewModel.sendChangePassOtpResult.observe(this) { result ->
             when (result) {
                 is Result.Loading -> {
-
+                    loadingDialog.startLoadingDialog()
                 }
                 is Result.Success -> {
-                    Handler(Looper.getMainLooper()).postDelayed({
-                        navigateToOtpVerification(email)
-                    }, 2000)
+                    loadingDialog.dismissDialog()
+                    val successDialog = SuccessDialog(this)
+                    successDialog.startSuccessDialog(getString(R.string.otp_sent_success))
+                    navigateToOtpVerification(email)
                 }
                 is Result.Error -> {
-
+                    val failedDialog = FailedDialog(this)
+                    failedDialog.startFailedDialog(getString(R.string.otp_sent_failed))
+                    lifecycleScope.launch {
+                        delay(2000)
+                        failedDialog.dismissDialog()
+                    }
                 }
             }
         }
     }
 
     private fun navigateToOtpVerification(email: String) {
-        Intent(this@ForgotPasswordActivity, OtpVerificationActivity::class.java).also {
-            it.putExtra("EMAIL", email)
-            startActivity(it)
+        lifecycleScope.launch {
+            delay(2000)
+            successDialog.dismissDialog()
+            Intent(this@ForgotPasswordActivity, OtpVerificationActivity::class.java).also {
+                it.putExtra("EMAIL", email)
+                startActivity(it)
+            }
         }
     }
 }
