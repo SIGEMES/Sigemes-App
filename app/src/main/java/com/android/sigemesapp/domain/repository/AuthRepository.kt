@@ -18,6 +18,9 @@ import com.android.sigemesapp.data.source.remote.ChangePasswordRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
+import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
 
@@ -168,4 +171,39 @@ class AuthRepository @Inject constructor (
             Log.d("ChangeForgotPasswordData", "Error: ${e.message}")
         }
     }
+
+    fun getAllGuesthousesWithDetails(): Flow<Result<List<GuesthouseResponse>>> = flow {
+        emit(Result.Loading)
+        try {
+            val allGuesthousesResponse = apiService.getAllGuesthouses()
+            val guesthouseIds = allGuesthousesResponse.data.map { it.id }
+
+            val guesthouses = mutableListOf<GuesthouseResponse>()
+
+            for (id in guesthouseIds) {
+                try {
+                    val guesthouse = apiService.getGuesthouse(id)
+                    guesthouses.add(guesthouse)
+                } catch (e: Exception) {
+                    Log.e("GetGuesthouseDetails", "Failed to fetch guesthouse with ID: $id, Error: ${e.message}")
+                }
+            }
+
+            emit(Result.Success(guesthouses))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+            Log.e("GetGuesthousesData", "Error: ${e.message}")
+        }
+    }
+
+    fun getGuesthouseRooms(id: Int): Flow<Result<List<RoomItem>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getGuesthouseRooms(id)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
 }

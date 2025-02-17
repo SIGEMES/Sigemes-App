@@ -6,6 +6,300 @@
     android:layout_height="match_parent"
     tools:context=".presentation.account.AccountFragment">
 
+    <TextView
+        android:id="@+id/app_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="16dp"
+        android:text="@string/sigemes"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"/>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/profile_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/app_name"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="@color/darkBlue">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:padding="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/profile_picture"
+                android:layout_width="78dp"
+                android:layout_height="78dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:src="@tools:sample/avatars"/>
+
+            <TextView
+                android:id="@+id/fullname"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:text="@string/user_fullname"
+                style="@style/TextBoldH5"
+                android:maxLines="2"
+                android:layout_marginStart="10dp"
+                app:layout_constraintEnd_toStartOf="@id/edit_button"
+                app:layout_constraintStart_toEndOf="@id/profile_picture"
+                app:layout_constraintBottom_toTopOf="@id/user_email"
+                app:layout_constraintTop_toTopOf="@id/profile_picture"/>
+
+            <TextView
+                android:id="@+id/user_email"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/user_domain_com"
+                style="@style/TextH6"
+                android:layout_marginStart="10dp"
+                app:layout_constraintTop_toBottomOf="@id/fullname"
+                app:layout_constraintStart_toEndOf="@id/profile_picture"
+                app:layout_constraintBottom_toBottomOf="@id/profile_picture"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_button"
+                android:layout_width="40dp"
+                android:layout_height="50dp"
+                android:backgroundTint="@color/softblue"
+                android:contentDescription="@string/icon"
+                android:paddingStart="5dp"
+                android:paddingEnd="5dp"
+                app:cornerRadius="100dp"
+                app:icon="@drawable/edit"
+                app:iconSize="30dp"
+                app:iconTint="@color/babyblue"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck"/>
+
+            <com.google.android.material.button.MaterialButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/lihat_profil_saya"
+                android:padding="3dp"
+                android:textAllCaps="false"
+                android:textSize="14sp"
+                app:cornerRadius="12dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:layout_marginTop="16dp"
+                app:layout_constraintTop_toBottomOf="@id/user_email"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/settings_card"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginTop="16dp"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintTop_toBottomOf="@id/profile_card"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="2dp"
+        app:strokeWidth="0.5dp"
+        app:strokeColor="@color/darkBlue">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pusat_info"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:id="@+id/pusat_bantuan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pusat_bantuan"
+                        style="@style/TextBoldH6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/pusat_bantuan_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lorem"
+                        style="@style/TextH7"
+                        app:layout_constraintTop_toBottomOf="@id/pusat_bantuan"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/nav_next"
+                        android:maxLines="1"
+                        tools:ignore="SmallSp" />
+
+                    <ImageView
+                        android:id="@+id/nav_next"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/navigate_next"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/pusat_bantuan_desc"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/onGray"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/pusat_bantuan_desc"
+                        android:layout_marginTop="10dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/hubungi_kami_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/pusat_info">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:id="@+id/hubungi_kami"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/hubungi_kami"
+                        style="@style/TextBoldH6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/hubungi_kami_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lorem"
+                        style="@style/TextH7"
+                        app:layout_constraintTop_toBottomOf="@id/hubungi_kami"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toStartOf="@id/nav_next2"
+                        android:maxLines="1"
+                        tools:ignore="SmallSp" />
+
+                    <ImageView
+                        android:id="@+id/nav_next2"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/navigate_next"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/hubungi_kami_desc"/>
+
+                    <View
+                        android:layout_width="match_parent"
+                        android:layout_height="1dp"
+                        android:background="@color/onGray"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/hubungi_kami_desc"
+                        android:layout_marginTop="10dp"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/pengaturan_card"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/hubungi_kami_card">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingHorizontal="16dp"
+                    android:paddingTop="16dp">
+
+                    <TextView
+                        android:id="@+id/pengaturan"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pengaturan"
+                        style="@style/TextBoldH6"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"/>
+
+                    <TextView
+                        android:id="@+id/pengaturan_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lorem"
+                        style="@style/TextH7"
+                        app:layout_constraintTop_toBottomOf="@id/pengaturan"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        android:layout_marginBottom="16dp"
+                        app:layout_constraintEnd_toStartOf="@id/nav_next3"
+                        android:maxLines="1"
+                        tools:ignore="SmallSp" />
+
+                    <ImageView
+                        android:id="@+id/nav_next3"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:src="@drawable/navigate_next"
+                        app:layout_constraintTop_toTopOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintStart_toEndOf="@id/pengaturan_desc"/>
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </com.google.android.material.card.MaterialCardView>
+
     <com.google.android.material.button.MaterialButton
         android:id="@+id/logout_button"
         android:layout_width="200dp"
@@ -16,12 +310,12 @@
         app:icon="@drawable/baseline_logout_24"
         app:iconGravity="textStart"
         android:textAllCaps="false"
-        android:text="Keluar"
+        android:text="@string/keluar"
         app:strokeColor="@color/red"
         app:strokeWidth="1dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/settings_card"
         style="@style/Widget.MaterialComponents.Button.OutlinedButton"
         android:layout_marginVertical="10dp"/>
 

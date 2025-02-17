@@ -41,17 +41,36 @@ object AppModule {
         }
     }
 
+//    @Provides
+//    @Singleton
+//    fun provideAuthInterceptor(userPreference: UserPreference): Interceptor {
+//        return Interceptor { chain ->
+//            val token = runBlocking { userPreference.getSession().first().token }
+//            Log.d("AuthInterceptor", "Token yang dikirim: $token")
+//
+//            val request = chain.request().newBuilder()
+//                .addHeader("Authorization", "Bearer $token")
+//                .build()
+//            chain.proceed(request)
+//        }
+//    }
+
     @Provides
     @Singleton
-    fun provideAuthInterceptor(userPreference: UserPreference): Interceptor {
+    fun provideAuthInterceptor(): Interceptor {
         return Interceptor { chain ->
-            val token = runBlocking { userPreference.getSession().first().token }
+            val token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwiZW1haWwiOiJzdXBlcmFkbWluQHByaXNtYS5pbyIsImZ1bGxuYW1lIjoiU3VwZXIgQWRtaW4iLCJyb2xlIjoic3VwZXJfYWRtaW4iLCJpYXQiOjE3MzgwMDA5Mzd9.x8mucG_6z1nfIbhKM8FiPpTaK1xElkTk9BJj89evRng"
+
+            Log.d("AuthInterceptor", "Token yang dikirim: $token")
+
             val request = chain.request().newBuilder()
                 .addHeader("Authorization", "Bearer $token")
                 .build()
             chain.proceed(request)
         }
     }
+
+
 
     @Provides
     @Singleton

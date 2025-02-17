@@ -5,14 +5,20 @@ import com.android.sigemesapp.data.source.remote.LoginRequest
 import com.android.sigemesapp.data.source.remote.RegisterRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
+import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
+import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
 import com.android.sigemesapp.data.source.remote.response.LoginResponse
 import com.android.sigemesapp.data.source.remote.response.RegisterResponse
 import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
 import retrofit2.http.Body
+import retrofit2.http.GET
 import retrofit2.http.POST
 import retrofit2.http.PUT
+import retrofit2.http.Path
 
 interface ApiService {
 
@@ -50,5 +56,24 @@ interface ApiService {
     suspend fun changePassword(
         @Body changePassword: ChangePasswordRequest
     ): ChangePasswordResponse
+
+    @GET("guesthouses")
+    suspend fun getAllGuesthouses() : AllGuesthouseResponse
+
+    @GET("guesthouses/{id}")
+    suspend fun getGuesthouse(
+        @Path("id") id: Int
+    ) : GuesthouseResponse
+
+    @GET("guesthouses/{guesthouse-id}/rooms")
+    suspend fun getGuesthouseRooms(
+        @Path("guesthouse-id") id: Int
+    ) : GuesthouseRoomsResponse
+
+    @GET("guesthouses/{guesthouse_id}/rooms/{room_id}")
+    suspend fun getDetailGuesthouseRoom(
+        @Path("guesthouse_id") guesthouse_id: Int,
+        @Path("room_id") room_id: Int
+    ) : DetailRoomResponse
 
 }

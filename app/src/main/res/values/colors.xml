@@ -10,4 +10,11 @@
     <color name="onGray">#9E9EA0</color>
     <color name="red">#CA1313</color>
     <color name="green">#254336</color>
+    <color name="darkBlue">#3B6790</color>
+    <color name="yellow">#FF9D23</color>
+    <color name="softyellow">#FFF4E0</color>
+    <color name="darkGreen">#3E7B27</color>
+    <color name="softblue">#E8F9FF</color>
+    <color name="orange">#EB5B00</color>
+    <color name="facility">#9E6F21</color>
 </resources>
