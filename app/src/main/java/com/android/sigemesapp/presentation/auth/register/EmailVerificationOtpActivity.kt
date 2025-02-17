@@ -3,8 +3,6 @@ package com.android.sigemesapp.presentation.auth.register
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -15,15 +13,14 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
-import dagger.hilt.android.AndroidEntryPoint
-import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.databinding.ActivityEmailVerificationOtpBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.auth.changePassword.ChangePasswordActivity
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
+import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.FailedDialog
 import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.dialog.SuccessDialog
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 

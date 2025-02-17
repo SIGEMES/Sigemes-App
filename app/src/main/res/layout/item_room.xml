@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="5dp"
+    android:layout_marginVertical="5dp"
+    app:cardCornerRadius="20dp"
+    app:strokeWidth="1.5dp"
+    app:strokeColor="@color/black">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/room_type"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/room_type"
+            style="@style/TextBoldH45"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_photo"
+            android:layout_marginTop="16dp"
+            android:layout_marginStart="16dp"/>
+
+        <ImageView
+            android:id="@+id/icon_hotel"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/hotel"
+            app:tint="@color/black"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/room_type"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="16dp"/>
+
+        <TextView
+            android:id="@+id/mess_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/mess_kota"
+            style="@style/TextBoldH6"
+            android:textColor="@color/black"
+            app:layout_constraintStart_toEndOf="@id/icon_hotel"
+            app:layout_constraintTop_toTopOf="@id/icon_hotel"
+            app:layout_constraintBottom_toBottomOf="@id/icon_hotel"
+            android:layout_marginStart="13dp"/>
+
+        <ImageView
+            android:id="@+id/star"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:src="@drawable/star"
+            app:tint="@color/yellow"
+            android:layout_marginEnd="8dp"
+            app:layout_constraintBottom_toBottomOf="@id/rating"
+            app:layout_constraintEnd_toStartOf="@id/rating"
+            app:layout_constraintTop_toTopOf="@id/rating"/>
+
+        <TextView
+            android:id="@+id/rating"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/rating"
+            android:textColor="@color/facility"
+            style="@style/TextBoldH6"
+            android:layout_marginEnd="5dp"
+            app:layout_constraintBottom_toBottomOf="@id/ulasan"
+            app:layout_constraintEnd_toStartOf="@id/ulasan"
+            app:layout_constraintTop_toTopOf="@id/ulasan"/>
+
+        <TextView
+            android:id="@+id/ulasan"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/ulasan_count"
+            android:textColor="@color/facility"
+            android:textSize="12sp"
+            android:textStyle="bold"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_photo"/>
+
+        <TextView
+            android:id="@+id/text_facilities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Fasilitas: "
+            android:textColor="@color/facility"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/icon_hotel"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="16dp"/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/facilities"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            app:layout_constraintStart_toEndOf="@id/text_facilities"
+            app:layout_constraintTop_toTopOf="@id/text_facilities"
+            app:layout_constraintBottom_toBottomOf="@id/text_facilities"/>
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/onGray"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="15dp"
+            app:layout_constraintTop_toBottomOf="@id/facilities"/>
+
+        <TextView
+            android:id="@+id/price_range"
+            android:textColor="@color/orange"
+            android:textStyle="bold"
+            style="@style/TextBoldH45"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/price_range"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/divider"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"/>
+
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/button_select"-->
+<!--            android:layout_width="58dp"-->
+<!--            android:layout_height="28dp"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            android:layout_marginBottom="16dp"-->
+<!--            android:background="@color/babyblue"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:padding="0dp"-->
+<!--            android:text="@string/pilih"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textColor="@color/white"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold"-->
+<!--            app:cornerRadius="12dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="parent"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/price_range"-->
+<!--            tools:ignore="TouchTargetSizeCheck,TextSizeCheck,TextContrastCheck" />-->
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</com.google.android.material.card.MaterialCardView>
