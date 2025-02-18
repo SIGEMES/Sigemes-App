@@ -202,11 +202,12 @@
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/facilities"
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintBottom_toBottomOf="@id/text_facilities"
                     app:layout_constraintStart_toEndOf="@id/text_facilities"
                     app:layout_constraintTop_toTopOf="@id/text_facilities"
+                    app:layout_constraintEnd_toEndOf="parent"
                     tools:listitem="@layout/item_facility" />
 
                 <View
@@ -442,23 +443,24 @@
                             android:id="@+id/renter_option_1"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
-                            app:cardCornerRadius="12dp"
-                            app:strokeWidth="1.5dp"
-                            app:strokeColor="@color/babyblue"
                             android:layout_marginTop="16dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:padding="12dp"
+                            app:cardCornerRadius="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/renter_selection_title"
-                            android:padding="12dp"
-                            android:clickable="true"
-                            android:focusable="true">
+                            app:strokeColor="@color/babyblue"
+                            app:strokeWidth="1.5dp"
+                            tools:ignore="TouchTargetSizeCheck">
 
                             <CheckBox
                                 android:id="@+id/check_option_1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Option 1"
+                                android:clickable="false"
                                 android:paddingHorizontal="10dp"
-                                android:clickable="false" />
+                                android:text="Option 1" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -466,22 +468,23 @@
                             android:id="@+id/renter_option_2"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardCornerRadius="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/renter_option_1"
-                            android:layout_marginTop="10dp"
-                            app:cardCornerRadius="12dp"
-                            app:strokeWidth="1.5dp"
                             app:strokeColor="@color/onGray"
-                            android:clickable="true"
-                            android:focusable="true">
+                            app:strokeWidth="1.5dp"
+                            tools:ignore="TouchTargetSizeCheck">
 
                             <CheckBox
                                 android:id="@+id/check_option_2"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Option 2"
+                                android:clickable="false"
                                 android:paddingHorizontal="10dp"
-                                android:clickable="false" />
+                                android:text="Option 2" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -489,23 +492,24 @@
                             android:id="@+id/renter_option_3"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            android:paddingVertical="10dp"
+                            app:cardCornerRadius="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/renter_option_2"
-                            android:layout_marginTop="10dp"
-                            app:cardCornerRadius="12dp"
-                            app:strokeWidth="1.5dp"
-                            android:paddingVertical="10dp"
                             app:strokeColor="@color/onGray"
-                            android:clickable="true"
-                            android:focusable="true">
+                            app:strokeWidth="1.5dp"
+                            tools:ignore="TouchTargetSizeCheck">
 
                             <CheckBox
                                 android:id="@+id/check_option_3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Option 3"
+                                android:clickable="false"
                                 android:paddingHorizontal="10dp"
-                                android:clickable="false" />
+                                android:text="Option 3" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -513,22 +517,23 @@
                             android:id="@+id/renter_option_4"
                             android:layout_width="wrap_content"
                             android:layout_height="35dp"
+                            android:layout_marginTop="10dp"
+                            android:clickable="true"
+                            android:focusable="true"
+                            app:cardCornerRadius="12dp"
                             app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/renter_option_3"
-                            android:layout_marginTop="10dp"
-                            app:cardCornerRadius="12dp"
-                            app:strokeWidth="1.5dp"
                             app:strokeColor="@color/onGray"
-                            android:clickable="true"
-                            android:focusable="true">
+                            app:strokeWidth="1.5dp"
+                            tools:ignore="TouchTargetSizeCheck">
 
                             <CheckBox
                                 android:id="@+id/check_option_4"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Option 4"
+                                android:clickable="false"
                                 android:paddingHorizontal="10dp"
-                                android:clickable="false" />
+                                android:text="Option 4" />
 
                         </com.google.android.material.card.MaterialCardView>
 
@@ -581,7 +586,7 @@
                             app:layout_constraintStart_toStartOf="@id/slot_tamu_title"
                             app:layout_constraintTop_toBottomOf="@id/slot_tamu_title"
                             android:text="@string/total_slot_title"
-                            style="@style/TextH7"/>
+                            style="@style/TextH6"/>
 
                         <TextView
                             android:id="@+id/total_slot_count"
@@ -592,7 +597,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/total_slot"
                             android:layout_marginStart="5dp"
                             android:text="@string/total_slot_count"
-                            style="@style/TextH7"/>
+                            style="@style/TextH6"/>
 
                         <TextView
                             android:id="@+id/available_slot"
@@ -602,7 +607,7 @@
                             app:layout_constraintStart_toStartOf="@id/total_slot"
                             app:layout_constraintTop_toBottomOf="@id/total_slot"
                             android:text="@string/available_slot_text"
-                            style="@style/TextH7"/>
+                            style="@style/TextH6"/>
 
                         <TextView
                             android:id="@+id/total_available_slot_count"
@@ -613,7 +618,7 @@
                             app:layout_constraintBottom_toBottomOf="@+id/available_slot"
                             android:layout_marginStart="5dp"
                             android:text="@string/available_slot_count"
-                            style="@style/TextH7"/>
+                            style="@style/TextH6"/>
 
                         <ImageView
                             android:id="@+id/warning_icon"
@@ -633,7 +638,7 @@
                             app:layout_constraintTop_toTopOf="@id/warning_icon"
                             app:layout_constraintStart_toEndOf="@id/warning_icon"
                             app:layout_constraintBottom_toBottomOf="@id/warning_icon"
-                            style="@style/TextH6"
+                            style="@style/TextBoldH6"
                             android:textColor="@color/orange"
                             android:layout_marginStart="8dp"/>
 
@@ -647,18 +652,17 @@
                             app:layout_constraintTop_toBottomOf="@id/warning_text"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:text="@string/reschedule_text"
-                            style="@style/TextH7"/>
+                            style="@style/TextH6"/>
 
                         <TextView
                             android:id="@+id/refund_text"
-                            style="@style/TextH7"
+                            style="@style/TextH6"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/refund_text"
                             android:textColor="@color/orange"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintHorizontal_bias="0.0"
                             app:layout_constraintStart_toStartOf="@id/reschedule_text"
                             app:layout_constraintTop_toBottomOf="@id/reschedule_text" />
 
@@ -684,6 +688,7 @@
                             android:layout_marginTop="10dp"/>
 
                         <TextView
+                            android:id="@+id/fasilias_kamar_text"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             app:layout_constraintStart_toStartOf="parent"
@@ -728,7 +733,7 @@
                             app:layout_constraintTop_toTopOf="parent"/>
 
                         <TextView
-                            android:id="@+id/rincian_pesanan"
+                            android:id="@+id/rincian_guesthouse"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="@string/rincian"
@@ -738,6 +743,16 @@
                             app:layout_constraintTop_toBottomOf="@id/rincian_harga_title"/>
 
                         <TextView
+                            android:id="@+id/rincian_room"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/rincian"
+                            style="@style/TextH6"
+                            android:layout_marginTop="0dp"
+                            app:layout_constraintStart_toStartOf="parent"
+                            app:layout_constraintTop_toBottomOf="@id/rincian_guesthouse"/>
+
+                        <TextView
                             android:id="@+id/renter_type_title"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
@@ -745,7 +760,7 @@
                             style="@style/TextH6"
                             android:layout_marginTop="8dp"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/rincian_pesanan"/>
+                            app:layout_constraintTop_toBottomOf="@id/rincian_room"/>
 
                         <TextView
                             android:id="@+id/renter_type"
@@ -829,21 +844,23 @@
                             app:cornerRadius="24dp"
                             app:layout_constraintEnd_toStartOf="@id/checkout_button"
                             app:layout_constraintStart_toStartOf="parent"
-                            app:layout_constraintTop_toBottomOf="@id/harga_total_title" />
+                            app:layout_constraintTop_toBottomOf="@id/harga_total_title"
+                            tools:ignore="TouchTargetSizeCheck" />
 
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/checkout_button"
                             android:layout_width="0dp"
                             android:layout_height="45dp"
+                            android:layout_marginTop="16dp"
+                            android:paddingHorizontal="2dp"
                             android:text="@string/checkout_kamar_ini"
                             android:textAllCaps="false"
                             android:textSize="12sp"
-                            android:paddingHorizontal="2dp"
+                            app:cornerRadius="24dp"
+                            app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/cart_button"
                             app:layout_constraintTop_toBottomOf="@id/harga_total_title"
-                            android:layout_marginTop="16dp"
-                            app:layout_constraintEnd_toEndOf="parent"
-                            app:cornerRadius="24dp" />
+                            tools:ignore="TouchTargetSizeCheck" />
 
                     </androidx.constraintlayout.widget.ConstraintLayout>
 

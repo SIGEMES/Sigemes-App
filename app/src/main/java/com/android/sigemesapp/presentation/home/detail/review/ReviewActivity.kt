@@ -1,21 +1,42 @@
 package com.android.sigemesapp.presentation.home.detail.review
 
 import android.os.Bundle
+import android.view.MenuItem
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import com.android.sigemesapp.R
+import com.android.sigemesapp.databinding.ActivityDetailMessBinding
+import com.android.sigemesapp.databinding.ActivityReviewBinding
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
 
 class ReviewActivity : AppCompatActivity() {
+
+    private lateinit var binding: ActivityReviewBinding
+
+    companion object {
+        const val KEY_ROOM_NAME = "key_room_name"
+    }
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        enableEdgeToEdge()
-        setContentView(R.layout.activity_review)
-        ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
-            val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
-            v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
-            insets
+        binding = ActivityReviewBinding.inflate(layoutInflater)
+        setContentView(binding.root)
+
+        supportActionBar?.setDisplayHomeAsUpEnabled(true)
+        val roomName = intent.getStringExtra(DetailMessActivity.KEY_ROOM_NAME)
+        supportActionBar?.title = roomName
+}
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressedDispatcher.onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
         }
     }
 }

@@ -1,10 +1,392 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.coordinatorlayout.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/babyblue"
     tools:context=".presentation.home.detail.about.AboutActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@color/babyblue"
+        android:elevation="0dp">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_scrollFlags="enterAlways|snap">
+
+            <ImageView
+                android:id="@+id/back_button"
+                android:layout_width="25dp"
+                android:layout_height="24dp"
+                android:layout_gravity="start|top"
+                android:layout_margin="16dp"
+                android:clickable="true"
+                android:contentDescription="@string/icon"
+                android:focusable="true"
+                android:background="?attr/selectableItemBackground"
+                android:src="@drawable/arrow_back"
+                app:tint="@color/white"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:ignore="TouchTargetSizeCheck" />
+
+            <TextView
+                android:id="@+id/guesthouse_name"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:text="@string/mess_kota"
+                style="@style/TextBoldH4"
+                android:textColor="@color/white"
+                android:layout_marginTop="16dp"/>
+
+            <Button
+                android:id="@+id/btnTentang"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clickable="true"
+                android:focusable="true"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/btnFasilitas"
+                app:layout_constraintTop_toBottomOf="@id/guesthouse_name"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                android:textAllCaps="false"
+                android:text="@string/tentang"/>
+
+            <View
+                android:id="@+id/active_line_1"
+                android:layout_width="90dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="2dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="@id/btnTentang"
+                app:layout_constraintEnd_toEndOf="@id/btnTentang"
+                app:layout_constraintTop_toBottomOf="@id/btnTentang"
+                android:background="@color/white"/>
+
+            <Button
+                android:id="@+id/btnFasilitas"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/fasilitas"
+                android:clickable="true"
+                android:focusable="true"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                app:layout_constraintEnd_toStartOf="@id/btnKebijakan"
+                app:layout_constraintStart_toEndOf="@id/btnTentang"
+                app:layout_constraintTop_toBottomOf="@id/guesthouse_name" />
+
+            <View
+                android:id="@+id/active_line_2"
+                android:layout_width="90dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="2dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/btnFasilitas"
+                app:layout_constraintEnd_toEndOf="@id/btnFasilitas"
+                app:layout_constraintTop_toBottomOf="@id/btnFasilitas"
+                android:background="@color/white"/>
+
+            <Button
+                android:id="@+id/btnKebijakan"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/kebijakan"
+                android:clickable="true"
+                android:focusable="true"
+                android:textAllCaps="false"
+                android:textColor="@color/white"
+                android:textSize="16sp"
+                android:textStyle="bold"
+                style="@style/Widget.AppCompat.Button.Borderless"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/btnFasilitas"
+                app:layout_constraintTop_toBottomOf="@id/guesthouse_name" />
+
+            <View
+                android:id="@+id/active_line_3"
+                android:layout_width="90dp"
+                android:layout_height="4dp"
+                android:layout_marginTop="2dp"
+                android:visibility="gone"
+                app:layout_constraintStart_toStartOf="@id/btnKebijakan"
+                app:layout_constraintEnd_toEndOf="@id/btnKebijakan"
+                app:layout_constraintTop_toBottomOf="@id/btnKebijakan"
+                android:background="@color/white"/>
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginTop="2dp"
+                android:visibility="visible"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/btnTentang"
+                android:background="@color/white"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- Scrollable Content -->
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        app:layout_behavior="@string/appbar_scrolling_view_behavior">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_about_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/lokasi_text_title"
+                        style="@style/TextBoldH5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/lokasi"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/lokasi_desc"
+                        style="@style/TextH6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/lorem"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lokasi_text_title" />
+
+                    <TextView
+                        android:id="@+id/about_text_title"
+                        style="@style/TextBoldH5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/tentang_gedung"
+                        android:layout_marginTop="8dp"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/lokasi_desc" />
+
+                    <TextView
+                        android:id="@+id/about_desc"
+                        style="@style/TextH6"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="@string/lorem"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toBottomOf="@id/about_text_title" />
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_facilities_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_about_section"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/fasilitas_title"
+                        style="@style/TextBoldH5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/fasilitas"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/fasilitas_umum_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/fasilitas_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/fasilitas_umum"
+                        style="@style/TextBoldH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/fasilitas_umum_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/fasilitas_umum_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/lorem"
+                        style="@style/TextH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/fasilitas_kamar_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/fasilitas_umum_desc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/fasilitas_kamar"
+                        style="@style/TextBoldH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/fasilitas_kamar_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/fasilitas_kamar_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/lorem"
+                        style="@style/TextH6"
+                        android:layout_marginTop="8dp"/>
+
+
+
+
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+            <com.google.android.material.card.MaterialCardView
+                android:id="@+id/card_kebijakan_section"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/card_facilities_section"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:layout_marginBottom="16dp"
+                android:layout_marginHorizontal="16dp"
+                android:layout_marginTop="14dp"
+                android:background="?attr/selectableItemBackground"
+                android:clickable="true"
+                android:focusable="true"
+                app:cardCornerRadius="20dp">
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:padding="16dp">
+
+                    <TextView
+                        android:id="@+id/kebijakan_title"
+                        style="@style/TextBoldH5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/kebijakan_properti"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <TextView
+                        android:id="@+id/checkin_checkout_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/kebijakan_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/waktu_check_in_dan_check_out"
+                        style="@style/TextBoldH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/checkin_checkout_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/checkin_checkout_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/lorem"
+                        style="@style/TextH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/dokumen_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/checkin_checkout_desc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/dokumen_yang_diperlukan"
+                        style="@style/TextBoldH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/dokumen_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/dokumen_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/lorem"
+                        style="@style/TextH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/kebijakan_khusus_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/dokumen_desc"
+                        app:layout_constraintStart_toStartOf="parent"
+                        android:text="@string/kebijakan_khusus"
+                        style="@style/TextBoldH6"
+                        android:layout_marginTop="8dp"/>
+
+                    <TextView
+                        android:id="@+id/kebijakan_khusus_desc"
+                        android:layout_width="0dp"
+                        android:layout_height="wrap_content"
+                        app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        android:text="@string/lorem"
+                        style="@style/TextH6"
+                        android:layout_marginTop="8dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </com.google.android.material.card.MaterialCardView>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
+
+</androidx.coordinatorlayout.widget.CoordinatorLayout>
