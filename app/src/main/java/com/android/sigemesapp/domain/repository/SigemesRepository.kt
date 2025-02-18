@@ -2,6 +2,7 @@ package com.android.sigemesapp.domain.repository
 
 import android.util.Log
 import com.android.sigemesapp.data.source.local.UserPreference
+import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
@@ -64,6 +65,16 @@ class SigemesRepository @Inject constructor (
         emit(Result.Loading)
         try {
             val response = apiService.getGuesthouse(guesthouseId)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getCityHall(id: Int): Flow<Result<CityHallData>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getCityHall(id)
             emit(Result.Success(response.data))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))

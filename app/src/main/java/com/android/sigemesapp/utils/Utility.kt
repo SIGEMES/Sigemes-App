@@ -39,6 +39,11 @@ fun getFacilityIcon(facilityName: String): Int {
         name.contains("king") -> R.drawable.king_bed
         name.contains("ac") -> R.drawable.ac
         name.contains("tv") -> R.drawable.tv
+        name.contains("parkir") -> R.drawable.parking
+        name.contains("sofa") -> R.drawable.sofa
+        name.contains("umum") -> R.drawable.restroom
+        name.contains("wifi") -> R.drawable.wifi
+
         else -> 0
     }
 }

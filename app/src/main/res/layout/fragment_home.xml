@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:layout_marginBottom="60dp"
     tools:context=".presentation.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -168,15 +169,6 @@
                         app:layout_constraintEnd_toEndOf="parent"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintTop_toTopOf="parent" />
-
-                    <!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:padding="15dp">-->
-
-
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
@@ -215,24 +207,6 @@
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
                         app:layout_constraintEnd_toEndOf="parent"/>
-
-<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:padding="15dp">-->
-
-<!--                        <ImageView-->
-<!--                            android:layout_width="50dp"-->
-<!--                            android:layout_height="50dp"-->
-<!--                            android:contentDescription="@string/mess_menu"-->
-<!--                            android:src="@drawable/building"-->
-<!--                            app:tint="@color/white"-->
-<!--                            app:layout_constraintTop_toTopOf="parent"-->
-<!--                            app:layout_constraintStart_toStartOf="parent"-->
-<!--                            app:layout_constraintBottom_toBottomOf="parent"-->
-<!--                            app:layout_constraintEnd_toEndOf="parent"/>-->
-
-<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
                 </com.google.android.material.card.MaterialCardView>
 
                 <TextView
@@ -285,17 +259,28 @@
             tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
 
         <ProgressBar
+            android:id="@+id/progress_bar1"
+            style="?android:attr/progressBarStyle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="@id/available_room"
+            app:layout_constraintStart_toEndOf="@id/available_room"
+            app:layout_constraintTop_toTopOf="@id/available_room" />
+
+        <ProgressBar
             android:id="@+id/progress_bar"
             style="?android:attr/progressBarStyle"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginVertical="16dp"
             android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/available_room" />
+            android:layout_marginStart="20dp"
+            app:layout_constraintBottom_toBottomOf="@id/available_gedung"
+            app:layout_constraintStart_toEndOf="@id/available_gedung"
+            app:layout_constraintTop_toTopOf="@id/available_gedung" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_room_card"
@@ -305,11 +290,288 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/filter_button"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            android:layout_marginBottom="55dp"
             android:layout_marginHorizontal="16dp"
             tools:listitem="@layout/item_room"
             android:layout_marginTop="10dp"/>
+
+        <TextView
+            android:id="@+id/available_gedung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/rv_room_card"
+            android:visibility="visible"
+            android:text="Gedung Adam Malik Tersedia Hari Ini"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"/>
+
+        <TextView
+            android:id="@+id/not_available_gedung"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/available_gedung_card"
+            android:visibility="visible"
+            android:text="Gedung Adam Malik Tidak Tersedia Hari Ini"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:layout_marginStart="25dp"
+            android:layout_marginTop="16dp"/>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/available_gedung_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/available_gedung"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/av_ged"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_photo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/gedung_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/room_type"
+                    style="@style/TextBoldH45"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_photo"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"/>
+
+                <ImageView
+                    android:id="@+id/star"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star"
+                    app:tint="@color/yellow"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/rating"
+                    app:layout_constraintEnd_toStartOf="@id/rating"
+                    app:layout_constraintTop_toTopOf="@id/rating"/>
+
+                <TextView
+                    android:id="@+id/rating"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating"
+                    android:textColor="@color/facility"
+                    style="@style/TextBoldH6"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ulasan"
+                    app:layout_constraintEnd_toStartOf="@id/ulasan"
+                    app:layout_constraintTop_toTopOf="@id/ulasan"/>
+
+                <TextView
+                    android:id="@+id/ulasan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ulasan_count"
+                    android:textColor="@color/facility"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_photo"/>
+
+                <TextView
+                    android:id="@+id/text_facilities"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fasilitas: "
+                    android:textColor="@color/facility"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gedung_name"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/facilities"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_facilities"
+                    app:layout_constraintTop_toTopOf="@id/text_facilities"
+                    app:layout_constraintBottom_toBottomOf="@id/text_facilities"/>
+
+                <View
+                    android:id="@+id/divider"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/facilities"/>
+
+                <TextView
+                    android:id="@+id/price_range"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
+                    style="@style/TextBoldH45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_range"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/not_available_gedung_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/not_available_gedung"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            android:visibility="gone"
+            android:backgroundTint="@color/onGray"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/rv_photo_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/gedung_name_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/room_type"
+                    style="@style/TextBoldH45"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_photo_gray"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"/>
+
+                <ImageView
+                    android:id="@+id/star_gray"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:src="@drawable/star"
+                    app:tint="@color/yellow"
+                    android:layout_marginEnd="8dp"
+                    app:layout_constraintBottom_toBottomOf="@id/rating_gray"
+                    app:layout_constraintEnd_toStartOf="@id/rating_gray"
+                    app:layout_constraintTop_toTopOf="@id/rating_gray"/>
+
+                <TextView
+                    android:id="@+id/rating_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rating"
+                    android:textColor="@color/facility"
+                    style="@style/TextBoldH6"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/ulasan_gray"
+                    app:layout_constraintEnd_toStartOf="@id/ulasan_gray"
+                    app:layout_constraintTop_toTopOf="@id/ulasan_gray"/>
+
+                <TextView
+                    android:id="@+id/ulasan_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/ulasan_count"
+                    android:textColor="@color/facility"
+                    android:textSize="12sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rv_photo_gray"/>
+
+                <TextView
+                    android:id="@+id/text_facilities_gray"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Fasilitas: "
+                    android:textColor="@color/facility"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/gedung_name_gray"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/facilities_gray"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/text_facilities_gray"
+                    app:layout_constraintTop_toTopOf="@id/text_facilities_gray"
+                    app:layout_constraintBottom_toBottomOf="@id/text_facilities_gray"/>
+
+                <View
+                    android:id="@+id/divider_gray"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/black"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="16dp"
+                    android:layout_marginTop="15dp"
+                    app:layout_constraintTop_toBottomOf="@id/facilities_gray"/>
+
+                <TextView
+                    android:id="@+id/price_range_gray"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
+                    style="@style/TextBoldH45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_range"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider_gray"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="16dp"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
 
 </androidx.constraintlayout.widget.ConstraintLayout>
 

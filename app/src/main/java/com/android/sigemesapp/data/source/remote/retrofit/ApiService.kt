@@ -7,6 +7,7 @@ import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
 import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
+import com.android.sigemesapp.data.source.remote.response.CityHallResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
@@ -75,5 +76,10 @@ interface ApiService {
         @Path("guesthouse_id") guesthouse_id: Int,
         @Path("room_id") room_id: Int
     ) : DetailRoomResponse
+
+    @GET(" city-halls/{id}")
+    suspend fun getCityHall(
+        @Path("id") id: Int
+    ) : CityHallResponse
 
 }

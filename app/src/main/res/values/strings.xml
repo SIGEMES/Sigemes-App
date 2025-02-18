@@ -89,7 +89,7 @@
     <string name="user_domain_com">user@domain.com</string>
     <string name="lihat_profil_saya">Lihat Profil Saya</string>
     <string name="pusat_bantuan">Pusat Bantuan</string>
-    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.</string>
+    <string name="lorem">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse vel dui ac lorem luctus placerat. Integer euismod libero non eros volutpat, vitae fringilla velit fermentum. Proin volutpat, lorem non pellentesque pharetra, ex metus venenatis nulla, in tincidunt nulla eros id nulla. Sed id arcu urna.</string>
     <string name="hubungi_kami">Hubungi Kami</string>
     <string name="pengaturan">Pengaturan</string>
     <string name="keluar">Keluar</string>
@@ -130,6 +130,16 @@
     <string name="kategori_penyewa">- Kategori penyewa:</string>
     <string name="rincian">Mess Pemerintah Kota Padangsidimpuan, \nKamar VIP 1</string>
     <string name="rincian_title">Rincian Harga</string>
+    <string name="fasilitas_kamar">Fasilitas Kamar</string>
+    <string name="fasilitas_umum">Fasilitas Umum</string>
+    <string name="fasilitas">Fasilitas</string>
+    <string name="lokasi">Lokasi</string>
+    <string name="kebijakan">Kebijakan</string>
+    <string name="tentang">Tentang</string>
+    <string name="waktu_check_in_dan_check_out">Waktu Check-in dan Check-out</string>
+    <string name="dokumen_yang_diperlukan">Dokumen yang Diperlukan</string>
+    <string name="kebijakan_properti">Kebijakan Properti</string>
+    <string name="kebijakan_khusus">Kebijakan Khusus</string>
 
     <string-array name="gender_options">
         <item>Laki-Laki</item>
