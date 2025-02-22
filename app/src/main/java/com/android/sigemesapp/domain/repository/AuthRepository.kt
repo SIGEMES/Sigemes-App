@@ -18,11 +18,20 @@ import com.android.sigemesapp.data.source.remote.ChangePasswordRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
+import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
+import com.android.sigemesapp.data.source.remote.response.RenterData
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
+import com.android.sigemesapp.data.source.remote.response.UpdateProfileResponse
+import com.android.sigemesapp.data.source.remote.response.UpdatedData
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 
 class AuthRepository @Inject constructor (
     private val userPreference : UserPreference,
@@ -69,7 +78,8 @@ class AuthRepository @Inject constructor (
                 val user = UserModel(
                     email = response.data.email,
                     fullname = response.data.fullname,
-                    token = response.data.token
+                    token = response.data.token,
+                    id = response.data.id
                 )
                 userPreference.saveSession(user)
                 emit(Result.Success(response))
@@ -172,38 +182,45 @@ class AuthRepository @Inject constructor (
         }
     }
 
-    fun getAllGuesthousesWithDetails(): Flow<Result<List<GuesthouseResponse>>> = flow {
+    fun getRenterData(id: Int): Flow<Result<RenterData>> = flow {
         emit(Result.Loading)
         try {
-            val allGuesthousesResponse = apiService.getAllGuesthouses()
-            val guesthouseIds = allGuesthousesResponse.data.map { it.id }
-
-            val guesthouses = mutableListOf<GuesthouseResponse>()
-
-            for (id in guesthouseIds) {
-                try {
-                    val guesthouse = apiService.getGuesthouse(id)
-                    guesthouses.add(guesthouse)
-                } catch (e: Exception) {
-                    Log.e("GetGuesthouseDetails", "Failed to fetch guesthouse with ID: $id, Error: ${e.message}")
-                }
-            }
-
-            emit(Result.Success(guesthouses))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-            Log.e("GetGuesthousesData", "Error: ${e.message}")
-        }
-    }
-
-    fun getGuesthouseRooms(id: Int): Flow<Result<List<RoomItem>>> = flow {
-        emit(Result.Loading)
-        try {
-            val response = apiService.getGuesthouseRooms(id)
+            val response = apiService.getRenterData(id)
             emit(Result.Success(response.data))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))
         }
     }
+
+    fun updateRenterData(
+        id: Int,
+        fullname: String,
+        phone_number: String,
+        gender: String,
+        profile_picture: File?
+    ): Flow<Result<UpdateProfileResponse>> = flow {
+        emit(Result.Loading)
+        try {
+            val requestImageFile = profile_picture?.asRequestBody("image/jpeg".toMediaType())
+            val multipartBody = requestImageFile?.let {
+                MultipartBody.Part.createFormData(
+                    "profile_picture",
+                    profile_picture.name,
+                    it
+                )
+            }
+            val fullnameBody = fullname.toRequestBody("text/plain".toMediaType())
+            val phoneNumberBody = phone_number.toRequestBody("text/plain".toMediaType())
+            val genderBody = gender.toRequestBody("text/plain".toMediaType())
+            Log.d("UpdateProfile", "Updatee ${id}, $fullname, $phone_number, $gender, $multipartBody")
+            val response = apiService.updateRenterData(id, fullnameBody, phoneNumberBody, genderBody, multipartBody)
+
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+            Log.d("AuthRepository", "Update Error: ${e.message}")
+        }
+    }.flowOn(Dispatchers.IO)
+
 
 }

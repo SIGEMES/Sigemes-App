@@ -20,6 +20,9 @@
         android:theme="@style/Theme.SigemesApp"
         tools:targetApi="31">
         <activity
+            android:name=".presentation.account.edit.EditProfileActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.home.detail.review.ReviewActivity"
             android:exported="false" />
         <activity

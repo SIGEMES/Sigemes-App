@@ -23,7 +23,7 @@ data class CityHallData(
 	val contactPerson: String,
 
 	@field:SerializedName("area_m2")
-	val areaM2: Int,
+	val areaM2: Float,
 
 	@field:SerializedName("latitude")
 	val latitude: Any,

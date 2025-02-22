@@ -67,12 +67,12 @@
     <string name="success">Berhasil!</string>
     <string name="register_success">Akun berhasil didaftarkan!</string>
     <string name="register_failed">Akun tidak berhasil didaftarkan..</string>
-    <string name="sigemes">SIGEMES</string>
+    <string name="sigemes">SiGEMES</string>
     <string name="profile_picture">Profile Picture</string>
     <string name="title_1">Pesan penginapan atau gedung acara</string>
     <string name="title_2">Kelola reservasi dengan efektif</string>
     <string name="mess_menu">Mess Menu</string>
-    <string name="mess">Mess \nPemko</string>
+    <string name="mess">Mess\nPemko</string>
     <string name="mess_kota">Mess Kota Padangsidimpuan</string>
     <string name="gedung_adam_malik">Gedung Adam Malik</string>
     <string name="available_room">Kamar Tersedia Hari Ini</string>
@@ -112,8 +112,8 @@
     <string name="selamat_pagi">Selamat Pagi</string>
     <string name="room_facilities">- King size bed\n- TV\n- AC</string>
     <string name="fasilitas_kamar_title">Fasilitas Kamar</string>
-    <string name="refund_text">- Apabila kamar sudah dipesan kemudian pesanan dibatalkan, maka biaya pemesanan tidak dapat dikembalikan.</string>
-    <string name="reschedule_text">- Apabila kamar sudah dipesan, maka jadwal pemesanan tidak dapat diganti.</string>
+    <string name="refund_text">- Apabila kamar sudah dipesan dan dibayar kemudian pesanan dibatalkan, maka biaya pemesanan tidak dapat dikembalikan.</string>
+    <string name="reschedule_text">- Apabila kamar sudah dipesan dan dibayar, maka jadwal pemesanan tidak dapat diganti.</string>
     <string name="mohon_diperhatikan">Mohon Diperhatikan:</string>
     <string name="available_slot_count">3 Tamu</string>
     <string name="available_slot_text">Slot Tersedia:</string>
@@ -140,7 +140,18 @@
     <string name="dokumen_yang_diperlukan">Dokumen yang Diperlukan</string>
     <string name="kebijakan_properti">Kebijakan Properti</string>
     <string name="kebijakan_khusus">Kebijakan Khusus</string>
-
+    <string name="refund_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar kemudian pesanan Anda batalkan, maka biaya pemesanan tidak dapat dikembalikan.</string>
+    <string name="reschedule_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar, maka Anda tidak dapat mengganti jadwal pemesanan.</string>
+    <string name="cityhall_payment_info_text">- Pembayaran untuk penyewaan Gedung Adam Malik dapat dilakukan paling lambat satu minggu sebelum acara.</string>
+    <string name="kebijakan_cityhall">- Kami mohon pengertiannya. Jika pada tanggal yang sama terdapat acara pemerintahan, pesanan Anda mungkin perlu dibatalkan atau dijadwalkan ulang sesuai ketentuan peraturan Walikota.</string>
+    <string name="kategori_acara">- Kategori Acara:</string>
+    <string name="durasi_sewa_gedung">- Durasi sewa gedung:</string>
+    <string name="_1_hari">1 hari</string>
+    <string name="checkout_gedung_ini">Checkout Gedung Ini</string>
+    <string name="edit_profil">Edit Profil</string>
+    <string name="durasi_sewa">- Durasi Sewa</string>
+    <string name="tentang_mess_pemko">Tentang Mess Pemko</string>
+    <string name="tentang_gedung_adam_malik">Tentang Gedung Adam Malik</string>
     <string-array name="gender_options">
         <item>Laki-Laki</item>
         <item>Perempuan</item>

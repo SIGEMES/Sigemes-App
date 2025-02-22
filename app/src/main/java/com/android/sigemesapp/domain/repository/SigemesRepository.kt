@@ -80,4 +80,5 @@ class SigemesRepository @Inject constructor (
             emit(Result.Error("Error: ${e.message}"))
         }
     }
+
 }

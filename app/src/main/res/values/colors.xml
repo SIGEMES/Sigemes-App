@@ -17,4 +17,7 @@
     <color name="softblue">#E8F9FF</color>
     <color name="orange">#EB5B00</color>
     <color name="facility">#9E6F21</color>
+    <color name="onGreen">#7BBB71</color>
+    <color name="onBrown">#C38154</color>
+    <color name="bluable">#d9eafd</color>
 </resources>

@@ -35,7 +35,7 @@
                 tools:ignore="TouchTargetSizeCheck" />
 
             <TextView
-                android:id="@+id/guesthouse_name"
+                android:id="@+id/name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 app:layout_constraintStart_toStartOf="parent"
@@ -55,7 +55,7 @@
                 android:focusable="true"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toStartOf="@id/btnFasilitas"
-                app:layout_constraintTop_toBottomOf="@id/guesthouse_name"
+                app:layout_constraintTop_toBottomOf="@id/name"
                 android:textColor="@color/white"
                 android:textSize="16sp"
                 android:textStyle="bold"
@@ -87,7 +87,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 app:layout_constraintEnd_toStartOf="@id/btnKebijakan"
                 app:layout_constraintStart_toEndOf="@id/btnTentang"
-                app:layout_constraintTop_toBottomOf="@id/guesthouse_name" />
+                app:layout_constraintTop_toBottomOf="@id/name" />
 
             <View
                 android:id="@+id/active_line_2"
@@ -114,7 +114,7 @@
                 style="@style/Widget.AppCompat.Button.Borderless"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/btnFasilitas"
-                app:layout_constraintTop_toBottomOf="@id/guesthouse_name" />
+                app:layout_constraintTop_toBottomOf="@id/name" />
 
             <View
                 android:id="@+id/active_line_3"

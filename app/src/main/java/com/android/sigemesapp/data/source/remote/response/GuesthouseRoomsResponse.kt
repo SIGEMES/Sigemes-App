@@ -41,7 +41,7 @@ data class PricingItem(
 data class RoomItem(
 
 	@field:SerializedName("area_m2")
-	val areaM2: Int,
+	val areaM2: Float,
 
 	@field:SerializedName("available_slot")
 	val availableSlot: Int,

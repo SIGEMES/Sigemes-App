@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/softblue"
     tools:context=".presentation.home.detail.review.ReviewActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -16,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             app:strokeColor="@color/babyblue"
-            android:backgroundTint="@color/softblue"
+            android:backgroundTint="@color/bluable"
             app:strokeWidth="1dp"
             app:cardCornerRadius="24dp"
             android:layout_marginTop="15dp"

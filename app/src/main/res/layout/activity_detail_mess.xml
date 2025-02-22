@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/softblue"
     tools:context=".presentation.home.detail.DetailMessActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -188,7 +189,6 @@
                             android:text="@string/ulasan_count"/>
                     </androidx.constraintlayout.widget.ConstraintLayout>
                 </com.google.android.material.card.MaterialCardView>
-
                 <TextView
                     android:id="@+id/text_facilities"
                     android:layout_width="wrap_content"
@@ -208,7 +208,9 @@
                     app:layout_constraintStart_toEndOf="@id/text_facilities"
                     app:layout_constraintTop_toTopOf="@id/text_facilities"
                     app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginStart="5dp"
                     tools:listitem="@layout/item_facility" />
+
 
                 <View
                     android:id="@+id/divider2"
@@ -834,13 +836,13 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/cart_button"
                             android:layout_width="0dp"
-                            android:layout_height="45dp"
+                            android:layout_height="50dp"
                             android:layout_marginTop="16dp"
                             android:layout_marginEnd="8dp"
                             android:paddingHorizontal="2dp"
                             android:text="@string/tambah_ke_keranjang"
                             android:textAllCaps="false"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             app:cornerRadius="24dp"
                             app:layout_constraintEnd_toStartOf="@id/checkout_button"
                             app:layout_constraintStart_toStartOf="parent"
@@ -850,12 +852,12 @@
                         <com.google.android.material.button.MaterialButton
                             android:id="@+id/checkout_button"
                             android:layout_width="0dp"
-                            android:layout_height="45dp"
+                            android:layout_height="50dp"
                             android:layout_marginTop="16dp"
                             android:paddingHorizontal="2dp"
                             android:text="@string/checkout_kamar_ini"
                             android:textAllCaps="false"
-                            android:textSize="12sp"
+                            android:textSize="14sp"
                             app:cornerRadius="24dp"
                             app:layout_constraintEnd_toEndOf="parent"
                             app:layout_constraintStart_toEndOf="@id/cart_button"

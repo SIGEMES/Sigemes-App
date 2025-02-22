@@ -5,6 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+    android:background="@color/softblue"
     tools:context=".presentation.home.detail.DetailGedungActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -14,13 +15,14 @@
         <FrameLayout
             android:id="@+id/header"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="210dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <androidx.recyclerview.widget.RecyclerView
-                android:layout_width="match_parent"
+                android:id="@+id/rv_photo_cityhall"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:contentDescription="@string/photo"
                 tools:listitem="@layout/item_photo_slider" />
@@ -46,17 +48,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/header"
-            android:layout_marginHorizontal="14dp"
-            android:layout_marginTop="14dp"
-            app:cardCornerRadius="12dp"
-            app:strokeColor="@color/darkBlue"
-            app:strokeWidth="1dp"
-            android:elevation="1dp">
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/building_name"
@@ -67,17 +68,26 @@
                     android:text="@string/gedung_adam_malik"
                     style="@style/TextBoldH4"/>
 
+                <ImageView
+                    android:id="@+id/location_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    app:tint="@color/black"
+                    android:src="@drawable/location"
+                    app:layout_constraintTop_toBottomOf="@id/building_name"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="5dp"/>
+
                 <TextView
-                    android:id="@+id/location"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Kota Padangsidimpuan, Sumatera Utara"
-                    android:textColor="@color/babyblue"
-                    android:textStyle="bold"
-                    android:textSize="14sp"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/building_name"
-                    android:layout_marginTop="5dp"/>
+                    style="@style/TextBoldH6"
+                    android:textColor="@color/black"
+                    app:layout_constraintStart_toEndOf="@id/location_icon"
+                    app:layout_constraintTop_toTopOf="@id/location_icon"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/location_icon"/>
 
                 <com.google.android.material.card.MaterialCardView
                     android:id="@+id/maps"
@@ -135,7 +145,7 @@
                     app:strokeWidth="1dp"
                     app:cardCornerRadius="24dp"
                     android:layout_marginTop="5dp"
-                    app:layout_constraintTop_toBottomOf="@id/location"
+                    app:layout_constraintTop_toBottomOf="@id/location_icon"
                     app:layout_constraintStart_toStartOf="parent">
 
                     <androidx.constraintlayout.widget.ConstraintLayout
@@ -178,15 +188,27 @@
                 </com.google.android.material.card.MaterialCardView>
 
 
-                <androidx.recyclerview.widget.RecyclerView
-                    android:id="@+id/facilities"
+                <TextView
+                    android:id="@+id/text_facilities"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:text="Fasilitas: "
+                    android:textColor="@color/facility"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/divider"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    android:layout_marginTop="8dp"
-                    tools:listitem="@layout/item_facility"/>
+                    android:layout_marginTop="16dp"/>
+
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/facilities"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/text_facilities"
+                    app:layout_constraintStart_toEndOf="@id/text_facilities"
+                    app:layout_constraintTop_toTopOf="@id/text_facilities"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    tools:listitem="@layout/item_facility" />
 
                 <View
                     android:id="@+id/divider"
@@ -211,20 +233,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_general_info"
-            android:layout_marginHorizontal="14dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp"
-            app:cardCornerRadius="12dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            app:strokeColor="@color/darkBlue"
-            app:strokeWidth="1dp"
-            android:elevation="1dp">
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/about_text_title"
@@ -236,6 +257,7 @@
                     app:layout_constraintTop_toTopOf="parent"/>
 
                 <TextView
+                    android:id="@+id/tentang_gedung_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     app:layout_constraintStart_toStartOf="parent"
@@ -266,20 +288,19 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_about"
-            android:layout_marginHorizontal="14dp"
+            android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp"
-            app:cardCornerRadius="12dp"
             android:background="?attr/selectableItemBackground"
             android:clickable="true"
             android:focusable="true"
-            app:strokeColor="@color/darkBlue"
-            app:strokeWidth="1dp"
-            android:elevation="1dp">
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:padding="10dp">
+                android:padding="16dp">
 
                 <TextView
                     android:id="@+id/ulasan_text_title"
@@ -331,6 +352,462 @@
                     app:layout_constraintBottom_toBottomOf="@id/text_review_count2"
                     app:layout_constraintStart_toEndOf="@id/text_review_count2"
                     android:text="@string/ulasan_count"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_select_event_type"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_ulasan"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:background="?attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/event_selection_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Silahkan Pilih Kategori Acara"
+                    style="@style/TextBoldH5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/event_option_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="16dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:padding="12dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_selection_title"
+                    app:strokeColor="@color/babyblue"
+                    app:strokeWidth="1.5dp"
+                    tools:ignore="TouchTargetSizeCheck">
+
+                    <CheckBox
+                        android:id="@+id/check_option_1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:paddingHorizontal="10dp"
+                        android:text="Option 1" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/event_option_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_option_1"
+                    app:strokeColor="@color/onGray"
+                    app:strokeWidth="1.5dp"
+                    tools:ignore="TouchTargetSizeCheck">
+
+                    <CheckBox
+                        android:id="@+id/check_option_2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:paddingHorizontal="10dp"
+                        android:text="Option 2" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/event_option_3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="35dp"
+                    android:layout_marginTop="10dp"
+                    android:clickable="true"
+                    android:focusable="true"
+                    android:paddingVertical="10dp"
+                    app:cardCornerRadius="12dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_option_2"
+                    app:strokeColor="@color/onGray"
+                    app:strokeWidth="1.5dp"
+                    tools:ignore="TouchTargetSizeCheck">
+
+                    <CheckBox
+                        android:id="@+id/check_option_3"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:clickable="false"
+                        android:paddingHorizontal="10dp"
+                        android:text="Option 3" />
+
+                </com.google.android.material.card.MaterialCardView>
+
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/event_option_3"/>
+
+                <TextView
+                    android:id="@+id/cityhall_info_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Informasi Terkait Penyewaan Gedung Adam Malik"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2"/>
+
+                <ImageView
+                    android:id="@+id/warning_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/cityhall_info_title"
+                    android:layout_marginTop="10dp"
+                    app:tint="@color/orange"
+                    android:src="@drawable/baseline_warning_amber_24"/>
+
+                <TextView
+                    android:id="@+id/warning_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mohon_diperhatikan"
+                    app:layout_constraintTop_toTopOf="@id/warning_icon"
+                    app:layout_constraintStart_toEndOf="@id/warning_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/warning_icon"
+                    style="@style/TextBoldH6"
+                    android:textColor="@color/orange"
+                    android:layout_marginStart="8dp"/>
+
+                <TextView
+                    android:id="@+id/kebijakan_city_hall_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/orange"
+                    app:layout_constraintStart_toStartOf="@id/warning_icon"
+                    app:layout_constraintTop_toBottomOf="@id/warning_text"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/kebijakan_cityhall"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/cityhall_payment_text"
+                    style="@style/TextH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/cityhall_payment_info_text"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/kebijakan_city_hall_text"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_city_hall_text" />
+
+                <TextView
+                    android:id="@+id/reschedule_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/cityhall_payment_text"
+                    app:layout_constraintTop_toBottomOf="@id/cityhall_payment_text"
+                    android:text="@string/reschedule_text_cityhall"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/refund_text"
+                    style="@style/TextH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/refund_text_cityhall"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/reschedule_text"
+                    app:layout_constraintTop_toBottomOf="@id/reschedule_text" />
+
+                <View
+                    android:id="@+id/divide2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/refund_text"/>
+
+                <TextView
+                    android:id="@+id/fasilitas_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/fasilitas"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divide2"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="10dp"/>
+
+                <ImageView
+                    android:id="@+id/luas_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fasilitas_title"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/group"/>
+
+                <TextView
+                    android:id="@+id/luas_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Luas: "
+                    app:layout_constraintTop_toTopOf="@id/luas_icon"
+                    app:layout_constraintStart_toEndOf="@id/luas_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/luas_icon"
+                    style="@style/TextH6"
+                    android:layout_marginStart="8dp"/>
+
+                <TextView
+                    android:id="@+id/luas"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/luas_title"
+                    app:layout_constraintTop_toTopOf="@id/luas_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/luas_title"
+                    android:layout_marginStart="5dp"
+                    android:text="1000 m"
+                    style="@style/TextH6"/>
+
+                <ImageView
+                    android:id="@+id/capacity_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/luas"
+                    android:layout_marginTop="10dp"
+                    android:src="@drawable/group"/>
+
+                <TextView
+                    android:id="@+id/capacity_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kapasitas Gedung: "
+                    app:layout_constraintTop_toTopOf="@id/capacity_icon"
+                    app:layout_constraintStart_toEndOf="@id/capacity_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/capacity_icon"
+                    style="@style/TextH6"
+                    android:layout_marginStart="8dp"/>
+
+                <TextView
+                    android:id="@+id/capacity"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toEndOf="@id/capacity_title"
+                    app:layout_constraintTop_toTopOf="@id/capacity_title"
+                    app:layout_constraintBottom_toBottomOf="@+id/capacity_title"
+                    android:layout_marginStart="5dp"
+                    android:text="1000 orang"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/fasilias_acara_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/capacity"
+                    android:text="Fasilitas acara"
+                    style="@style/TextH6"
+                    android:layout_marginTop="10dp"/>
+
+                <TextView
+                    android:id="@+id/fasilitas_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/fasilias_acara_title"
+                    android:text="@string/room_facilities"
+                    style="@style/TextH6"
+                    android:layout_marginTop="5dp"/>
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_rincian_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_select_event_type"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:background="?attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/rincian_harga_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rincian_title"
+                    style="@style/TextBoldH5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/rincian_pemesanan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rincian"
+                    style="@style/TextH6"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rincian_harga_title"/>
+
+                <TextView
+                    android:id="@+id/event_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kategori_acara"
+                    style="@style/TextH6"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rincian_pemesanan"/>
+
+                <TextView
+                    android:id="@+id/event_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/umum"
+                    style="@style/TextH6"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintStart_toEndOf="@id/event_type_title"
+                    app:layout_constraintTop_toTopOf="@id/event_type_title"
+                    app:layout_constraintBottom_toBottomOf="@id/event_type_title"/>
+
+                <TextView
+                    android:id="@+id/duration_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/durasi_sewa_gedung"
+                    style="@style/TextH6"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/event_type"/>
+
+                <TextView
+                    android:id="@+id/duration_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/_1_hari"
+                    style="@style/TextH6"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintStart_toEndOf="@id/duration_type_title"
+                    app:layout_constraintTop_toTopOf="@id/duration_type_title"
+                    app:layout_constraintBottom_toBottomOf="@id/duration_type_title"/>
+
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/duration_text"/>
+
+
+                <TextView
+                    android:id="@+id/harga_total_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_harga"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"/>
+
+
+                <TextView
+                    android:id="@+id/price_range"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
+                    style="@style/TextBoldH45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_range"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"
+                    android:layout_marginBottom="16dp"
+                    android:layout_marginTop="16dp"/>
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/cart_button"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginEnd="8dp"
+                    android:paddingHorizontal="2dp"
+                    android:text="@string/tambah_ke_keranjang"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    app:cornerRadius="24dp"
+                    app:layout_constraintEnd_toStartOf="@id/checkout_button"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/harga_total_title"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/checkout_button"
+                    android:layout_width="0dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="16dp"
+                    android:paddingHorizontal="2dp"
+                    android:text="@string/checkout_gedung_ini"
+                    android:textAllCaps="false"
+                    android:textSize="14sp"
+                    app:cornerRadius="24dp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toEndOf="@id/cart_button"
+                    app:layout_constraintTop_toBottomOf="@id/harga_total_title"
+                    tools:ignore="TouchTargetSizeCheck" />
+
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>

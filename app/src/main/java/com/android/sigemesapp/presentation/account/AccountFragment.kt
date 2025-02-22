@@ -11,8 +11,12 @@ import androidx.activity.viewModels
 import androidx.lifecycle.ViewModelProvider
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.FragmentAccountBinding
+import com.android.sigemesapp.presentation.account.edit.EditProfileActivity
 import com.android.sigemesapp.presentation.auth.AuthViewModel
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
+import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.showAlertDialog
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -33,7 +37,50 @@ class AccountFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        setupRenterData()
         setupAction()
+    }
+
+    private fun setupRenterData() {
+        authViewModel.getSession().observe(viewLifecycleOwner) { user ->
+            if(user.isLogin){
+                authViewModel.getRenterData(user.id)
+
+                authViewModel.renterData.observe(viewLifecycleOwner){ result ->
+                    when(result){
+                        is Result.Loading -> {
+
+                        }
+
+                        is Result.Success -> {
+                            binding.fullname.text = result.data.fullname
+                            binding.userEmail.text = result.data.email
+                            Glide.with(binding.profilePicture.context)
+                                .load(result.data.profilePicture)
+                                .error(R.drawable.ic_android_black_24dp)
+                                .into(binding.profilePicture)
+
+                            setupEditAction(result.data.id)
+                        }
+
+                        is Result.Error -> {
+
+                        }
+                    }
+
+                }
+            }
+
+        }
+
+    }
+
+    private fun setupEditAction(id: Int) {
+        binding.editProfileButton.setOnClickListener {
+            val intent = Intent(requireActivity(), EditProfileActivity::class.java)
+            intent.putExtra(EditProfileActivity.KEY_USER_ID, id)
+            startActivity(intent)
+        }
     }
 
     private fun setupAction() {
