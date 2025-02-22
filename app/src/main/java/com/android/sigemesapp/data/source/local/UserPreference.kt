@@ -5,6 +5,7 @@ import androidx.datastore.core.DataStore
 import androidx.datastore.preferences.core.Preferences
 import androidx.datastore.preferences.core.booleanPreferencesKey
 import androidx.datastore.preferences.core.edit
+import androidx.datastore.preferences.core.intPreferencesKey
 import androidx.datastore.preferences.core.stringPreferencesKey
 import androidx.datastore.preferences.preferencesDataStore
 import kotlinx.coroutines.flow.Flow
@@ -25,6 +26,7 @@ class UserPreference @Inject constructor(
             preferences[FULLNAME_KEY] = user.fullname
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
+            preferences[USER_ID] = user.id
         }
     }
 
@@ -34,7 +36,8 @@ class UserPreference @Inject constructor(
                 preferences[EMAIL_KEY] ?: "",
                 preferences[FULLNAME_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
-                preferences[IS_LOGIN_KEY] ?: false
+                preferences[IS_LOGIN_KEY] ?: false,
+                preferences[USER_ID] ?: -1
             )
         }
     }
@@ -56,5 +59,6 @@ class UserPreference @Inject constructor(
         private val FULLNAME_KEY = stringPreferencesKey("userFullname")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+        private val USER_ID = intPreferencesKey("1")
     }
 }

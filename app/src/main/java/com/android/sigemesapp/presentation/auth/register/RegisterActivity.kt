@@ -83,8 +83,8 @@ class RegisterActivity : AppCompatActivity() {
         var gender = ""
         if (checkgender == "Perempuan"){
             gender = "perempuan"
-        } else if (checkgender == "Laki-laki"){
-            gender = "laki-laki"
+        } else if (checkgender == "Laki-Laki"){
+            gender = "laki_laki"
         }
         val email = binding.edRegisterEmail.text.toString()
         val password = binding.edLoginPassword.text.toString()

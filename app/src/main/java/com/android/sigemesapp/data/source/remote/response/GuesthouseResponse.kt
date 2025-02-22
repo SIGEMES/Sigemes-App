@@ -32,7 +32,7 @@ data class GuesthouseData(
 	val contactPerson: String,
 
 	@field:SerializedName("area_m2")
-	val areaM2: Int,
+	val areaM2: Double,
 
 	@field:SerializedName("latitude")
 	val latitude: Any,

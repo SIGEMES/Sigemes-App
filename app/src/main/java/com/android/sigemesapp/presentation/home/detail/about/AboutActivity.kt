@@ -1,13 +1,16 @@
 package com.android.sigemesapp.presentation.home.detail.about
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.databinding.ActivityAboutBinding
+import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity
 import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
 import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
 import com.android.sigemesapp.presentation.home.detail.DetailViewModel
@@ -25,6 +28,7 @@ class AboutActivity : AppCompatActivity() {
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
         const val KEY_GUESTHOUSE_ID = "key_guesthouse_id"
+        const val KEY_CITYHALL_ID = "key_cityhall_id"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -37,17 +41,30 @@ class AboutActivity : AppCompatActivity() {
 
         setupAction()
 
-        val roomId = intent.getIntExtra(DetailMessActivity.KEY_ROOM_ID, -1)
-        val guesthouseId = intent.getIntExtra(DetailMessActivity.KEY_GUESTHOUSE_ID, -1)
+        val roomId = intent.getIntExtra(KEY_ROOM_ID, -1)
+        val guesthouseId = intent.getIntExtra(KEY_GUESTHOUSE_ID, -1)
+        val cityHallId = intent.getIntExtra(KEY_CITYHALL_ID, -1)
 
-        observeRoomData(guesthouseId, roomId)
-        observeGuesthouseData(guesthouseId)
+        Log.e("Checkin Id", "roomId $roomId, guesthouseId $guesthouseId, cityhallId $cityHallId")
 
+        if(cityHallId == -1){
+            if(roomId == 1){
+                observeRoomData(guesthouseId, roomId)
+            }else{
+                setupVisibilityRoom()
+            }
+            observeGuesthouseData(guesthouseId)
+        } else{
+            observeCityHallData(cityHallId)
+        }
+    }
 
+    private fun setupVisibilityRoom() {
+        binding.fasilitasKamarTitle.visibility = View.GONE
+        binding.fasilitasKamarDesc.visibility = View.GONE
     }
 
     private fun setupAction() {
-
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -103,6 +120,7 @@ class AboutActivity : AppCompatActivity() {
     private fun setGuesthouseDetail(guesthouse: GuesthouseData) {
         binding.lokasiDesc.text = guesthouse.address
         binding.aboutDesc.text = guesthouse.description
+        binding.name.text = guesthouse.name
 
         val facility = extractFacilities(guesthouse.facilities)
         binding.fasilitasUmumDesc.text = String.format("- " + facility.joinToString("\n- "))
@@ -129,7 +147,48 @@ class AboutActivity : AppCompatActivity() {
     }
 
     private fun setRoomDetail(room: DetailRoom) {
+        binding.fasilitasKamarDesc.visibility = View.VISIBLE
+        binding.fasilitasKamarTitle.visibility = View.VISIBLE
         val facility = extractFacilities(room.facilities)
         binding.fasilitasKamarDesc.text = String.format("- " + facility.joinToString("\n- "))
+    }
+
+
+    private fun observeCityHallData(cityHallId: Int) {
+        detailViewModel.getCityHall(cityHallId)
+
+        detailViewModel.detailCityHall.observe(this){ result ->
+            when (result) {
+                is Result.Loading -> {
+
+                }
+                is Result.Success -> {
+                    val cityHall = result.data
+                    setCityHallDetail(cityHall)
+                }
+                is Result.Error -> {
+                    Toast.makeText(this, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
+                }
+            }
+
+        }
+    }
+
+    private fun setCityHallDetail(cityHall: CityHallData) {
+        binding.lokasiDesc.text = cityHall.address
+        binding.aboutDesc.text = cityHall.description
+        binding.name.text = cityHall.name
+
+        val area = "${cityHall.areaM2} m²"
+        val capacity = "${cityHall.peopleCapacity} orang"
+        val facilityList = extractFacilities(cityHall.pricing[1].facilities).toMutableList()
+
+        facilityList.add(0, "Luas: $area")
+        facilityList.add(1, "Kapasitas: $capacity")
+
+        binding.fasilitasUmumDesc.text = facilityList.joinToString("\n- ", prefix = "- ")
+
+        binding.fasilitasKamarTitle.visibility = View.GONE
+        binding.fasilitasKamarDesc.visibility = View.GONE
     }
 }

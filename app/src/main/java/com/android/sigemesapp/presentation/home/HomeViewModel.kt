@@ -6,6 +6,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.sigemesapp.data.source.remote.response.CityHallData
+import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.domain.repository.SigemesRepository
@@ -21,6 +22,9 @@ class HomeViewModel @Inject constructor(
 
     private val _allGuesthousesResult = MutableLiveData<Result<List<GuesthouseResponse>>>()
     val allGuesthousesResult: LiveData<Result<List<GuesthouseResponse>>> get() = _allGuesthousesResult
+
+    private val _guesthouseResult = MutableLiveData<Result<GuesthouseData>>()
+    val guesthouseResult: LiveData<Result<GuesthouseData>> get() = _guesthouseResult
 
     private val _allRooms = MutableLiveData<Result<List<RoomItem>>>()
     val allRooms: LiveData<Result<List<RoomItem>>> get() = _allRooms
@@ -52,6 +56,16 @@ class HomeViewModel @Inject constructor(
             sigemesRepository.getCityHall(id)
                 .collect{ result ->
                     _cityHall.value = result
+                }
+        }
+    }
+
+    fun getGuesthouse(id: Int){
+        viewModelScope.launch {
+            sigemesRepository.getDetailGuesthouse(id)
+                .collect{ result ->
+                    _guesthouseResult.value = result
+
                 }
         }
     }

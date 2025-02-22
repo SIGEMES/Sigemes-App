@@ -3,6 +3,7 @@ package com.android.sigemesapp.presentation.home.detail
 import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
+import android.util.Log
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -31,7 +32,6 @@ class DetailMessActivity : AppCompatActivity() {
 
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
-        const val KEY_ROOM_NAME = "key_room_name"
         const val KEY_GUESTHOUSE_ID = "key_guesthouse_id"
         const val KEY_DURATION = "key_duration"
     }
@@ -57,7 +57,6 @@ class DetailMessActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
-
     }
 
     private fun observeGuesthouseData(guesthouseId: Int) {
@@ -139,6 +138,7 @@ class DetailMessActivity : AppCompatActivity() {
         binding.cardUlasan.setOnClickListener {
             val intent = Intent(this, ReviewActivity::class.java)
             intent.putExtra(ReviewActivity.KEY_ROOM_NAME, room.name)
+            Log.e("Check", "roomNameMess ${room.name}")
             startActivity(intent)
         }
 
@@ -150,7 +150,6 @@ class DetailMessActivity : AppCompatActivity() {
         }
 
         val facility = extractFacilities(room.facilities)
-
         binding.fasiliasKamarText.text = String.format("- " + facility.joinToString("\n- "))
 
         val durationInNights = receivedDuration ?: 1

@@ -29,9 +29,8 @@
         android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toBottomOf="@id/app_name"
         app:cardCornerRadius="20dp"
-        app:cardElevation="2dp"
-        app:strokeWidth="0.5dp"
-        app:strokeColor="@color/darkBlue">
+        app:strokeWidth="1.5dp"
+        app:strokeColor="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -53,8 +52,8 @@
                 android:text="@string/user_fullname"
                 style="@style/TextBoldH5"
                 android:maxLines="2"
-                android:layout_marginStart="10dp"
-                app:layout_constraintEnd_toStartOf="@id/edit_button"
+                android:layout_marginStart="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@id/profile_picture"
                 app:layout_constraintBottom_toTopOf="@id/user_email"
                 app:layout_constraintTop_toTopOf="@id/profile_picture"/>
@@ -65,31 +64,17 @@
                 android:layout_height="wrap_content"
                 android:text="@string/user_domain_com"
                 style="@style/TextH6"
-                android:layout_marginStart="10dp"
+                android:layout_marginStart="16dp"
                 app:layout_constraintTop_toBottomOf="@id/fullname"
                 app:layout_constraintStart_toEndOf="@id/profile_picture"
                 app:layout_constraintBottom_toBottomOf="@id/profile_picture"/>
 
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/edit_button"
-                android:layout_width="40dp"
-                android:layout_height="50dp"
-                android:backgroundTint="@color/softblue"
-                android:contentDescription="@string/icon"
-                android:paddingStart="5dp"
-                android:paddingEnd="5dp"
-                app:cornerRadius="100dp"
-                app:icon="@drawable/edit"
-                app:iconSize="30dp"
-                app:iconTint="@color/babyblue"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:ignore="TouchTargetSizeCheck"/>
 
             <com.google.android.material.button.MaterialButton
+                android:id="@+id/edit_profile_button"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/lihat_profil_saya"
+                android:text="@string/edit_profil"
                 android:padding="3dp"
                 android:textAllCaps="false"
                 android:textSize="14sp"
@@ -114,9 +99,8 @@
         android:layout_marginHorizontal="20dp"
         app:layout_constraintTop_toBottomOf="@id/profile_card"
         app:cardCornerRadius="20dp"
-        app:cardElevation="2dp"
-        app:strokeWidth="0.5dp"
-        app:strokeColor="@color/darkBlue">
+        app:strokeWidth="1.5dp"
+        app:strokeColor="@color/black">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:layout_width="match_parent"
@@ -130,6 +114,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 android:clickable="true"
                 android:focusable="true"
+
                 app:layout_constraintTop_toTopOf="parent">
 
                 <androidx.constraintlayout.widget.ConstraintLayout
@@ -152,7 +137,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/lorem"
-                        style="@style/TextH7"
+                        style="@style/TextH6"
                         app:layout_constraintTop_toBottomOf="@id/pusat_bantuan"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/nav_next"
@@ -212,7 +197,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/lorem"
-                        style="@style/TextH7"
+                        style="@style/TextH6"
                         app:layout_constraintTop_toBottomOf="@id/hubungi_kami"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintEnd_toStartOf="@id/nav_next2"
@@ -272,7 +257,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:text="@string/lorem"
-                        style="@style/TextH7"
+                        style="@style/TextH6"
                         app:layout_constraintTop_toBottomOf="@id/pengaturan"
                         app:layout_constraintStart_toStartOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
