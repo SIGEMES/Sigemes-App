@@ -14,6 +14,15 @@ data class DetailRoomResponse(
 	val status: Boolean
 )
 
+data class DetailMediaItemRoom(
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("url")
+	val url: String
+)
+
 data class PricingItemRoom(
 
 	@field:SerializedName("is_active")
@@ -32,7 +41,7 @@ data class PricingItemRoom(
 data class DetailRoom(
 
 	@field:SerializedName("area_m2")
-	val areaM2: Float,
+	val areaM2: Int,
 
 	@field:SerializedName("available_slot")
 	val availableSlot: Int,
@@ -59,17 +68,5 @@ data class DetailRoom(
 	val totalSlot: Int,
 
 	@field:SerializedName("pricing")
-	val pricing: List<PricingItemRoom>,
-
-	@field:SerializedName("status")
-	val status: String
-)
-
-data class DetailMediaItemRoom(
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("url")
-	val url: String
+	val pricing: List<PricingItemRoom>
 )

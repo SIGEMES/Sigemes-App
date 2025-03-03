@@ -14,34 +14,10 @@ data class GuesthouseRoomsResponse(
 	val status: Boolean
 )
 
-data class MediaItem(
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("url")
-	val url: String
-)
-
-data class PricingItem(
-
-	@field:SerializedName("is_active")
-	val isActive: Boolean,
-
-	@field:SerializedName("retribution_type")
-	val retributionType: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("price_per_day")
-	val pricePerDay: Int
-)
-
 data class RoomItem(
 
 	@field:SerializedName("area_m2")
-	val areaM2: Float,
+	val areaM2: Int,
 
 	@field:SerializedName("available_slot")
 	val availableSlot: Int,
@@ -68,8 +44,29 @@ data class RoomItem(
 	val totalSlot: Int,
 
 	@field:SerializedName("pricing")
-	val pricing: List<PricingItem>,
+	val pricing: List<PricingItem>
+)
 
-	@field:SerializedName("status")
-	val status: String
+data class PricingItem(
+
+	@field:SerializedName("is_active")
+	val isActive: Boolean,
+
+	@field:SerializedName("retribution_type")
+	val retributionType: String,
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("price_per_day")
+	val pricePerDay: Int
+)
+
+data class MediaItem(
+
+	@field:SerializedName("id")
+	val id: Int,
+
+	@field:SerializedName("url")
+	val url: String
 )

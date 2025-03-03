@@ -578,7 +578,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/fasilitas_title"
                     android:layout_marginTop="10dp"
-                    android:src="@drawable/group"/>
+                    android:src="@drawable/size"/>
 
                 <TextView
                     android:id="@+id/luas_title"
@@ -670,7 +670,6 @@
             android:background="?attr/selectableItemBackground"
             app:cardCornerRadius="20dp"
             app:strokeWidth="1.5dp"
-            app:layout_constraintBottom_toBottomOf="parent"
             android:layout_marginBottom="16dp"
             app:strokeColor="@color/black">
 
@@ -752,6 +751,26 @@
                     android:layout_marginTop="10dp"
                     app:layout_constraintTop_toBottomOf="@id/duration_text"/>
 
+                <TextView
+                    android:id="@+id/price_per_day_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga per hari"
+                    style="@style/TextH6"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"/>
+
+                <TextView
+                    android:id="@+id/price_per_day"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 80.000"
+                    style="@style/TextBoldH5"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/price_per_day_title"
+                    app:layout_constraintBottom_toBottomOf="@id/price_per_day_title"/>
 
                 <TextView
                     android:id="@+id/harga_total_title"
@@ -759,10 +778,9 @@
                     android:layout_height="wrap_content"
                     android:text="@string/total_harga"
                     style="@style/TextBoldH5"
-                    android:layout_marginTop="16dp"
+                    android:layout_marginTop="8dp"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider3"/>
-
+                    app:layout_constraintTop_toBottomOf="@id/price_per_day_title"/>
 
                 <TextView
                     android:id="@+id/price_range"
@@ -773,46 +791,33 @@
                     android:layout_height="wrap_content"
                     android:text="@string/price_range"
                     app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/divider3"
-                    android:layout_marginBottom="16dp"
-                    android:layout_marginTop="16dp"/>
+                    app:layout_constraintTop_toTopOf="@id/harga_total_title"
+                    app:layout_constraintBottom_toBottomOf="@id/harga_total_title"/>
 
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/cart_button"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="8dp"
-                    android:paddingHorizontal="2dp"
-                    android:text="@string/tambah_ke_keranjang"
-                    android:textAllCaps="false"
-                    android:textSize="14sp"
-                    app:cornerRadius="24dp"
-                    app:layout_constraintEnd_toStartOf="@id/checkout_button"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/harga_total_title"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-                <com.google.android.material.button.MaterialButton
-                    android:id="@+id/checkout_button"
-                    android:layout_width="0dp"
-                    android:layout_height="50dp"
-                    android:layout_marginTop="16dp"
-                    android:paddingHorizontal="2dp"
-                    android:text="@string/checkout_gedung_ini"
-                    android:textAllCaps="false"
-                    android:textSize="14sp"
-                    app:cornerRadius="24dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@id/cart_button"
-                    app:layout_constraintTop_toBottomOf="@id/harga_total_title"
-                    tools:ignore="TouchTargetSizeCheck" />
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
         </com.google.android.material.card.MaterialCardView>
 
-
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/checkout_button"
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="2dp"
+            android:text="@string/pesan_gedung"
+            android:textAllCaps="false"
+            android:layout_height="55dp"
+            style="@style/TextBoldH5"
+            android:backgroundTint="@color/orange"
+            android:textColor="@color/white"
+            app:cornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_rincian_harga"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            tools:ignore="TouchTargetSizeCheck" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -57,20 +57,15 @@
                 style="@style/PinWidget.PinView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="30dp"
-                android:layout_marginEnd="30dp"
                 android:layout_marginBottom="8dp"
                 android:inputType="number"
                 android:padding="10dp"
+                android:layout_gravity="center"
                 android:textSize="18sp"
                 app:itemCount="5"
                 app:itemHeight="48dp"
                 app:itemRadius="10dp"
-                app:lineColor="@color/onGray"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:lineColor="@color/onGray" />
 
             <View
                 android:layout_width="wrap_content"
@@ -80,7 +75,9 @@
                 android:id="@+id/btnVerifyOtp"
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
-                android:text="@string/verify_otp"
+                android:text="@string/kirim_kode"
+                android:textStyle="bold"
+                android:textAllCaps="false"
                 app:cornerRadius="8dp" />
 
             <TextView

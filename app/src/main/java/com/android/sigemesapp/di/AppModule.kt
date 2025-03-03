@@ -8,6 +8,8 @@ import com.android.sigemesapp.data.source.remote.retrofit.ApiService
 import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.local.dataStore
+import com.google.gson.Gson
+import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -84,11 +86,19 @@ object AppModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient): Retrofit {
+    fun provideGson(): Gson {
+        return GsonBuilder()
+            .serializeNulls()  // Pastikan null tetap dikirim
+            .create()
+    }
+
+    @Provides
+    @Singleton
+    fun provideRetrofit(baseUrl: String, okHttpClient: OkHttpClient, gson: Gson): Retrofit {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .client(okHttpClient)
-            .addConverterFactory(GsonConverterFactory.create())
+            .addConverterFactory(GsonConverterFactory.create(gson))
             .build()
     }
 

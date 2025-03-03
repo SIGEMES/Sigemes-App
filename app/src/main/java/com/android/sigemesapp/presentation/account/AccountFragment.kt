@@ -44,31 +44,14 @@ class AccountFragment : Fragment() {
     private fun setupRenterData() {
         authViewModel.getSession().observe(viewLifecycleOwner) { user ->
             if(user.isLogin){
-                authViewModel.getRenterData(user.id)
+                binding.fullname.text = user.fullname
+                binding.userEmail.text = user.email
+                Glide.with(binding.profilePicture.context)
+                    .load(user.profile_picture)
+                    .error(R.drawable.ic_android_black_24dp)
+                    .into(binding.profilePicture)
 
-                authViewModel.renterData.observe(viewLifecycleOwner){ result ->
-                    when(result){
-                        is Result.Loading -> {
-
-                        }
-
-                        is Result.Success -> {
-                            binding.fullname.text = result.data.fullname
-                            binding.userEmail.text = result.data.email
-                            Glide.with(binding.profilePicture.context)
-                                .load(result.data.profilePicture)
-                                .error(R.drawable.ic_android_black_24dp)
-                                .into(binding.profilePicture)
-
-                            setupEditAction(result.data.id)
-                        }
-
-                        is Result.Error -> {
-
-                        }
-                    }
-
-                }
+                setupEditAction(user.id)
             }
 
         }

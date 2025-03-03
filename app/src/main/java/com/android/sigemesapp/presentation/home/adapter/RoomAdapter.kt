@@ -16,7 +16,7 @@ class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<R
 
     class RoomViewHolder(private val binding: ItemRoomBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(room: RoomItem, callback: OnItemClickCallback?) {
-            if(room.status == "tersedia"){
+
                 binding.roomType.text = room.name
 
                 var minPrice = Int.MAX_VALUE
@@ -53,7 +53,7 @@ class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<R
                 binding.root.setOnClickListener {
                     callback?.onItemClicked(room)
                 }
-            }
+
         }
     }
 

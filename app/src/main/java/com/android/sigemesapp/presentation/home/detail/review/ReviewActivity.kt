@@ -1,18 +1,9 @@
 package com.android.sigemesapp.presentation.home.detail.review
 
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.android.sigemesapp.R
-import com.android.sigemesapp.databinding.ActivityDetailMessBinding
 import com.android.sigemesapp.databinding.ActivityReviewBinding
-import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
 
 class ReviewActivity : AppCompatActivity() {
 

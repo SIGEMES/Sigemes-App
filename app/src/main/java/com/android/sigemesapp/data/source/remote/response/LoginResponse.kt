@@ -25,6 +25,9 @@ data class LoginData(
 	@field:SerializedName("profile_picture")
 	val profilePicture: String,
 
+	@field:SerializedName("phone_number")
+	val phoneNumber: String,
+
 	@field:SerializedName("fullname")
 	val fullname: String,
 

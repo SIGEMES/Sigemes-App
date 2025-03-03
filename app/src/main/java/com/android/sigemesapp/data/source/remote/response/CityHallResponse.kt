@@ -64,6 +64,9 @@ data class CityHallMediaItem(
 
 data class CityHallPricingItem(
 
+	@field:SerializedName("is_active")
+	val isActive: Boolean,
+
 	@field:SerializedName("activity_type")
 	val activityType: String,
 

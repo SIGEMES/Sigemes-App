@@ -17,6 +17,10 @@ import com.android.sigemesapp.presentation.home.search.SearchActivity
 import com.android.sigemesapp.utils.Result
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Calendar
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class HomeFragment : Fragment() {
@@ -43,40 +47,22 @@ class HomeFragment : Fragment() {
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         setupWelcome()
-        setupAction()
-        setupAboutGedung()
-        setupAboutMess()
 
     }
 
     private fun setupWelcome() {
         authViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            binding.username.text = "Halo, ${user.fullname}"
-
-            authViewModel.getRenterData(user.id)
-
-            authViewModel.renterData.observe(viewLifecycleOwner){ result ->
-                when(result){
-                    is Result.Loading -> {
-
-                    }
-
-                    is Result.Success -> {
-                        Glide.with(binding.profilePic.context)
-                            .load(result.data.profilePicture)
-                            .error(R.drawable.ic_android_black_24dp)
-                            .into(binding.profilePic)
-                    }
-
-                    is Result.Error -> {
-
-                    }
-                }
-
+            if (user.isLogin){
+                binding.username.text = "Halo, ${user.fullname}"
+                Glide.with(binding.profilePic.context)
+                    .load(user.profile_picture)
+                    .error(R.drawable.ic_android_black_24dp)
+                    .into(binding.profilePic)
+                setupAction()
+                setupAboutGedung()
+                setupAboutMess()
             }
-
         }
-
     }
 
     private fun setupAboutMess() {
@@ -107,7 +93,15 @@ class HomeFragment : Fragment() {
     }
 
     private fun setupAboutGedung() {
-        homeViewModel.getCityHall(1)
+        val today = Calendar.getInstance().timeInMillis
+        val tomorrow = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 1) }.timeInMillis
+
+        val ymf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
+
+        val startDate = ymf.format(Date(today))
+        val endDate = ymf.format(Date(tomorrow))
+
+        homeViewModel.getCityHall(1, startDate, endDate)
 
         homeViewModel.cityHall.observe(viewLifecycleOwner){ result ->
             when(result){

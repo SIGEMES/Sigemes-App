@@ -17,6 +17,7 @@ material = "1.12.0"
 constraintlayout = "2.2.0"
 lifecycleLivedataKtx = "2.8.7"
 lifecycleViewmodelKtx = "2.8.7"
+midtransUikit = "2.0.0"
 navigationFragmentKtx = "2.8.5"
 navigationUiKtx = "2.8.5"
 legacySupportV4 = "1.0.0"
@@ -28,6 +29,7 @@ roomCompiler = "2.6.1"
 roomRuntime = "2.6.1"
 dagger = "2.52"
 hilt = "2.52"
+uikit = "2.3.0-SANDBOX"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -60,6 +62,7 @@ dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
 dagger-compiler = { module = "com.google.dagger:dagger-compiler", version.ref = "dagger" }
 hilt-android = { module = "com.google.dagger:hilt-android", version.ref = "hilt" }
 hilt-android-compiler = { module = "com.google.dagger:hilt-android-compiler", version.ref = "hilt" }
+uikit = { module = "com.midtrans:uikit", version.ref = "uikit" }
 
 
 [plugins]

@@ -152,6 +152,21 @@
     <string name="durasi_sewa">- Durasi Sewa</string>
     <string name="tentang_mess_pemko">Tentang Mess Pemko</string>
     <string name="tentang_gedung_adam_malik">Tentang Gedung Adam Malik</string>
+    <string name="kirim_email">Kirim Email</string>
+    <string name="kirim_kode">Kirim Kode</string>
+    <string name="no_rooms_available">Mohon maaf...\nTidak ada kamar mess yang tersedia.</string>
+    <string name="cityhall_available">Gedung Adam Malik tersedia</string>
+    <string name="no_cityhall_available">Mohon maaf...\nPada tanggal tersebut Gedung Adam Malik tidak tersedia.</string>
+    <string name="check_in">Check-in</string>
+    <string name="check_out">Check-out</string>
+    <string name="checkin_checkout_tutorial_desc">Petunjuk Check-in\nHarap lapor ke resepsionis dengan membawa KTP dan bukti pemesanan Anda.\n\nPetunjuk Check-out\nHarap lapor ke resepsionis dan bawa kartu kunci kamar Anda.</string>
+    <string name="lanjut_ke_pembayaran">Lanjut ke Pembayaran</string>
+    <string name="pesan_kamar_ini">Pesan Kamar Ini</string>
+    <string name="pesan_gedung">Pesan Gedung</string>
+    <string name="harga_total">Harga Total</string>
+    <string name="bayar_sekarang">Bayar Sekarang</string>
+    <string name="rent_success">Pemesanan Berhasil!</string>
+    <string name="cancelled_rent_success">Pemesanan Berhasil Dibatalkan</string>
     <string-array name="gender_options">
         <item>Laki-Laki</item>
         <item>Perempuan</item>

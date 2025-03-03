@@ -8,7 +8,7 @@
     android:clickable="true"
     android:focusable="true"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
+    android:layout_marginTop="10dp"
     app:strokeColor="@color/black">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -21,6 +21,7 @@
             android:layout_height="wrap_content"
             android:text="No. Invoice"
             style="@style/TextBoldH6"
+            android:visibility="gone"
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"
             app:layout_constraintStart_toStartOf="parent"
@@ -32,6 +33,7 @@
             android:layout_height="wrap_content"
             android:text="11334"
             style="@style/TextH6"
+            android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/no_pesanan_title"
             app:layout_constraintBottom_toBottomOf="@id/no_pesanan_title"
             app:layout_constraintStart_toEndOf="@id/no_pesanan_title"
@@ -42,6 +44,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="18:26"
+            android:visibility="gone"
             android:layout_marginEnd="16dp"
             app:layout_constraintTop_toTopOf="@id/date"
             app:layout_constraintBottom_toBottomOf="@id/date"
@@ -54,9 +57,9 @@
             android:layout_height="wrap_content"
             android:text="22 Feb 2025,"
             style="@style/TextH6"
+            android:layout_marginVertical="8dp"
             android:layout_marginEnd="8dp"
-            app:layout_constraintTop_toTopOf="@id/no_pesanan"
-            app:layout_constraintBottom_toBottomOf="@id/no_pesanan"
+            app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintEnd_toStartOf="@id/time"/>
 
         <com.google.android.material.card.MaterialCardView
@@ -66,7 +69,9 @@
             android:layout_marginTop="8dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/no_pesanan_title"
+            app:layout_constraintTop_toBottomOf="@id/date"
+
+            app:cardElevation="0dp"
             android:backgroundTint="@color/softblue">
 
             <androidx.constraintlayout.widget.ConstraintLayout
@@ -97,7 +102,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="@string/mess_kota"
-                    style="@style/TextBoldH45"
+                    style="@style/TextBoldH5"
                     android:layout_marginStart="15dp"
                     app:layout_constraintBottom_toTopOf="@id/room_type_title"
                     app:layout_constraintStart_toEndOf="@id/card_photo"
@@ -112,10 +117,21 @@
                     android:layout_marginStart="15dp"
                     android:layout_marginTop="5dp"
                     android:text="Kamar VIP 1"
-                    app:layout_constraintBottom_toBottomOf="@+id/card_photo"
+                    app:layout_constraintBottom_toTopOf="@+id/check_in_check_out"
                     app:layout_constraintStart_toEndOf="@id/card_photo"
                     app:layout_constraintTop_toBottomOf="@id/title_pesanan" />
 
+                <TextView
+                    android:id="@+id/check_in_check_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rab, 15 Mar 2025 - Kam, 16 Mar 2025"
+                    app:layout_constraintStart_toEndOf="@+id/card_photo"
+                    app:layout_constraintTop_toBottomOf="@id/room_type_title"
+                    android:layout_marginStart="15dp"
+                    style="@style/TextH6"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintBottom_toBottomOf="@id/card_photo"/>
 
             </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -125,17 +141,18 @@
 
         <TextView
             android:id="@+id/status"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Pembayaran Berhasil"
             style="@style/TextBoldH6"
-            android:textColor="@color/green"
-            android:layout_marginTop="8dp"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginBottom="16dp"
-            app:layout_constraintStart_toStartOf="parent"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="8dp"
+            android:text="Pembayaran Berhasil"
+            android:textColor="@color/green"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/short_detail_card"/>
+            app:layout_constraintEnd_toStartOf="@+id/total_price"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/short_detail_card" />
 
         <TextView
             android:id="@+id/total_price"

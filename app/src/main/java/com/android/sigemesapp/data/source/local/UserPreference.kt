@@ -26,6 +26,9 @@ class UserPreference @Inject constructor(
             preferences[FULLNAME_KEY] = user.fullname
             preferences[TOKEN_KEY] = user.token
             preferences[IS_LOGIN_KEY] = true
+            preferences[GENDER] = user.gender
+            preferences[PROFILE_PICTURE] = user.profile_picture
+            preferences[PHONE_NUMBER] = user.phone_number
             preferences[USER_ID] = user.id
         }
     }
@@ -37,6 +40,9 @@ class UserPreference @Inject constructor(
                 preferences[FULLNAME_KEY] ?: "",
                 preferences[TOKEN_KEY] ?: "",
                 preferences[IS_LOGIN_KEY] ?: false,
+                preferences[GENDER] ?: "",
+                preferences[PROFILE_PICTURE] ?: "",
+                preferences[PHONE_NUMBER] ?: "",
                 preferences[USER_ID] ?: -1
             )
         }
@@ -59,6 +65,9 @@ class UserPreference @Inject constructor(
         private val FULLNAME_KEY = stringPreferencesKey("userFullname")
         private val TOKEN_KEY = stringPreferencesKey("token")
         private val IS_LOGIN_KEY = booleanPreferencesKey("isLogin")
+        private val GENDER = stringPreferencesKey("gender")
+        private val PROFILE_PICTURE = stringPreferencesKey("profile_picture")
+        private val PHONE_NUMBER = stringPreferencesKey("phone_number")
         private val USER_ID = intPreferencesKey("1")
     }
 }
