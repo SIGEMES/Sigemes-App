@@ -13,12 +13,6 @@
     </fragment>
 
     <fragment
-        android:id="@+id/navigation_cart"
-        android:name="com.android.sigemesapp.presentation.cart.CartFragment"
-        android:label="@string/keranjang"
-        tools:layout="@layout/fragment_cart" />
-
-    <fragment
         android:id="@+id/navigation_history"
         android:name="com.android.sigemesapp.presentation.history.HistoryFragment"
         android:label="@string/riwayat"

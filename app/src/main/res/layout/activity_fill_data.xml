@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/softblue"
+    tools:context=".presentation.home.search.rent.FillDataActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/count_one"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:backgroundTint="@color/babyblue"
+            app:cardCornerRadius="30dp"
+            android:layout_marginVertical="16dp"
+            app:layout_constraintStart_toStartOf="@id/active_line"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    style="@style/TextBoldH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1"
+                    android:textColor="@color/white"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <TextView
+            android:id="@+id/pesan_text"
+            style="@style/TextBoldH6"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:text="Pesan"
+            android:textColor="@color/babyblue"
+            app:layout_constraintBottom_toBottomOf="@id/count_one"
+            app:layout_constraintEnd_toEndOf="@+id/active_line"
+            app:layout_constraintStart_toEndOf="@id/count_one"
+            app:layout_constraintTop_toTopOf="@+id/count_one" />
+
+        <View
+            android:id="@+id/active_line"
+            android:layout_width="90dp"
+            android:layout_height="3dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/babyblue"
+            android:visibility="visible"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/count_one" />
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/mohon_periksa"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/white"
+            android:layout_marginTop="8dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/active_line"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="8dp"
+                android:paddingHorizontal="10dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Mohon periksa kembali pesanan Anda sebelum melanjutkan ke pembayaran"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    style="@style/TextBoldH6"
+                    android:textColor="@color/babyblue"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_rincian_pesanan_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/mohon_periksa"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/item_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mess_kota"
+                    style="@style/TextBoldH45"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/check_in_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/check_in"
+                    style="@style/TextH6"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"/>
+
+                <TextView
+                    android:id="@+id/check_in_date"
+                    style="@style/TextBoldH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jum, 24 Jan 2025"
+                    android:layout_marginEnd="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/check_in_title"
+                    app:layout_constraintStart_toStartOf="parent" />
+
+                <TextView
+                    android:id="@+id/check_in_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(14:00)"
+                    android:visibility="gone"
+                    style="@style/TextH6"
+                    app:layout_constraintTop_toBottomOf="@id/check_in_date"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/check_out_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/check_out"
+                    style="@style/TextH6"
+                    android:layout_marginStart="30dp"
+                    app:layout_constraintStart_toEndOf="@id/moon_icon"
+                    app:layout_constraintTop_toTopOf="@id/check_in_title"
+                    app:layout_constraintBottom_toBottomOf="@id/check_in_title"/>
+
+                <TextView
+                    android:id="@+id/check_out_date"
+                    style="@style/TextBoldH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Jum, 25 Jan 2025"
+                    app:layout_constraintStart_toStartOf="@id/check_out_title"
+                    app:layout_constraintTop_toBottomOf="@+id/check_out_title" />
+
+                <TextView
+                    android:id="@+id/check_out_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="(12:00)"
+                    android:visibility="gone"
+                    style="@style/TextH6"
+                    app:layout_constraintTop_toBottomOf="@id/check_out_date"
+                    app:layout_constraintStart_toStartOf="@id/check_out_date"/>
+
+                <View
+                    android:id="@+id/divider1"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/item_title"/>
+
+                <ImageView
+                    android:id="@+id/moon_icon"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider1"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    android:src="@drawable/baseline_nights_stay_24"/>
+
+                <TextView
+                    android:id="@+id/duration_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="1 malam"
+                    app:layout_constraintTop_toBottomOf="@id/moon_icon"
+                    app:layout_constraintStart_toStartOf="@id/moon_icon"
+                    app:layout_constraintEnd_toEndOf="@id/moon_icon"
+                    style="@style/TextH6"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/renter_type"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/umum"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/renter_type_title"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/renter_type_title"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/renter_type_title"/>-->
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/duration_type_title"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/durasi_sewa_kamar"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/renter_type"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/duration_text"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/_1_malam"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:layout_marginStart="5dp"-->
+<!--                    app:layout_constraintStart_toEndOf="@id/duration_type_title"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/duration_type_title"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/duration_type_title"/>-->
+
+
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/price_per_night_title"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Harga per malam"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/divider3"/>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/price_per_night"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="Rp 80.000"-->
+<!--                    style="@style/TextBoldH5"-->
+<!--                    android:textColor="@color/orange"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/price_per_night_title"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/price_per_night_title"/>-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/harga_total_title"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/total_harga"-->
+<!--                    style="@style/TextBoldH5"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/price_per_night_title"/>-->
+
+
+<!--                <TextView-->
+<!--                    android:id="@+id/price_range"-->
+<!--                    android:textColor="@color/orange"-->
+<!--                    android:textStyle="bold"-->
+<!--                    style="@style/TextBoldH45"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/price_range"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/harga_total_title"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/harga_total_title"/>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_rincian_pesanan_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_rincian_pesanan_1"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/detail_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Detail Pesanan"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="16dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <View
+                    android:id="@+id/divider2"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    android:layout_marginHorizontal="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/detail_title"/>
+
+                <TextView
+                    android:id="@+id/room_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Kamar"
+                    style="@style/TextH6"
+                    android:visibility="gone"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider2"/>
+
+                <TextView
+                    android:id="@+id/room_type"
+                    style="@style/TextH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="VIP 1"
+                    android:visibility="gone"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@id/room_title"
+                    app:layout_constraintBottom_toBottomOf="@id/room_title"
+                    app:layout_constraintStart_toEndOf="@id/room_title"/>
+
+                <TextView
+                    android:id="@+id/renter_type_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextH6"
+                    android:layout_marginStart="16dp"
+                    android:text="Kategori Penyewa: "
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintTop_toBottomOf="@id/room_title"
+                    app:layout_constraintStart_toStartOf="parent"/>
+
+                <TextView
+                    android:id="@+id/renter_type"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/umum"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintTop_toTopOf="@id/renter_type_title"
+                    app:layout_constraintStart_toEndOf="@id/renter_type_title"
+                    app:layout_constraintBottom_toBottomOf="@id/renter_type_title"
+                    style="@style/TextH6"/>
+
+                <View
+                    android:id="@+id/divider3"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/renter_type_title"/>
+
+                <TextView
+                    android:id="@+id/data_pemesan"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Data Pemesan"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="8dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider3"/>
+
+                <View
+                    android:id="@+id/divider4"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginHorizontal="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/data_pemesan"/>
+
+                <TextView
+                    android:id="@+id/user_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Tiara Fitra Ramadhani Siregar"
+                    style="@style/TextBoldH6"
+                    android:layout_marginStart="16dp"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider4"/>
+
+                <TextView
+                    android:id="@+id/user_email"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    style="@style/TextH6"
+                    android:layout_marginBottom="16dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/user_name"/>
+
+                <TextView
+                    android:id="@+id/user_phone"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nomor_handphone"
+                    app:layout_constraintTop_toTopOf="@id/user_email"
+                    app:layout_constraintBottom_toBottomOf="@id/user_email"
+                    style="@style/TextH6"
+                    app:layout_constraintStart_toEndOf="@id/user_email"
+                    android:layout_marginStart="10dp"/>
+
+                <TextView
+                    android:id="@+id/user_gender"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jenis_kelamin"
+                    app:layout_constraintTop_toTopOf="@id/user_phone"
+                    app:layout_constraintBottom_toBottomOf="@id/user_phone"
+                    style="@style/TextH6"
+                    app:layout_constraintStart_toEndOf="@id/user_phone"
+                    android:layout_marginStart="10dp"/>
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/renter_type"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/umum"-->
+                <!--                    style="@style/TextH6"-->
+                <!--                    android:layout_marginStart="5dp"-->
+                <!--                    app:layout_constraintStart_toEndOf="@id/renter_type_title"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/renter_type_title"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/renter_type_title"/>-->
+
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/duration_type_title"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/durasi_sewa_kamar"-->
+                <!--                    style="@style/TextH6"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/renter_type"/>-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/duration_text"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/_1_malam"-->
+                <!--                    style="@style/TextH6"-->
+                <!--                    android:layout_marginStart="5dp"-->
+                <!--                    app:layout_constraintStart_toEndOf="@id/duration_type_title"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/duration_type_title"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/duration_type_title"/>-->
+
+
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/price_per_night_title"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="Harga per malam"-->
+                <!--                    style="@style/TextH6"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/divider3"/>-->
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/price_per_night"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="Rp 80.000"-->
+                <!--                    style="@style/TextBoldH5"-->
+                <!--                    android:textColor="@color/orange"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/price_per_night_title"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/price_per_night_title"/>-->
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/harga_total_title"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/total_harga"-->
+                <!--                    style="@style/TextBoldH5"-->
+                <!--                    android:layout_marginTop="8dp"-->
+                <!--                    app:layout_constraintStart_toStartOf="parent"-->
+                <!--                    app:layout_constraintTop_toBottomOf="@id/price_per_night_title"/>-->
+
+
+                <!--                <TextView-->
+                <!--                    android:id="@+id/price_range"-->
+                <!--                    android:textColor="@color/orange"-->
+                <!--                    android:textStyle="bold"-->
+                <!--                    style="@style/TextBoldH45"-->
+                <!--                    android:layout_width="wrap_content"-->
+                <!--                    android:layout_height="wrap_content"-->
+                <!--                    android:text="@string/price_range"-->
+                <!--                    app:layout_constraintEnd_toEndOf="parent"-->
+                <!--                    app:layout_constraintTop_toTopOf="@id/harga_total_title"-->
+                <!--                    app:layout_constraintBottom_toBottomOf="@id/harga_total_title"/>-->
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_kebijakan"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_rincian_pesanan_2"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/softyellow"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/yellow">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/kebijakan_title"
+                    style="@style/TextBoldH5"
+                    android:textColor="@color/orange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kebijakan_properti"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/clock_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/clock"
+                    app:tint="@color/orange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_title"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/checkin_checkout_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/clock_icon"
+                    app:layout_constraintStart_toEndOf="@id/clock_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/clock_icon"
+                    android:text="@string/waktu_check_in_dan_check_out"
+                    style="@style/TextBoldH6"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange"/>
+
+                <TextView
+                    android:id="@+id/waktu_check_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/checkin_checkout_title"
+                    app:layout_constraintStart_toStartOf="@id/checkin_checkout_title"
+                    android:text="Waktu Check-in"
+                    style="@style/TextH6"
+                    android:textColor="@color/yellow"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/time_check_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/waktu_check_in"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/waktu_check_in"
+                    android:text="dari 14:00"
+                    style="@style/TextBoldH6"
+                    android:textColor="@color/yellow"/>
+
+                <TextView
+                    android:id="@+id/waktu_check_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/waktu_check_in"
+                    app:layout_constraintStart_toStartOf="@id/waktu_check_in"
+                    android:text="Waktu Check-out"
+                    style="@style/TextH6"
+                    android:textColor="@color/yellow"
+                    android:layout_marginTop="5dp"/>
+
+                <TextView
+                    android:id="@+id/time_check_out"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/waktu_check_out"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="@id/waktu_check_out"
+                    android:text="sebelum 12:00"
+                    style="@style/TextBoldH6"
+                    android:textColor="@color/yellow"/>
+
+                <ImageView
+                    android:id="@+id/file_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/desc"
+                    app:tint="@color/orange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/waktu_check_out"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/checkin_checkout_tutorial_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/file_icon"
+                    app:layout_constraintStart_toEndOf="@id/file_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/file_icon"
+                    android:text="Petunjuk Umum Check-in dan Check-out"
+                    style="@style/TextBoldH6"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange"/>
+
+                <TextView
+                    android:id="@+id/checkin_checkout_tutorial"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toBottomOf="@id/checkin_checkout_tutorial_title"
+                    app:layout_constraintStart_toStartOf="@id/checkin_checkout_tutorial_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/checkin_checkout_tutorial_desc"
+                    style="@style/TextH6"
+                    android:textColor="@color/yellow"
+                    android:layout_marginTop="5dp"/>
+
+                <ImageView
+                    android:id="@+id/book_rules_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/book_rules"
+                    app:tint="@color/orange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/checkin_checkout_tutorial"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/kebijakan_khusus_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/book_rules_icon"
+                    app:layout_constraintStart_toEndOf="@id/book_rules_icon"
+                    app:layout_constraintBottom_toBottomOf="@id/book_rules_icon"
+                    android:text="@string/kebijakan_khusus"
+                    style="@style/TextBoldH6"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange"/>
+
+                <TextView
+                    android:id="@+id/reschedule_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
+                    app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/reschedule_text"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/refund_text"
+                    style="@style/TextH6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/refund_text"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/reschedule_text"
+                    app:layout_constraintTop_toBottomOf="@id/reschedule_text" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_rincian_harga"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_kebijakan"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:background="?attr/selectableItemBackground"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/rincian_harga_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rincian_title"
+                    style="@style/TextBoldH5"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"/>
+
+                <TextView
+                    android:id="@+id/rincian_item_name"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/mess_kota"
+                    style="@style/TextH6"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rincian_harga_title"/>
+
+                <TextView
+                    android:id="@+id/rincian_item"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:text="Kamar VIP 1, Umum, 1 malam"
+                    style="@style/TextH6"
+                    android:layout_marginTop="0dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/rincian_item_name"/>
+
+                <View
+                    android:id="@+id/divider5"
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/onGray"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginHorizontal="8dp"
+                    android:layout_marginTop="10dp"
+                    app:layout_constraintTop_toBottomOf="@id/rincian_item"/>
+
+                <TextView
+                    android:id="@+id/price_per_night_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Harga per malam"
+                    style="@style/TextH6"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/divider5"/>
+
+                <TextView
+                    android:id="@+id/price_per_night"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Rp 80.000"
+                    style="@style/TextBoldH5"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/price_per_night_title"
+                    app:layout_constraintBottom_toBottomOf="@id/price_per_night_title"/>
+
+
+                <TextView
+                    android:id="@+id/harga_total_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/total_harga"
+                    style="@style/TextBoldH5"
+                    android:layout_marginTop="8dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/price_per_night_title"/>
+
+                <TextView
+                    android:id="@+id/price_range"
+                    android:textColor="@color/orange"
+                    android:textStyle="bold"
+                    style="@style/TextBoldH45"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/price_range"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@id/harga_total_title"
+                    app:layout_constraintBottom_toBottomOf="@id/harga_total_title"/>
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/next_button"
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="2dp"
+            android:text="@string/lanjut_ke_pembayaran"
+            android:textAllCaps="false"
+            android:layout_height="55dp"
+            style="@style/TextBoldH5"
+            android:textColor="@color/white"
+            app:cornerRadius="24dp"
+            android:backgroundTint="@color/orange"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/card_rincian_harga"
+            app:layout_constraintBottom_toBottomOf="parent"
+            android:layout_marginBottom="16dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</ScrollView>

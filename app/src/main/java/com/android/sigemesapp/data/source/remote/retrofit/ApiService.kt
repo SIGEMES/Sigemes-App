@@ -1,14 +1,20 @@
 package com.android.sigemesapp.data.source.remote.retrofit
 
 import com.android.sigemesapp.data.source.remote.ChangePasswordRequest
+import com.android.sigemesapp.data.source.remote.CreateCityHallRentRequest
+import com.android.sigemesapp.data.source.remote.CreateGuesthouseRentRequest
 import com.android.sigemesapp.data.source.remote.LoginRequest
 import com.android.sigemesapp.data.source.remote.RegisterRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
 import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
 import com.android.sigemesapp.data.source.remote.response.CityHallResponse
+import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
+import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
+import com.android.sigemesapp.data.source.remote.response.GetAllRentsResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
 import com.android.sigemesapp.data.source.remote.response.LoginResponse
@@ -26,6 +32,7 @@ import retrofit2.http.POST
 import retrofit2.http.PUT
 import retrofit2.http.Part
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 interface ApiService {
 
@@ -89,18 +96,44 @@ interface ApiService {
 
     @GET("guesthouses/{guesthouse-id}/rooms")
     suspend fun getGuesthouseRooms(
-        @Path("guesthouse-id") id: Int
-    ) : GuesthouseRoomsResponse
+        @Path("guesthouse-id") id: Int,
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("renter_gender") renterGender: String
+    ): GuesthouseRoomsResponse
 
     @GET("guesthouses/{guesthouse_id}/rooms/{room_id}")
     suspend fun getDetailGuesthouseRoom(
         @Path("guesthouse_id") guesthouse_id: Int,
-        @Path("room_id") room_id: Int
+        @Path("room_id") room_id: Int,
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
+        @Query("renter_gender") renterGender: String
     ) : DetailRoomResponse
 
     @GET("city-halls/{id}")
     suspend fun getCityHall(
-        @Path("id") id: Int
+        @Path("id") id: Int,
+        @Query("start_date") startDate: String,
+        @Query("end_date") endDate: String,
     ) : CityHallResponse
+
+    @POST("rents")
+    suspend fun createGuesthouseRent(
+        @Body createGuesthouseRentRequest: CreateGuesthouseRentRequest
+    ): CreateGuesthouseRentResponse
+
+    @POST("rents")
+    suspend fun createCityHallRent(
+        @Body createCityHallRentRequest: CreateCityHallRentRequest
+    ): CreateCityHallRentResponse
+
+    @PUT("rents/{id}")
+    suspend fun cancelRent(
+        @Path("id") id :Int
+    ): CancelCityHallResponse
+
+    @GET("rents")
+    suspend fun getAllRents(): GetAllRentsResponse
 
 }

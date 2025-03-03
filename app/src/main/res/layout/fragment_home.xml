@@ -6,6 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:layout_marginBottom="60dp"
+    android:id="@+id/fragmentHome"
     tools:context=".presentation.home.HomeFragment">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -78,7 +79,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/username"
             android:layout_marginVertical="16dp"
-
             app:strokeColor="@color/black"
             app:strokeWidth="1.5dp"
             app:cardCornerRadius="20dp">

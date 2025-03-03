@@ -7,11 +7,6 @@
         android:title="@string/beranda" />
 
     <item
-        android:id="@+id/navigation_cart"
-        android:icon="@drawable/baseline_shopping_cart"
-        android:title="@string/keranjang" />
-
-    <item
         android:id="@+id/navigation_history"
         android:icon="@drawable/history"
         android:title="@string/riwayat" />

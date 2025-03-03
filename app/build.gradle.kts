@@ -17,6 +17,7 @@ android {
         versionCode = 1
         versionName = "1.0"
         buildConfigField("String", "BASE_URL", "\"https://sigemes-api-63593591732.us-central1.run.app/api/v1/\"")
+        buildConfigField("String", "CLIENT_KEY", "\"SB-Mid-client-gx1SPx4pXzr519oa\"")
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
 
@@ -78,6 +79,6 @@ dependencies {
     implementation(libs.hilt.android)
     ksp(libs.hilt.android.compiler)
     implementation(libs.glide)
-
     implementation(libs.circleimageview)
+    implementation (libs.uikit)
 }

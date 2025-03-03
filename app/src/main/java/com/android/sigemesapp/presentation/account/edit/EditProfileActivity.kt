@@ -93,15 +93,12 @@ class EditProfileActivity : AppCompatActivity() {
     }
 
     private fun setupData(data: RenterData) {
-
         val fullname = authViewModel.fullname ?: data.fullname
         val photoUri = authViewModel.currentImageUri ?: Uri.parse(data.profilePicture)
         val gender = authViewModel.gender ?: data.gender
         val phoneNumber = authViewModel.phoneNumber ?: data.phoneNumber
-        Log.e("CheckGenderSpinnerInitial", "Gender Initialll= $gender")
 
         checkChanges(data.id, data.fullname, data.phoneNumber, data.gender)
-        Log.e("CheckChanges", "${data.id}, ${data.fullname}, ${data.phoneNumber}, ${data.gender}")
 
         binding.userEmail.text = data.email
 
@@ -158,8 +155,7 @@ class EditProfileActivity : AppCompatActivity() {
         initalPhoneNumber: String,
         initialGender: String
     ) {
-        Log.e("CheckChanges", "${id}, ${initialFullname}, ${initalPhoneNumber}, ${initialGender}")
-        binding.edUpdateFullname.addTextChangedListener(object : TextWatcher {
+       binding.edUpdateFullname.addTextChangedListener(object : TextWatcher {
             override fun beforeTextChanged(s: CharSequence, start: Int, count: Int, after: Int) {}
 
             override fun onTextChanged(s: CharSequence, start: Int, before: Int, count: Int) {

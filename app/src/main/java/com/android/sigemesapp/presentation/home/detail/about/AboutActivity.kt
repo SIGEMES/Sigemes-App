@@ -11,13 +11,16 @@ import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.databinding.ActivityAboutBinding
 import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
+import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity.Companion
 import com.android.sigemesapp.presentation.home.detail.DetailViewModel
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.extractFacilities
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint
+import java.text.SimpleDateFormat
+import java.util.Date
+import java.util.Locale
 
 @AndroidEntryPoint
 class AboutActivity : AppCompatActivity() {
@@ -29,6 +32,9 @@ class AboutActivity : AppCompatActivity() {
         const val KEY_ROOM_ID = "key_room_id"
         const val KEY_GUESTHOUSE_ID = "key_guesthouse_id"
         const val KEY_CITYHALL_ID = "key_cityhall_id"
+        const val EXTRA_START_DATE = "extra_start_date"
+        const val EXTRA_END_DATE = "extra_end_date"
+        const val EXTRA_GENDER = "extra_gender"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,18 +50,25 @@ class AboutActivity : AppCompatActivity() {
         val roomId = intent.getIntExtra(KEY_ROOM_ID, -1)
         val guesthouseId = intent.getIntExtra(KEY_GUESTHOUSE_ID, -1)
         val cityHallId = intent.getIntExtra(KEY_CITYHALL_ID, -1)
+        val gender = intent.getStringExtra(EXTRA_GENDER) ?: "Default Query"
+        var startDate = intent.getLongExtra(EXTRA_START_DATE, -1)
+        var endDate = intent.getLongExtra(EXTRA_END_DATE, -1)
 
-        Log.e("Checkin Id", "roomId $roomId, guesthouseId $guesthouseId, cityhallId $cityHallId")
+        val ymf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
+
+        val startDateApi = ymf.format(Date(startDate))
+        val endDateApi = ymf.format(Date(endDate))
+
 
         if(cityHallId == -1){
             if(roomId == 1){
-                observeRoomData(guesthouseId, roomId)
+                observeRoomData(guesthouseId, roomId, startDateApi, endDateApi, gender)
             }else{
                 setupVisibilityRoom()
             }
             observeGuesthouseData(guesthouseId)
         } else{
-            observeCityHallData(cityHallId)
+            observeCityHallData(cityHallId, startDateApi, endDateApi)
         }
     }
 
@@ -84,7 +97,7 @@ class AboutActivity : AppCompatActivity() {
         }
 
         binding.btnKebijakan.setOnClickListener {
-            scrollToSection(binding.cardKebijakanSection)
+            scrollToSection(binding.cardKebijakan)
             binding.activeLine1.visibility = View.GONE
             binding.activeLine2.visibility = View.GONE
             binding.activeLine3.visibility = View.VISIBLE
@@ -126,8 +139,8 @@ class AboutActivity : AppCompatActivity() {
         binding.fasilitasUmumDesc.text = String.format("- " + facility.joinToString("\n- "))
     }
 
-    private fun observeRoomData(guesthouseId: Int, roomId: Int,) {
-        detailViewModel.getDetailGuesthouseRoom(guesthouseId, roomId)
+    private fun observeRoomData(guesthouseId: Int, roomId: Int, startDate: String, endDate: String, gender: String) {
+        detailViewModel.getDetailGuesthouseRoom(guesthouseId, roomId, startDate, endDate, gender)
 
         detailViewModel.detailRoom.observe(this){ result ->
             when (result) {
@@ -154,8 +167,8 @@ class AboutActivity : AppCompatActivity() {
     }
 
 
-    private fun observeCityHallData(cityHallId: Int) {
-        detailViewModel.getCityHall(cityHallId)
+    private fun observeCityHallData(cityHallId: Int, startDate: String, endDate: String) {
+        detailViewModel.getCityHall(cityHallId, startDate, endDate)
 
         detailViewModel.detailCityHall.observe(this){ result ->
             when (result) {

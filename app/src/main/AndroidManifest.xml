@@ -8,6 +8,7 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
+
     <application
         android:name=".SigemesApp"
         android:allowBackup="true"
@@ -17,8 +18,18 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
+        tools:replace="android:allowBackup"
         android:theme="@style/Theme.SigemesApp"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.home.search.rent.payment.PaymentActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.home.search.rent.FillDataActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.home.search.SearchResultActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.account.edit.EditProfileActivity"
             android:exported="false" />
@@ -33,9 +44,6 @@
             android:exported="false" />
         <activity
             android:name=".presentation.home.detail.DetailMessActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.home.search.RoomPersonActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.home.search.SearchActivity"

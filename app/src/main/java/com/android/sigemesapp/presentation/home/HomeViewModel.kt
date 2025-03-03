@@ -20,40 +20,15 @@ class HomeViewModel @Inject constructor(
     private val sigemesRepository: SigemesRepository
 ) : ViewModel() {
 
-    private val _allGuesthousesResult = MutableLiveData<Result<List<GuesthouseResponse>>>()
-    val allGuesthousesResult: LiveData<Result<List<GuesthouseResponse>>> get() = _allGuesthousesResult
-
     private val _guesthouseResult = MutableLiveData<Result<GuesthouseData>>()
     val guesthouseResult: LiveData<Result<GuesthouseData>> get() = _guesthouseResult
-
-    private val _allRooms = MutableLiveData<Result<List<RoomItem>>>()
-    val allRooms: LiveData<Result<List<RoomItem>>> get() = _allRooms
 
     private val _cityHall = MutableLiveData<Result<CityHallData>>()
     val cityHall: LiveData<Result<CityHallData>> get() = _cityHall
 
-    fun getGuesthouses(){
+    fun getCityHall(id: Int, startDate: String, endDate: String){
         viewModelScope.launch {
-            sigemesRepository.getAllGuesthousesWithDetails()
-                .collect{ result ->
-                    _allGuesthousesResult.value = result
-
-                }
-        }
-    }
-
-    fun getRooms(id: Int){
-        viewModelScope.launch {
-            sigemesRepository.getGuesthouseRooms(id)
-                .collect{ result ->
-                    _allRooms.value = result
-                }
-        }
-    }
-
-    fun getCityHall(id: Int){
-        viewModelScope.launch {
-            sigemesRepository.getCityHall(id)
+            sigemesRepository.getCityHall(id, startDate, endDate)
                 .collect{ result ->
                     _cityHall.value = result
                 }

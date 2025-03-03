@@ -14,13 +14,19 @@ import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.databinding.ActivityDetailGedungBinding
 import com.android.sigemesapp.presentation.home.adapter.FacilityAdapter
 import com.android.sigemesapp.presentation.home.adapter.PhotoAdapter
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion.KEY_GUESTHOUSE_ID
+import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion.KEY_ROOM_ID
 import com.android.sigemesapp.presentation.home.detail.about.AboutActivity
-import com.android.sigemesapp.presentation.home.detail.adapter.PhotoRoomAdapter
 import com.android.sigemesapp.presentation.home.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.rent.FillDataActivity
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.extractFacilities
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
+import java.text.SimpleDateFormat
+import java.util.Date
 import java.util.Locale
 
 @AndroidEntryPoint
@@ -28,9 +34,26 @@ class DetailGedungActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailGedungBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private var startDate : Long = 0
+    private var endDate : Long = 0
+    private var startDateApi = ""
+    private var endDateApi = ""
+    private var receivedDuration = -1
+    private var rentType = ""
+    private var pricePerNight = -1
+    private var pricingId = -1
+    private var gender = ""
 
     companion object {
         const val KEY_CITYHALL_ID = "key_cityhall_id"
+        const val EXTRA_START_DATE = "extra_start_date"
+        const val EXTRA_END_DATE = "extra_end_date"
+        const val EXTRA_GENDER = "extra_gender"
+        const val KEY_DURATION = "key_duration"
+        const val EXTRA_CATEGORY = "extra_category"
+        const val EXTRA_RENT_TYPE = "extra_rent_type"
+        const val EXTRA_PRICE_PER_NIGHT = "extra_price_per_night"
+        const val EXTRA_PRICING_ID = "extra_pricing_id"
     }
     
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -41,14 +64,23 @@ class DetailGedungActivity : AppCompatActivity() {
         supportActionBar?.hide()
 
         val cityHallId = intent.getIntExtra(KEY_CITYHALL_ID, -1)
-        val receivedDuration = intent.getIntExtra(DetailMessActivity.KEY_DURATION, 1)
+        startDate = intent.getLongExtra(EXTRA_START_DATE, -1)
+        endDate = intent.getLongExtra(EXTRA_END_DATE, -1)
+        gender = intent.getStringExtra(EXTRA_GENDER) ?: "Default Query"
 
-        setupAction()
-        observeCityHallData(cityHallId, receivedDuration)
+        receivedDuration = calculateDays(startDate, endDate)
+
+        val ymf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
+
+        startDateApi = ymf.format(Date(startDate))
+        endDateApi = ymf.format(Date(endDate))
+
+        setupAction(cityHallId)
+        observeCityHallData(cityHallId)
     }
 
-    private fun observeCityHallData(cityHallId: Int, receivedDuration: Int) {
-        detailViewModel.getCityHall(cityHallId)
+    private fun observeCityHallData(cityHallId: Int) {
+        detailViewModel.getCityHall(cityHallId, startDateApi, endDateApi)
 
         detailViewModel.detailCityHall.observe(this){ result ->
             when (result) {
@@ -57,7 +89,7 @@ class DetailGedungActivity : AppCompatActivity() {
                 }
                 is Result.Success -> {
                     val cityHall = result.data
-                    setCityHallDetail(cityHall, receivedDuration)
+                    setCityHallDetail(cityHall)
                 }
                 is Result.Error -> {
                     Toast.makeText(this, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
@@ -66,13 +98,28 @@ class DetailGedungActivity : AppCompatActivity() {
         }
     }
 
-    private fun setupAction() {
+    private fun setupAction(cityHallId: Int) {
         binding.backButton.setOnClickListener {
             finish()
         }
+
+        binding.checkoutButton.setOnClickListener {
+            val intent = Intent(this, FillDataActivity::class.java)
+            intent.putExtra(KEY_CITYHALL_ID, cityHallId)
+            intent.putExtra(EXTRA_START_DATE, startDate)
+            intent.putExtra(EXTRA_END_DATE, endDate)
+            intent.putExtra(EXTRA_GENDER, gender)
+            intent.putExtra(KEY_DURATION, receivedDuration)
+            Log.e("Durations1", "durations $receivedDuration")
+            intent.putExtra(EXTRA_CATEGORY, "Gedung")
+            intent.putExtra(EXTRA_RENT_TYPE, rentType)
+            intent.putExtra(EXTRA_PRICE_PER_NIGHT, pricePerNight)
+            intent.putExtra(EXTRA_PRICING_ID, pricingId)
+            startActivity(intent)
+        }
     }
 
-    private fun setCityHallDetail(cityHall: CityHallData, receivedDuration: Int) {
+    private fun setCityHallDetail(cityHall: CityHallData) {
         binding.rvPhotoCityhall.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val cityHallPhotoUrls = cityHall.media.map { it.url }
         val photoAdapter = PhotoAdapter(cityHallPhotoUrls)
@@ -80,12 +127,11 @@ class DetailGedungActivity : AppCompatActivity() {
         binding.rincianPemesanan.text = cityHall.name
 
         binding.buildingName.text = cityHall.name
-        binding.capacity.text = String.format(cityHall.peopleCapacity.toString())
-        binding.luas.text = String.format(cityHall.areaM2.toString())
+        binding.capacity.text = String.format("${cityHall.peopleCapacity} orang")
+        binding.luas.text = String.format("${cityHall.areaM2} m2")
         binding.tentangGedungText.text = cityHall.description
 
-        val durationInDays = receivedDuration ?: 1
-        binding.durationText.text = String.format("$durationInDays hari")
+        binding.durationText.text = String.format("$receivedDuration hari")
 
         val checkboxes = listOf(
             binding.checkOption1,
@@ -114,12 +160,18 @@ class DetailGedungActivity : AppCompatActivity() {
             }
 
             val pricePerDay = pricing[index].pricePerDay
+            pricePerNight = pricePerDay
             val totalPrice = pricePerDay * receivedDuration
 
             binding.priceRange.text = String.format("Rp %s",
                 NumberFormat.getNumberInstance(Locale("id", "ID")).format(totalPrice))
 
             binding.eventType.text = pricing[index].activityType
+            rentType = pricing[index].activityType
+            pricingId = pricing[index].id
+
+            binding.pricePerDay.text = String.format("Rp %s",
+                NumberFormat.getNumberInstance(Locale("id", "ID")).format(pricePerDay))
 
             val facility = extractFacilities(cityHall.pricing[index].facilities)
             binding.fasilitasText.text = String.format("- " + facility.joinToString("\n- "))
@@ -157,6 +209,8 @@ class DetailGedungActivity : AppCompatActivity() {
         binding.cardAbout.setOnClickListener {
             val intent = Intent(this, AboutActivity::class.java)
             intent.putExtra(AboutActivity.KEY_CITYHALL_ID, cityHall.id)
+            intent.putExtra(AboutActivity.EXTRA_START_DATE, startDate)
+            intent.putExtra(AboutActivity.EXTRA_END_DATE, endDate)
             startActivity(intent)
         }
 
