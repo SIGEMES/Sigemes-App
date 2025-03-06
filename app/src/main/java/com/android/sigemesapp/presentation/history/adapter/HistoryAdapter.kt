@@ -8,6 +8,8 @@ import com.android.sigemesapp.databinding.ItemHistoryBinding
 import com.android.sigemesapp.utils.convertTimestampToFormattedDate
 import com.android.sigemesapp.utils.convertToDateRange
 import com.android.sigemesapp.utils.setRentStatusColorAndText
+import java.text.NumberFormat
+import java.util.Locale
 
 class HistoryAdapter(private val listHistory: List<RentsDataItem>) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
@@ -15,18 +17,20 @@ class HistoryAdapter(private val listHistory: List<RentsDataItem>) : RecyclerVie
 
     class HistoryViewHolder(private val binding: ItemHistoryBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(history: RentsDataItem, callback: OnItemClickCallback?) {
+            binding.noPesanan.text = history.payment.id
+            binding.totalPrice.text = String.format("Rp %s",
+                NumberFormat.getNumberInstance(Locale("id", "ID")).format(history.payment.amount))
 
             if(history.cityHallPricing == null){
                 val dateTime = convertTimestampToFormattedDate(history.createdAt)
-                binding.date.text = dateTime
+//                binding.date.text = dateTime
                 binding.titlePesanan.text = history.guesthouseRoomPricing?.guesthouseRoom?.guesthouse?.name
                 binding.roomTypeTitle.text = String.format("Kamar ${history.guesthouseRoomPricing?.guesthouseRoom?.name}")
                 setRentStatusColorAndText(binding, history.rentStatus)
                 binding.checkInCheckOut.text = convertToDateRange(history.startDate, history.endDate)
-
             } else if (history.guesthouseRoomPricing == null){
                 val dateTime = convertTimestampToFormattedDate(history.createdAt)
-                binding.date.text = dateTime
+//                binding.date.text = dateTime
                 binding.titlePesanan.text = history.cityHallPricing.cityHall.name
                 binding.roomTypeTitle.text = String.format("Acara ${history.cityHallPricing.activityType}")
                 setRentStatusColorAndText(binding, history.rentStatus)

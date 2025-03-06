@@ -1,6 +1,8 @@
 package com.android.sigemesapp.data.source.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class CreateCityHallRentResponse(
 
@@ -14,6 +16,7 @@ data class CreateCityHallRentResponse(
 	val status: Boolean
 )
 
+@Parcelize
 data class CityHallRentMediaItem(
 
 	@field:SerializedName("id")
@@ -21,8 +24,9 @@ data class CityHallRentMediaItem(
 
 	@field:SerializedName("url")
 	val url: String
-)
+): Parcelable
 
+@Parcelize
 data class CityHallPricing(
 
 	@field:SerializedName("is_active")
@@ -42,9 +46,10 @@ data class CityHallPricing(
 
 	@field:SerializedName("price_per_day")
 	val pricePerDay: Int
-)
+): Parcelable
 
-data class CityHallRenter(
+@Parcelize
+data class Renter(
 
 	@field:SerializedName("gender")
 	val gender: String,
@@ -63,8 +68,9 @@ data class CityHallRenter(
 
 	@field:SerializedName("email")
 	val email: String
-)
+): Parcelable
 
+@Parcelize
 data class CityHall(
 
 	@field:SerializedName("address")
@@ -74,10 +80,10 @@ data class CityHall(
 	val contactPerson: String,
 
 	@field:SerializedName("area_m2")
-	val areaM2: Int,
+	val areaM2: Double,
 
 	@field:SerializedName("latitude")
-	val latitude: Any,
+	val latitude: Double,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -95,12 +101,13 @@ data class CityHall(
 	val peopleCapacity: Int,
 
 	@field:SerializedName("longitude")
-	val longitude: Any,
+	val longitude: Double,
 
 	@field:SerializedName("status")
 	val status: String
-)
+): Parcelable
 
+@Parcelize
 data class CityHallRent(
 
 	@field:SerializedName("renter_id")
@@ -119,7 +126,7 @@ data class CityHallRent(
 	val createdAt: String,
 
 	@field:SerializedName("payment")
-	val payment: PaymentCityHall,
+	val payment: Payment,
 
 	@field:SerializedName("id")
 	val id: Int,
@@ -131,38 +138,12 @@ data class CityHallRent(
 	val renterGender: String,
 
 	@field:SerializedName("renter")
-	val renter: CityHallRenter,
+	val renter: Renter,
 
 	@field:SerializedName("city_hall_pricing")
 	val cityHallPricing: CityHallPricing,
 
 	@field:SerializedName("start_date")
 	val startDate: String
-)
+): Parcelable
 
-data class PaymentCityHall(
-
-	@field:SerializedName("amount")
-	val amount: Int,
-
-	@field:SerializedName("payment_gateway_token")
-	val paymentGatewayToken: String,
-
-	@field:SerializedName("method")
-	val method: String,
-
-	@field:SerializedName("rent_id")
-	val rentId: Int,
-
-	@field:SerializedName("payment_confirmed_at")
-	val paymentConfirmedAt: String,
-
-	@field:SerializedName("id")
-	val id: String,
-
-	@field:SerializedName("payment_triggered_at")
-	val paymentTriggeredAt: Any,
-
-	@field:SerializedName("status")
-	val status: String
-)

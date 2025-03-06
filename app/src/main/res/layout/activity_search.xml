@@ -48,7 +48,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     style="@style/TextH6"
-                    android:text="Pilih rentang tanggal check-in dan check-out"
+                    android:text="@string/pilih_rentang_tanggal_check_in_dan_check_out"
                     app:layout_constraintStart_toStartOf="parent"
                     android:layout_marginTop="16dp"
                     app:layout_constraintTop_toBottomOf="@id/title"/>

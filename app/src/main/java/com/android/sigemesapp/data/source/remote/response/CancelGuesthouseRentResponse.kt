@@ -1,6 +1,8 @@
 package com.android.sigemesapp.data.source.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class CancelGuesthouseRentResponse(
 
@@ -14,6 +16,7 @@ data class CancelGuesthouseRentResponse(
 	val status: Boolean
 )
 
+@Parcelize
 data class GuesthouseRoom(
 
 	@field:SerializedName("area_m2")
@@ -48,7 +51,7 @@ data class GuesthouseRoom(
 
 	@field:SerializedName("status")
 	val status: String
-)
+): Parcelable
 
 data class CancelGuesthouseRentData(
 
@@ -59,7 +62,7 @@ data class CancelGuesthouseRentData(
 	val endDate: String,
 
 	@field:SerializedName("check_in")
-	val checkIn: Any,
+	val checkIn: String,
 
 	@field:SerializedName("rent_status")
 	val rentStatus: String,
@@ -77,7 +80,7 @@ data class CancelGuesthouseRentData(
 	val cityHallPricing: Any,
 
 	@field:SerializedName("check_out")
-	val checkOut: Any,
+	val checkOut: String,
 
 	@field:SerializedName("updated_at")
 	val updatedAt: String,
@@ -92,7 +95,7 @@ data class CancelGuesthouseRentData(
 	val startDate: String
 )
 
-
+@Parcelize
 data class Guesthouse(
 
 	@field:SerializedName("address")
@@ -102,10 +105,10 @@ data class Guesthouse(
 	val contactPerson: String,
 
 	@field:SerializedName("area_m2")
-	val areaM2: Any,
+	val areaM2: Double,
 
 	@field:SerializedName("latitude")
-	val latitude: Any,
+	val latitude: Double,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -120,8 +123,8 @@ data class Guesthouse(
 	val facilities: String,
 
 	@field:SerializedName("longitude")
-	val longitude: Any,
+	val longitude: Double,
 
 	@field:SerializedName("guesthouse_media")
 	val guesthouseMedia: List<GuesthouseMediaItem>
-)
+): Parcelable

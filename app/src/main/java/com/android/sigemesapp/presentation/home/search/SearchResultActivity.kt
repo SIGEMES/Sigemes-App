@@ -13,11 +13,11 @@ import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.databinding.ActivitySearchResultBinding
-import com.android.sigemesapp.presentation.home.adapter.FacilityAdapter
-import com.android.sigemesapp.presentation.home.adapter.PhotoAdapter
-import com.android.sigemesapp.presentation.home.adapter.RoomAdapter
-import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
+import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
+import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
+import com.android.sigemesapp.presentation.home.search.adapter.RoomAdapter
+import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity
+import com.android.sigemesapp.presentation.home.search.detail.DetailMessActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.calculateNights
@@ -82,7 +82,6 @@ class SearchResultActivity : AppCompatActivity() {
             supportActionBar?.title = "$startDateString - $endDateString, $duration malam"
             setupRoomCard()
         } else {
-            binding.filterButton.visibility = View.GONE
             binding.rvRoomCard.visibility = View.GONE
             val duration = calculateDays(startDate, endDate)
             supportActionBar?.title = "$startDateString - $endDateString, $duration hari"
@@ -132,7 +131,6 @@ class SearchResultActivity : AppCompatActivity() {
                         if (result.data.isNotEmpty()) {
                             binding.rvRoomCard.visibility = View.VISIBLE
                             binding.progressBar.visibility = View.GONE
-                            binding.filterButton.visibility = View.VISIBLE
                             roomList.addAll(result.data)
                             setupRoomData(result.data)
                         }
@@ -177,7 +175,6 @@ class SearchResultActivity : AppCompatActivity() {
         searchViewModel.cityHall.observe(this){ result ->
             when(result){
                 is Result.Loading -> {
-                    binding.filterButton.visibility = View.GONE
                     binding.progressBar.visibility = View.VISIBLE
                     binding.availableText.visibility = View.GONE
                 }

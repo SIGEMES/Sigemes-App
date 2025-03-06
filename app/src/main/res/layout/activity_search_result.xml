@@ -26,25 +26,25 @@
             android:layout_marginStart="25dp"
             android:layout_marginTop="16dp"/>
 
-        <com.google.android.material.button.MaterialButton
-            android:id="@+id/filter_button"
-            android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:layout_marginStart="25dp"
-            android:layout_marginTop="5dp"
-            android:clickable="true"
-            android:focusable="true"
-            android:text="@string/urutkan"
-            android:textAllCaps="false"
-            android:textSize="12sp"
-            app:cornerRadius="28dp"
-            app:icon="@drawable/filter_list"
-            app:iconSize="20dp"
-            app:iconTint="@color/white"
-            android:visibility="visible"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/available_text"
-            tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />
+<!--        <com.google.android.material.button.MaterialButton-->
+<!--            android:id="@+id/filter_button"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="40dp"-->
+<!--            android:layout_marginStart="25dp"-->
+<!--            android:layout_marginTop="5dp"-->
+<!--            android:clickable="true"-->
+<!--            android:focusable="true"-->
+<!--            android:text="@string/urutkan"-->
+<!--            android:textAllCaps="false"-->
+<!--            android:textSize="12sp"-->
+<!--            app:cornerRadius="28dp"-->
+<!--            app:icon="@drawable/filter_list"-->
+<!--            app:iconSize="20dp"-->
+<!--            app:iconTint="@color/white"-->
+<!--            android:visibility="visible"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/available_text"-->
+<!--            tools:ignore="TouchTargetSizeCheck,TextSizeCheck" />-->
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -65,7 +65,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/filter_button"
+            app:layout_constraintTop_toBottomOf="@id/available_text"
             app:layout_constraintEnd_toEndOf="parent"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="10dp"/>
@@ -109,41 +109,41 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"/>
 
-                <ImageView
-                    android:id="@+id/star"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/star"
-                    app:tint="@color/yellow"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/rating"
-                    app:layout_constraintEnd_toStartOf="@id/rating"
-                    app:layout_constraintTop_toTopOf="@id/rating"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/star"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:src="@drawable/star"-->
+<!--                    app:tint="@color/yellow"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/rating"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/rating"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/rating"/>-->
 
-                <TextView
-                    android:id="@+id/rating"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rating"
-                    android:textColor="@color/facility"
-                    style="@style/TextBoldH6"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/ulasan"
-                    app:layout_constraintEnd_toStartOf="@id/ulasan"
-                    app:layout_constraintTop_toTopOf="@id/ulasan"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/rating"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/rating"-->
+<!--                    android:textColor="@color/facility"-->
+<!--                    style="@style/TextBoldH6"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/ulasan"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/ulasan"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/ulasan"/>-->
 
-                <TextView
-                    android:id="@+id/ulasan"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ulasan_count"
-                    android:textColor="@color/facility"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_photo"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/ulasan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/ulasan_count"-->
+<!--                    android:textColor="@color/facility"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/rv_photo"/>-->
 
                 <TextView
                     android:id="@+id/text_facilities"
@@ -234,41 +234,41 @@
                     android:layout_marginTop="16dp"
                     android:layout_marginStart="16dp"/>
 
-                <ImageView
-                    android:id="@+id/star_gray"
-                    android:layout_width="20dp"
-                    android:layout_height="20dp"
-                    android:src="@drawable/star"
-                    app:tint="@color/yellow"
-                    android:layout_marginEnd="8dp"
-                    app:layout_constraintBottom_toBottomOf="@id/rating_gray"
-                    app:layout_constraintEnd_toStartOf="@id/rating_gray"
-                    app:layout_constraintTop_toTopOf="@id/rating_gray"/>
+<!--                <ImageView-->
+<!--                    android:id="@+id/star_gray"-->
+<!--                    android:layout_width="20dp"-->
+<!--                    android:layout_height="20dp"-->
+<!--                    android:src="@drawable/star"-->
+<!--                    app:tint="@color/yellow"-->
+<!--                    android:layout_marginEnd="8dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/rating_gray"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/rating_gray"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/rating_gray"/>-->
 
-                <TextView
-                    android:id="@+id/rating_gray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/rating"
-                    android:textColor="@color/facility"
-                    style="@style/TextBoldH6"
-                    android:layout_marginEnd="5dp"
-                    app:layout_constraintBottom_toBottomOf="@id/ulasan_gray"
-                    app:layout_constraintEnd_toStartOf="@id/ulasan_gray"
-                    app:layout_constraintTop_toTopOf="@id/ulasan_gray"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/rating_gray"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/rating"-->
+<!--                    android:textColor="@color/facility"-->
+<!--                    style="@style/TextBoldH6"-->
+<!--                    android:layout_marginEnd="5dp"-->
+<!--                    app:layout_constraintBottom_toBottomOf="@id/ulasan_gray"-->
+<!--                    app:layout_constraintEnd_toStartOf="@id/ulasan_gray"-->
+<!--                    app:layout_constraintTop_toTopOf="@id/ulasan_gray"/>-->
 
-                <TextView
-                    android:id="@+id/ulasan_gray"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="@string/ulasan_count"
-                    android:textColor="@color/facility"
-                    android:textSize="12sp"
-                    android:textStyle="bold"
-                    android:layout_marginTop="16dp"
-                    android:layout_marginEnd="16dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/rv_photo_gray"/>
+<!--                <TextView-->
+<!--                    android:id="@+id/ulasan_gray"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:text="@string/ulasan_count"-->
+<!--                    android:textColor="@color/facility"-->
+<!--                    android:textSize="12sp"-->
+<!--                    android:textStyle="bold"-->
+<!--                    android:layout_marginTop="16dp"-->
+<!--                    android:layout_marginEnd="16dp"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/rv_photo_gray"/>-->
 
                 <TextView
                     android:id="@+id/text_facilities_gray"

@@ -13,7 +13,7 @@ import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.FragmentAccountBinding
 import com.android.sigemesapp.presentation.account.edit.EditProfileActivity
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity
+import com.android.sigemesapp.presentation.home.search.detail.DetailMessActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.showAlertDialog
 import com.bumptech.glide.Glide

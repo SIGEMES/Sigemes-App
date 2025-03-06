@@ -23,10 +23,10 @@ data class CityHallData(
 	val contactPerson: String,
 
 	@field:SerializedName("area_m2")
-	val areaM2: Float,
+	val areaM2: Double,
 
 	@field:SerializedName("latitude")
-	val latitude: Any,
+	val latitude: Double,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -47,7 +47,7 @@ data class CityHallData(
 	val pricing: List<CityHallPricingItem>,
 
 	@field:SerializedName("longitude")
-	val longitude: Any,
+	val longitude: Double,
 
 	@field:SerializedName("status")
 	val status: String

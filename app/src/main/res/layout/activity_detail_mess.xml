@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".presentation.home.detail.DetailMessActivity">
+    tools:context=".presentation.home.search.detail.DetailMessActivity">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
@@ -171,8 +171,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            android:textSize="14sp"
-                            android:textStyle="bold"
+                            style="@style/TextBoldH45"
                             android:textColor="@color/darkBlue"
                             android:text="@string/rating"
                             app:layout_constraintBottom_toBottomOf="@id/star"
@@ -180,8 +179,10 @@
                             app:layout_constraintTop_toTopOf="@id/star" />
 
                         <TextView
+                            android:id="@+id/total_ulasan"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
+                            android:layout_marginStart="10dp"
                             app:layout_constraintTop_toTopOf="@id/text_review_count"
                             app:layout_constraintBottom_toBottomOf="@id/text_review_count"
                             app:layout_constraintStart_toEndOf="@id/text_review_count"
@@ -393,7 +394,7 @@
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="5dp"
-                            style="@style/TextBoldH5"
+                            style="@style/TextBoldH45"
                             android:textColor="@color/babyblue"
                             android:text="@string/rating"
                             app:layout_constraintBottom_toBottomOf="@id/star2"
@@ -401,6 +402,7 @@
                             app:layout_constraintTop_toTopOf="@id/star2" />
 
                         <TextView
+                            android:id="@+id/total_ulasan2"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:layout_marginStart="8dp"

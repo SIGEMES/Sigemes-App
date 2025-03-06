@@ -8,7 +8,6 @@
         android:name="android.permission.WRITE_EXTERNAL_STORAGE"
         android:maxSdkVersion="28" />
 
-
     <application
         android:name=".SigemesApp"
         android:allowBackup="true"
@@ -18,9 +17,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:allowBackup"
         android:theme="@style/Theme.SigemesApp"
+        tools:replace="android:allowBackup"
         tools:targetApi="31">
+        <activity
+            android:name=".presentation.history.detail.DetailHistoryActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.history.detail.ContinuePaymentActivity"
+            android:exported="false" />
         <activity
             android:name=".presentation.home.search.rent.payment.PaymentActivity"
             android:exported="false" />
@@ -34,16 +39,16 @@
             android:name=".presentation.account.edit.EditProfileActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.home.detail.review.ReviewActivity"
+            android:name=".presentation.home.search.detail.review.ReviewActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.home.detail.about.AboutActivity"
+            android:name=".presentation.home.search.detail.about.AboutActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.home.detail.DetailGedungActivity"
+            android:name=".presentation.home.search.detail.DetailGedungActivity"
             android:exported="false" />
         <activity
-            android:name=".presentation.home.detail.DetailMessActivity"
+            android:name=".presentation.home.search.detail.DetailMessActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.home.search.SearchActivity"

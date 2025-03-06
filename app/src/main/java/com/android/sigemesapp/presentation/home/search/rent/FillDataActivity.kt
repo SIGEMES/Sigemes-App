@@ -11,8 +11,8 @@ import androidx.appcompat.app.AppCompatActivity
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.ActivityFillDataBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.detail.DetailViewModel
-import com.android.sigemesapp.presentation.home.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.detail.DetailViewModel
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
 import com.android.sigemesapp.presentation.home.search.rent.payment.PaymentActivity
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
@@ -26,7 +26,6 @@ class FillDataActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityFillDataBinding
     private val authViewModel: AuthViewModel by viewModels()
-    private val rentViewModel: RentViewModel by viewModels()
     private var startDate : Long = 0
     private var endDate : Long = 0
     private var startDateApi = ""
@@ -130,10 +129,11 @@ class FillDataActivity : AppCompatActivity() {
         binding.rincianItemName.text = getString(R.string.mess_kota)
         binding.pricePerNightTitle.text = "Harga per malam"
         binding.renterTypeTitle.text = "Kategori Penyewa: "
-        binding.rincianItem.text = String.format("${itemName}, ${rentType}, ${receivedDuration} malam")
+        binding.rincianItem.text = String.format("Kamar ${itemName}, ${rentType}, ${receivedDuration} malam")
         binding.durationCount.text = String.format("$receivedDuration malam")
+        binding.cardKebijakanMess.visibility = View.VISIBLE
         binding.nextButton.setOnClickListener {
-
+            navigateToPaymentGuesthouse()
         }
     }
 
@@ -152,12 +152,13 @@ class FillDataActivity : AppCompatActivity() {
         binding.rincianItem.text = String.format("Acara ${rentType}, ${receivedDuration} hari")
         binding.durationCount.text = String.format("$receivedDuration hari")
         binding.moonIcon.setImageResource(R.drawable.day)
+        binding.cardKebijakanGedung.visibility = View.VISIBLE
         binding.nextButton.setOnClickListener {
-            navigateToPayment()
+            navigateToPaymentCityHall()
         }
     }
 
-    private fun navigateToPayment() {
+    private fun navigateToPaymentCityHall() {
         val intent = Intent(this, PaymentActivity::class.java)
         intent.putExtra(EXTRA_PRICING_ID, pricingId)
         intent.putExtra(EXTRA_SLOT, 1)
@@ -165,7 +166,18 @@ class FillDataActivity : AppCompatActivity() {
         intent.putExtra(EXTRA_END_DATE, endDateApi)
         intent.putExtra(EXTRA_GENDER, gender)
         intent.putExtra(KEY_DURATION, receivedDuration)
-        Log.e("CreCreateCityHallReques", "gender $gender")
+        intent.putExtra(EXTRA_CATEGORY, category)
+        startActivity(intent)
+    }
+
+    private fun navigateToPaymentGuesthouse() {
+        val intent = Intent(this, PaymentActivity::class.java)
+        intent.putExtra(EXTRA_PRICING_ID, pricingId)
+        intent.putExtra(EXTRA_SLOT, 1)
+        intent.putExtra(EXTRA_START_DATE, startDateApi)
+        intent.putExtra(EXTRA_END_DATE, endDateApi)
+        intent.putExtra(EXTRA_GENDER, gender)
+        intent.putExtra(KEY_DURATION, receivedDuration)
         intent.putExtra(EXTRA_CATEGORY, category)
         startActivity(intent)
     }

@@ -1,4 +1,4 @@
-package com.android.sigemesapp.presentation.home.detail
+package com.android.sigemesapp.presentation.home.search.detail
 
 import android.content.Intent
 import android.net.Uri
@@ -10,15 +10,15 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.R
+import com.android.sigemesapp.data.source.remote.response.CityHall
 import com.android.sigemesapp.data.source.remote.response.CityHallData
+import com.android.sigemesapp.data.source.remote.response.CityHallReviews
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityDetailGedungBinding
-import com.android.sigemesapp.presentation.home.adapter.FacilityAdapter
-import com.android.sigemesapp.presentation.home.adapter.PhotoAdapter
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion.KEY_GUESTHOUSE_ID
-import com.android.sigemesapp.presentation.home.detail.DetailMessActivity.Companion.KEY_ROOM_ID
-import com.android.sigemesapp.presentation.home.detail.about.AboutActivity
-import com.android.sigemesapp.presentation.home.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
+import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
+import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
 import com.android.sigemesapp.presentation.home.search.rent.FillDataActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDays
@@ -77,6 +77,7 @@ class DetailGedungActivity : AppCompatActivity() {
 
         setupAction(cityHallId)
         observeCityHallData(cityHallId)
+        setupReviewCount(cityHallId)
     }
 
     private fun observeCityHallData(cityHallId: Int) {
@@ -128,7 +129,7 @@ class DetailGedungActivity : AppCompatActivity() {
 
         binding.buildingName.text = cityHall.name
         binding.capacity.text = String.format("${cityHall.peopleCapacity} orang")
-        binding.luas.text = String.format("${cityHall.areaM2} m2")
+        binding.luas.text = String.format("${cityHall.areaM2} m²")
         binding.tentangGedungText.text = cityHall.description
 
         binding.durationText.text = String.format("$receivedDuration hari")
@@ -202,7 +203,7 @@ class DetailGedungActivity : AppCompatActivity() {
 
         binding.cardUlasan.setOnClickListener {
             val intent = Intent(this, ReviewActivity::class.java)
-            intent.putExtra(ReviewActivity.KEY_CITYHALL_NAME, cityHall.name)
+            intent.putExtra(KEY_CITYHALL_ID, cityHall.id)
             startActivity(intent)
         }
 
@@ -214,5 +215,36 @@ class DetailGedungActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+    }
+
+    private fun setupReviewCount(id: Int) {
+        detailViewModel.getCityHallReviews(id)
+        detailViewModel.cityHallReviews.observe(this) { result ->
+            when(result){
+                is Result.Loading -> {
+
+                }
+                is Result.Success -> {
+                    val cityHallReviews = result.data
+                    setCityHallReviews(cityHallReviews)
+
+                }
+                is Result.Error -> {
+
+                }
+            }
+        }
+    }
+
+    private fun setCityHallReviews(cityHallReviews: List<CityHallReviews>) {
+        val totalRating = cityHallReviews.sumOf { it.rating }
+        val totalItems = cityHallReviews.size
+
+        val averageRating = if (totalItems > 0) totalRating.toDouble() / totalItems else 0
+
+        binding.textReviewCount.text = String.format("$averageRating")
+        binding.totalUlasan.text = String.format(" ($totalItems ulasan)")
+        binding.textReviewCount2.text = String.format("$averageRating")
+        binding.totalUlasan2.text = String.format(" ($totalItems ulasan)")
     }
 }
