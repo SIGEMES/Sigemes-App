@@ -73,7 +73,7 @@
     <string name="title_2">Kelola reservasi dengan efektif</string>
     <string name="mess_menu">Mess Menu</string>
     <string name="mess">Mess\nPemko</string>
-    <string name="mess_kota">Mess Kota Padangsidimpuan</string>
+    <string name="mess_kota">Mess Pemko Padangsidimpuan</string>
     <string name="gedung_adam_malik">Gedung Adam Malik</string>
     <string name="available_room">Kamar Tersedia Hari Ini</string>
     <string name="urutkan">Urutkan</string>
@@ -140,10 +140,10 @@
     <string name="dokumen_yang_diperlukan">Dokumen yang Diperlukan</string>
     <string name="kebijakan_properti">Kebijakan Properti</string>
     <string name="kebijakan_khusus">Kebijakan Khusus</string>
-    <string name="refund_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar kemudian pesanan Anda batalkan, maka biaya pemesanan tidak dapat dikembalikan.</string>
+    <string name="refund_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar kemudian Anda membatalkan pesanan, maka biaya pemesanan tidak dapat dikembalikan.</string>
     <string name="reschedule_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar, maka Anda tidak dapat mengganti jadwal pemesanan.</string>
     <string name="cityhall_payment_info_text">- Pembayaran untuk penyewaan Gedung Adam Malik dapat dilakukan paling lambat satu minggu sebelum acara.</string>
-    <string name="kebijakan_cityhall">- Kami mohon pengertiannya. Jika pada tanggal yang sama terdapat acara pemerintahan, pesanan Anda mungkin perlu dibatalkan atau dijadwalkan ulang sesuai ketentuan peraturan Walikota.</string>
+    <string name="kebijakan_cityhall">- Kami mohon pengertiannya. Jika pada tanggal yang sama terdapat acara pemerintahan, pesanan Anda mungkin perlu dibatalkan atau dijadwalkan ulang sesuai ketentuan Peraturan Walikota.</string>
     <string name="kategori_acara">- Kategori Acara:</string>
     <string name="durasi_sewa_gedung">- Durasi sewa gedung:</string>
     <string name="_1_hari">1 hari</string>
@@ -167,6 +167,13 @@
     <string name="bayar_sekarang">Bayar Sekarang</string>
     <string name="rent_success">Pemesanan Berhasil!</string>
     <string name="cancelled_rent_success">Pemesanan Berhasil Dibatalkan</string>
+    <string name="pilih_metode_pembayaran">Pilih metode pembayaran</string>
+    <string name="pilih_rentang_tanggal_check_in_dan_check_out">Pilih rentang tanggal check-in dan check-out</string>
+    <string name="pilih_rentang_tanggal_mulai_sewa_dan_selesai">Pilih rentang tanggal mulai sewa dan selesai sewa</string>
+    <string name="desc_exit_dialog">Kamu masih dalam proses pembayaran. Kalau masih ragu, kamu bisa cek lagi detail pesanannya dulu yaa</string>
+    <string name="cek_detail">Cek detail</string>
+    <string name="keluar_halaman">Keluar halaman</string>
+    <string name="review_text">Yuk, bagikan pengalaman sewa kamu dengan meninggalkan ulasan. Ulasan kamu sangat berarti.</string>
     <string-array name="gender_options">
         <item>Laki-Laki</item>
         <item>Perempuan</item>

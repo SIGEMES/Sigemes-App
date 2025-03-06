@@ -2,7 +2,7 @@ package com.android.sigemesapp.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class GetAllRentsResponse(
+data class AllRentsResponse(
 
 	@field:SerializedName("data")
 	val data: List<RentsDataItem>,
@@ -37,14 +37,17 @@ data class RentsDataItem(
 	@field:SerializedName("renter_gender")
 	val renterGender: String,
 
-	@field:SerializedName("city_hall_pricing")
-	val cityHallPricing: CityHallPricing?,
+	@field:SerializedName("renter")
+	val renter: Renter,
 
 	@field:SerializedName("check_out")
 	val checkOut: String,
 
 	@field:SerializedName("updated_at")
 	val updatedAt: String,
+
+	@field:SerializedName("payment")
+	val payment: Payment,
 
 	@field:SerializedName("id")
 	val id: Int,
@@ -53,6 +56,8 @@ data class RentsDataItem(
 	val guesthouseRoomPricing: GuesthouseRoomPricing?,
 
 	@field:SerializedName("start_date")
-	val startDate: String
-)
+	val startDate: String,
 
+	@field:SerializedName("city_hall_pricing")
+	val cityHallPricing: CityHallPricing?
+)

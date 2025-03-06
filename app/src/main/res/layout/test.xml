@@ -157,15 +157,39 @@
                 android:textColor="@color/orange"/>
 
             <TextView
+                android:id="@+id/kebijakan_city_hall_text"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:textColor="@color/orange"
+                app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_title"
+                app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:text="@string/kebijakan_cityhall"
+                style="@style/TextH6"/>
+
+            <TextView
+                android:id="@+id/cityhall_payment_text"
+                style="@style/TextH6"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:text="@string/cityhall_payment_info_text"
+                android:textColor="@color/orange"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/kebijakan_city_hall_text"
+                app:layout_constraintTop_toBottomOf="@id/kebijakan_city_hall_text" />
+
+            <TextView
                 android:id="@+id/reschedule_text"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="5dp"
-                android:textColor="@color/yellow"
-                app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
-                app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_title"
+                android:textColor="@color/orange"
                 app:layout_constraintEnd_toEndOf="parent"
-                android:text="@string/reschedule_text"
+                app:layout_constraintStart_toStartOf="@id/cityhall_payment_text"
+                app:layout_constraintTop_toBottomOf="@id/cityhall_payment_text"
+                android:text="@string/reschedule_text_cityhall"
                 style="@style/TextH6"/>
 
             <TextView
@@ -173,9 +197,9 @@
                 style="@style/TextH6"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:text="@string/refund_text"
-                android:textColor="@color/yellow"
+                android:layout_marginTop="4dp"
+                android:text="@string/refund_text_cityhall"
+                android:textColor="@color/orange"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="@id/reschedule_text"
                 app:layout_constraintTop_toBottomOf="@id/reschedule_text" />

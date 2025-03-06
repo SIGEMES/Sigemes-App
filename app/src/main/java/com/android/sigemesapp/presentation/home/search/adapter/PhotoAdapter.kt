@@ -1,4 +1,4 @@
-package com.android.sigemesapp.presentation.home.adapter
+package com.android.sigemesapp.presentation.home.search.adapter
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

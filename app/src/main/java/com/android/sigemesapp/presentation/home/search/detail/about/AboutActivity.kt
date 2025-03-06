@@ -1,4 +1,4 @@
-package com.android.sigemesapp.presentation.home.detail.about
+package com.android.sigemesapp.presentation.home.search.detail.about
 
 import android.os.Bundle
 import android.util.Log
@@ -10,9 +10,9 @@ import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.databinding.ActivityAboutBinding
-import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.detail.DetailGedungActivity.Companion
-import com.android.sigemesapp.presentation.home.detail.DetailViewModel
+import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity
+import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity.Companion
+import com.android.sigemesapp.presentation.home.search.detail.DetailViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.extractFacilities
@@ -45,14 +45,14 @@ class AboutActivity : AppCompatActivity() {
 
         supportActionBar?.hide()
 
-        setupAction()
-
         val roomId = intent.getIntExtra(KEY_ROOM_ID, -1)
         val guesthouseId = intent.getIntExtra(KEY_GUESTHOUSE_ID, -1)
         val cityHallId = intent.getIntExtra(KEY_CITYHALL_ID, -1)
         val gender = intent.getStringExtra(EXTRA_GENDER) ?: "Default Query"
         var startDate = intent.getLongExtra(EXTRA_START_DATE, -1)
         var endDate = intent.getLongExtra(EXTRA_END_DATE, -1)
+
+        setupAction(cityHallId)
 
         val ymf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
 
@@ -77,7 +77,7 @@ class AboutActivity : AppCompatActivity() {
         binding.fasilitasKamarDesc.visibility = View.GONE
     }
 
-    private fun setupAction() {
+    private fun setupAction(cityHallId: Int) {
         binding.backButton.setOnClickListener {
             finish()
         }
@@ -97,7 +97,13 @@ class AboutActivity : AppCompatActivity() {
         }
 
         binding.btnKebijakan.setOnClickListener {
-            scrollToSection(binding.cardKebijakan)
+            if (cityHallId == -1){
+                binding.cardKebijakanMess.visibility = View.VISIBLE
+                scrollToSection(binding.cardKebijakanMess)
+            }else{
+                binding.cardKebijakanGedung.visibility = View.VISIBLE
+                scrollToSection(binding.cardKebijakanGedung)
+            }
             binding.activeLine1.visibility = View.GONE
             binding.activeLine2.visibility = View.GONE
             binding.activeLine3.visibility = View.VISIBLE

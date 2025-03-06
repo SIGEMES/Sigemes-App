@@ -551,7 +551,7 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.card.MaterialCardView
-            android:id="@+id/card_kebijakan"
+            android:id="@+id/card_kebijakan_mess"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
@@ -559,6 +559,7 @@
             app:layout_constraintTop_toBottomOf="@id/card_rincian_pesanan_2"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp"
+            android:visibility="gone"
             android:backgroundTint="@color/softyellow"
             app:cardCornerRadius="20dp"
             app:strokeWidth="1.5dp"
@@ -570,7 +571,7 @@
                 android:padding="16dp">
 
                 <TextView
-                    android:id="@+id/kebijakan_title"
+                    android:id="@+id/kebijakan_title_mess"
                     style="@style/TextBoldH5"
                     android:textColor="@color/orange"
                     android:layout_width="wrap_content"
@@ -586,11 +587,11 @@
                     android:src="@drawable/clock"
                     app:tint="@color/orange"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@id/kebijakan_title"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_title_mess"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
-                    android:id="@+id/checkin_checkout_title"
+                    android:id="@+id/checkin_checkout_mess_title"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     app:layout_constraintTop_toTopOf="@id/clock_icon"
@@ -605,8 +606,8 @@
                     android:id="@+id/waktu_check_in"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    app:layout_constraintTop_toBottomOf="@id/checkin_checkout_title"
-                    app:layout_constraintStart_toStartOf="@id/checkin_checkout_title"
+                    app:layout_constraintTop_toBottomOf="@id/checkin_checkout_mess_title"
+                    app:layout_constraintStart_toStartOf="@id/checkin_checkout_mess_title"
                     android:text="Waktu Check-in"
                     style="@style/TextH6"
                     android:textColor="@color/yellow"
@@ -680,13 +681,94 @@
                     android:layout_marginTop="5dp"/>
 
                 <ImageView
-                    android:id="@+id/book_rules_icon"
+                    android:id="@+id/book_rules_icon_mess"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:src="@drawable/book_rules"
                     app:tint="@color/orange"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@id/checkin_checkout_tutorial"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:id="@+id/kebijakan_khusus_mess_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintTop_toTopOf="@id/book_rules_icon_mess"
+                    app:layout_constraintStart_toEndOf="@id/book_rules_icon_mess"
+                    app:layout_constraintBottom_toBottomOf="@id/book_rules_icon_mess"
+                    android:text="@string/kebijakan_khusus"
+                    style="@style/TextBoldH6"
+                    android:layout_marginStart="8dp"
+                    android:textColor="@color/orange"/>
+
+                <TextView
+                    android:id="@+id/reschedule_mess_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_mess_title"
+                    app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_mess_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/reschedule_text"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/refund_mess_text"
+                    style="@style/TextH6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/refund_text"
+                    android:textColor="@color/yellow"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/reschedule_mess_text"
+                    app:layout_constraintTop_toBottomOf="@id/reschedule_mess_text" />
+
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/card_kebijakan_gedung"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/card_kebijakan_mess"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="14dp"
+            android:backgroundTint="@color/softyellow"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/yellow">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:padding="16dp">
+
+                <TextView
+                    android:id="@+id/kebijakan_title"
+                    style="@style/TextBoldH5"
+                    android:textColor="@color/orange"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kebijakan_properti"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <ImageView
+                    android:id="@+id/book_rules_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:src="@drawable/book_rules"
+                    app:tint="@color/orange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_title"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -702,15 +784,39 @@
                     android:textColor="@color/orange"/>
 
                 <TextView
+                    android:id="@+id/kebijakan_city_hall_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="5dp"
+                    android:textColor="@color/orange"
+                    app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_title"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@string/kebijakan_cityhall"
+                    style="@style/TextH6"/>
+
+                <TextView
+                    android:id="@+id/cityhall_payment_text"
+                    style="@style/TextH6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/cityhall_payment_info_text"
+                    android:textColor="@color/orange"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="@id/kebijakan_city_hall_text"
+                    app:layout_constraintTop_toBottomOf="@id/kebijakan_city_hall_text" />
+
+                <TextView
                     android:id="@+id/reschedule_text"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="5dp"
-                    android:textColor="@color/yellow"
-                    app:layout_constraintTop_toBottomOf="@id/kebijakan_khusus_title"
-                    app:layout_constraintStart_toStartOf="@id/kebijakan_khusus_title"
+                    android:textColor="@color/orange"
                     app:layout_constraintEnd_toEndOf="parent"
-                    android:text="@string/reschedule_text"
+                    app:layout_constraintStart_toStartOf="@id/cityhall_payment_text"
+                    app:layout_constraintTop_toBottomOf="@id/cityhall_payment_text"
+                    android:text="@string/reschedule_text_cityhall"
                     style="@style/TextH6"/>
 
                 <TextView
@@ -718,9 +824,9 @@
                     style="@style/TextH6"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="8dp"
-                    android:text="@string/refund_text"
-                    android:textColor="@color/yellow"
+                    android:layout_marginTop="4dp"
+                    android:text="@string/refund_text_cityhall"
+                    android:textColor="@color/orange"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="@id/reschedule_text"
                     app:layout_constraintTop_toBottomOf="@id/reschedule_text" />
@@ -736,7 +842,7 @@
             android:layout_height="wrap_content"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/card_kebijakan"
+            app:layout_constraintTop_toBottomOf="@id/card_kebijakan_gedung"
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="14dp"
             android:background="?attr/selectableItemBackground"

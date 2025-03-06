@@ -8,14 +8,16 @@ import com.android.sigemesapp.data.source.remote.RegisterRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
 import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.AllRentsResponse
 import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
 import com.android.sigemesapp.data.source.remote.response.CityHallResponse
+import com.android.sigemesapp.data.source.remote.response.CityHallReviewsResponse
 import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
-import com.android.sigemesapp.data.source.remote.response.GetAllRentsResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviewsResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
 import com.android.sigemesapp.data.source.remote.response.LoginResponse
 import com.android.sigemesapp.data.source.remote.response.RegisterResponse
@@ -134,6 +136,26 @@ interface ApiService {
     ): CancelCityHallResponse
 
     @GET("rents")
-    suspend fun getAllRents(): GetAllRentsResponse
+    suspend fun getAllRents(): AllRentsResponse
 
+    @GET("rents/{id}")
+    suspend fun getDetailGuesthouseRent(
+        @Path("id") id : Int
+    ): CreateGuesthouseRentResponse
+
+    @GET("rents/{id}")
+    suspend fun getDetailCityHallRent(
+        @Path("id") id : Int
+    ): CreateCityHallRentResponse
+
+    @GET("guesthouses/{guesthouse_id}/rooms/{room_id}/reviews")
+    suspend fun getRoomReviews(
+        @Path("guesthouse_id") guesthouse_id: Int,
+        @Path("room_id") room_id: Int,
+    ): GuesthouseRoomReviewsResponse
+
+    @GET("city-halls/{id}/reviews")
+    suspend fun getCityHallReviews(
+        @Path("id") id: Int
+    ): CityHallReviewsResponse
 }

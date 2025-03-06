@@ -1,21 +1,22 @@
 package com.android.sigemesapp.domain.repository
 
 import android.util.Log
-import com.android.sigemesapp.data.source.local.UserModel
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.liveData
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.remote.CreateCityHallRentRequest
 import com.android.sigemesapp.data.source.remote.CreateGuesthouseRentRequest
-import com.android.sigemesapp.data.source.remote.LoginRequest
-import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
+import com.android.sigemesapp.data.source.remote.response.CityHall
 import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
+import com.android.sigemesapp.data.source.remote.response.CityHallReviews
 import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
-import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
-import com.android.sigemesapp.data.source.remote.response.LoginResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.data.source.remote.retrofit.ApiService
@@ -24,7 +25,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
-import retrofit2.http.Query
 import javax.inject.Inject
 
 class SigemesRepository @Inject constructor (
@@ -169,6 +169,56 @@ class SigemesRepository @Inject constructor (
         emit(Result.Loading)
         try {
             val response = apiService.getAllRents()
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+//    fun getHistory(): LiveData<Result<List<RentsDataItem>>> = liveData(Dispatchers.IO) {
+//        emit(Result.Loading)
+//        try{
+//            val response = apiService.getAllRents().data
+//            emit(Result.Success(response))
+//        } catch (e: Exception) {
+//            emit(Result.Error("ErrorDel: ${e.message}"))
+//        }
+//    }
+
+    fun getGuesthouseDetailRent(id: Int): Flow<Result<GuesthouseRentData>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDetailGuesthouseRent(id)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getCityHallDetailRent(id: Int): Flow<Result<CityHallRent>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getDetailCityHallRent(id)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getGuesthouseRoomsReview(guesthouseId: Int, roomId: Int): Flow<Result<List<GuesthouseRoomReviews>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getRoomReviews(guesthouseId, roomId)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getCityHallReview(id: Int): Flow<Result<List<CityHallReviews>>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getCityHallReviews(id)
             emit(Result.Success(response.data))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))

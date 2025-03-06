@@ -4,14 +4,11 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
-import com.android.sigemesapp.data.source.remote.response.RegisterResponse
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
-import com.android.sigemesapp.data.source.remote.response.RoomItem
-import com.android.sigemesapp.domain.repository.AuthRepository
 import com.android.sigemesapp.domain.repository.SigemesRepository
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -34,6 +31,12 @@ class RentViewModel @Inject constructor(
 
     private val _allRentsResult = MutableLiveData<Result<List<RentsDataItem>>>()
     val allRentsResult: LiveData<Result<List<RentsDataItem>>> get() = _allRentsResult
+
+    private val _guesthouseDetailRent = MutableLiveData<Result<GuesthouseRentData>>()
+    val guesthouseDetailRent: LiveData<Result<GuesthouseRentData>> get() = _guesthouseDetailRent
+
+    private val _cityhallDetailRent = MutableLiveData<Result<CityHallRent>>()
+    val cityhallDetailRent: LiveData<Result<CityHallRent>> get() = _cityhallDetailRent
 
     fun createGuesthouseRent(guesthouseRoomPricingId: Int, slot: Int, startDate: String, endDate: String, renterGender: String) {
         viewModelScope.launch {
@@ -70,5 +73,25 @@ class RentViewModel @Inject constructor(
                 }
         }
     }
+
+    fun getDetailGuesthouseRent(id: Int){
+        viewModelScope.launch {
+            sigemesRepository.getGuesthouseDetailRent(id)
+                .collect{ result ->
+                    _guesthouseDetailRent.value = result
+                }
+        }
+    }
+
+    fun getDetailCityHallRent(id: Int){
+        viewModelScope.launch {
+            sigemesRepository.getCityHallDetailRent(id)
+                .collect{ result ->
+                    _cityhallDetailRent.value = result
+                }
+        }
+    }
+
+//    fun getHistory() = sigemesRepository.getHistory()
 
 }

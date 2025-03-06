@@ -26,6 +26,7 @@ import java.util.Locale
 import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.databinding.ItemHistoryBinding
 import java.util.TimeZone
+import java.util.concurrent.TimeUnit
 
 private const val MAXIMAL_SIZE = 1000000
 private const val FILENAME_FORMAT = "yyyyMMdd_HHmmss"
@@ -186,6 +187,17 @@ fun formatDate(inputDate: String): String {
     return outputFormat.format(date)
 }
 
+fun formatDateUTC(inputDate: String): String {
+    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
+    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val outputFormat = SimpleDateFormat("EEE, dd MMM yyyy", Locale("id", "ID"))
+    outputFormat.timeZone = TimeZone.getDefault()
+
+    val date = inputFormat.parse(inputDate)
+    return date?.let { outputFormat.format(it) } ?: "Tanggal tidak valid"
+}
+
 fun convertTimestampToFormattedDate(timestamp: String): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
     inputFormat.timeZone = TimeZone.getTimeZone("UTC")
@@ -234,7 +246,6 @@ fun setRentStatusColorAndText(binding: ItemHistoryBinding, status: String) {
         else -> null
     }
 
-    // Set warna teks
     val color = if (colorRes != null) {
         ContextCompat.getColor(binding.root.context, colorRes)
     } else {
@@ -242,4 +253,67 @@ fun setRentStatusColorAndText(binding: ItemHistoryBinding, status: String) {
     }
     binding.status.setTextColor(color)
 }
+
+fun calculateNightsUTC(startDateStr: String, endDateStr: String): Int {
+    val startDate = parseDate(startDateStr)
+    val endDate = parseDate(endDateStr)
+    val diffMillis = endDate - startDate
+    return (diffMillis / (1000 * 60 * 60 * 24)).toInt()
+}
+
+fun calculateDaysUTC(startDateStr: String, endDateStr: String): Int {
+    val startDate = parseDate(startDateStr)
+    val endDate = parseDate(endDateStr)
+    val diffMillis = endDate - startDate
+    val days = (diffMillis / (1000 * 60 * 60 * 24)).toInt()
+    return days + 1
+}
+
+private fun parseDate(dateStr: String): Long {
+    val format = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    format.timeZone = TimeZone.getTimeZone("UTC")
+    return format.parse(dateStr)?.time ?: 0L
+}
+
+fun calculateTimeDifference(date: String): String {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+
+    val updatedTime: Date = dateFormat.parse(date) ?: return "Unknown"
+
+    val now = Date()
+
+    val diffInMillis = now.time - updatedTime.time
+
+    val diffInSeconds = TimeUnit.MILLISECONDS.toSeconds(diffInMillis)
+    val diffInMinutes = TimeUnit.MILLISECONDS.toMinutes(diffInMillis)
+    val diffInHours = TimeUnit.MILLISECONDS.toHours(diffInMillis)
+    val diffInDays = TimeUnit.MILLISECONDS.toDays(diffInMillis)
+
+    // Return the appropriate time difference
+    return when {
+        diffInDays >= 365 -> {
+            val years = diffInDays / 365
+            "$years tahun"
+        }
+        diffInDays >= 30 -> {
+            val months = diffInDays / 30
+            "$months bulan"
+        }
+        diffInDays >= 1 -> {
+            "$diffInDays hari"
+        }
+        diffInHours >= 1 -> {
+            "$diffInHours jam"
+        }
+        diffInMinutes >= 1 -> {
+            "$diffInMinutes menit"
+        }
+        else -> {
+            "$diffInSeconds detik"
+        }
+    }
+}
+
+
 

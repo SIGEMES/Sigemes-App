@@ -25,9 +25,7 @@ import java.util.Locale
 class SearchActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivitySearchBinding
-//    private val searchViewModel: SearchViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
-    private val rentViewModel: RentViewModel by viewModels()
     private val failedDialog = FailedDialog(this)
     private var category = ""
     private var startDateSend : Long = 0
@@ -67,8 +65,16 @@ class SearchActivity : AppCompatActivity() {
 
 
     private fun setupSearchCard() {
-        binding.title.text = if (category == "Mess") getText(R.string.text_mess) else getText(R.string.text_gedung)
-        binding.malamOrDays.text = if (category == "Mess") "malam" else "hari"
+        if (category == "Mess"){
+            binding.title.text = getText(R.string.text_mess)
+            binding.malamOrDays.text = "malam"
+            binding.pickRangeDate.text = getString(R.string.pilih_rentang_tanggal_check_in_dan_check_out)
+        } else {
+            binding.title.text = getText(R.string.text_gedung)
+            binding.malamOrDays.text = "hari"
+            binding.pickRangeDate.text = getString(R.string.pilih_rentang_tanggal_mulai_sewa_dan_selesai)
+        }
+
         val today = Calendar.getInstance().timeInMillis
         val tomorrow = Calendar.getInstance().apply { add(Calendar.DAY_OF_YEAR, 1) }.timeInMillis
         val sdf = SimpleDateFormat("EEE, dd MMM yyyy", Locale("id", "ID"))

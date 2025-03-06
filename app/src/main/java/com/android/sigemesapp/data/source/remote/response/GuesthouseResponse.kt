@@ -1,6 +1,8 @@
 package com.android.sigemesapp.data.source.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class GuesthouseResponse(
 
@@ -14,6 +16,7 @@ data class GuesthouseResponse(
 	val status: Boolean
 )
 
+@Parcelize
 data class GuesthouseMediaItem(
 
 	@field:SerializedName("id")
@@ -21,7 +24,7 @@ data class GuesthouseMediaItem(
 
 	@field:SerializedName("url")
 	val url: String
-)
+): Parcelable
 
 data class GuesthouseData(
 
@@ -35,7 +38,7 @@ data class GuesthouseData(
 	val areaM2: Double,
 
 	@field:SerializedName("latitude")
-	val latitude: Any,
+	val latitude: Double,
 
 	@field:SerializedName("name")
 	val name: String,
@@ -50,7 +53,7 @@ data class GuesthouseData(
 	val facilities: String,
 
 	@field:SerializedName("longitude")
-	val longitude: Any,
+	val longitude: Double,
 
 	@field:SerializedName("guesthouse_media")
 	val guesthouseMedia: List<GuesthouseMediaItem>

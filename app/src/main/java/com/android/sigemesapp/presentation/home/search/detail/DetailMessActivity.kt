@@ -1,4 +1,4 @@
-package com.android.sigemesapp.presentation.home.detail
+package com.android.sigemesapp.presentation.home.search.detail
 
 import android.content.Intent
 import android.net.Uri
@@ -13,12 +13,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityDetailMessBinding
-import com.android.sigemesapp.presentation.home.adapter.FacilityAdapter
-import com.android.sigemesapp.presentation.home.adapter.PhotoAdapter
-import com.android.sigemesapp.presentation.home.detail.about.AboutActivity
-import com.android.sigemesapp.presentation.home.detail.adapter.PhotoRoomAdapter
-import com.android.sigemesapp.presentation.home.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
+import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
+import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity.Companion.EXTRA_PRICING_ID
+import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
+import com.android.sigemesapp.presentation.home.search.detail.adapter.PhotoRoomAdapter
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
 import com.android.sigemesapp.presentation.home.search.rent.FillDataActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateNights
@@ -43,6 +45,7 @@ class DetailMessActivity : AppCompatActivity() {
     private var rentType = ""
     private var pricePerNight = -1
     private var itemName = ""
+    private var pricingId = -1
 
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
@@ -55,6 +58,7 @@ class DetailMessActivity : AppCompatActivity() {
         const val EXTRA_RENT_TYPE = "extra_rent_type"
         const val EXTRA_PRICE_PER_NIGHT = "extra_price_per_night"
         const val EXTRA_ITEM_NAME = "extra_item_name"
+        const val EXTRA_PRICING_ID = "extra_pricing_id"
 
     }
 
@@ -78,6 +82,7 @@ class DetailMessActivity : AppCompatActivity() {
         startDateApi = ymf.format(Date(startDate))
         endDateApi = ymf.format(Date(endDate))
 
+        setupReviewCount(guesthouseId, roomId)
         observeGuesthouseData(guesthouseId)
         observeRoomData(guesthouseId, roomId)
         setupAction()
@@ -137,6 +142,7 @@ class DetailMessActivity : AppCompatActivity() {
         val photoAdapter = PhotoAdapter(photoUrls)
         binding.rvPhotoMess.adapter = photoAdapter
 
+        binding.lodgingNameText.text = guesthouse.name
         binding.facilities.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         val facilityList = extractFacilities(guesthouse.facilities)
         val facilityAdapter = FacilityAdapter(facilityList)
@@ -170,7 +176,8 @@ class DetailMessActivity : AppCompatActivity() {
 
         binding.cardUlasan.setOnClickListener {
             val intent = Intent(this, ReviewActivity::class.java)
-            intent.putExtra(ReviewActivity.KEY_ROOM_NAME, room.name)
+            intent.putExtra(KEY_ROOM_ID, roomId)
+            intent.putExtra(KEY_GUESTHOUSE_ID, guesthouseId)
             startActivity(intent)
         }
 
@@ -232,6 +239,8 @@ class DetailMessActivity : AppCompatActivity() {
 
             binding.pricePerNight.text = String.format("Rp %s",
                 NumberFormat.getNumberInstance(Locale("id", "ID")).format(pricePerDay))
+
+            pricingId = pricing[index].id
         }
 
         for (i in pricing.indices) {
@@ -266,8 +275,40 @@ class DetailMessActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_RENT_TYPE, rentType)
             intent.putExtra(EXTRA_PRICE_PER_NIGHT, pricePerNight)
             intent.putExtra(EXTRA_ITEM_NAME, itemName)
+            intent.putExtra(EXTRA_PRICING_ID, pricingId)
             startActivity(intent)
         }
+    }
+
+    private fun setupReviewCount(guesthouseId: Int, roomId: Int) {
+        detailViewModel.getGuesthouseRoomsReviews(guesthouseId, roomId)
+        detailViewModel.guesthouseRoomReviews.observe(this) { result ->
+            when(result){
+                is Result.Loading -> {
+
+                }
+                is Result.Success -> {
+                    val guesthouseRoomReviews = result.data
+                    setGuesthouseRoomReviews(guesthouseRoomReviews)
+
+                }
+                is Result.Error -> {
+
+                }
+            }
+        }
+    }
+
+    private fun setGuesthouseRoomReviews(guesthouseRoomReviews: List<GuesthouseRoomReviews>) {
+        val totalRating = guesthouseRoomReviews.sumOf { it.rating }
+        val totalItems = guesthouseRoomReviews.size
+
+        val averageRating = if (totalItems > 0) totalRating.toDouble() / totalItems else 0
+
+        binding.textReviewCount.text = String.format("$averageRating")
+        binding.totalUlasan.text = String.format(" ($totalItems ulasan)")
+        binding.textReviewCount2.text = String.format("$averageRating")
+        binding.totalUlasan2.text = String.format(" ($totalItems ulasan)")
     }
 
 }

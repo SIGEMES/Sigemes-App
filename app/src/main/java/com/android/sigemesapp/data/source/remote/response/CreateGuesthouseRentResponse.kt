@@ -1,6 +1,8 @@
 package com.android.sigemesapp.data.source.remote.response
 
+import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
+import kotlinx.parcelize.Parcelize
 
 data class CreateGuesthouseRentResponse(
 
@@ -14,46 +16,14 @@ data class CreateGuesthouseRentResponse(
 	val status: Boolean
 )
 
-data class GuesthouseDt(
-
-	@field:SerializedName("address")
-	val address: String,
-
-	@field:SerializedName("contact_person")
-	val contactPerson: String,
-
-	@field:SerializedName("area_m2")
-	val areaM2: Float,
-
-	@field:SerializedName("latitude")
-	val latitude: Any,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("description")
-	val description: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("facilities")
-	val facilities: String,
-
-	@field:SerializedName("longitude")
-	val longitude: Float,
-
-	@field:SerializedName("guesthouse_media")
-	val guesthouseMedia: List<GuesthMediaItem>
-)
-
+@Parcelize
 data class GuesthouseRoomPricing(
 
 	@field:SerializedName("is_active")
 	val isActive: Boolean,
 
 	@field:SerializedName("guesthouse_room")
-	val guesthouseRoom: GuesthouseRoomData,
+	val guesthouseRoom: GuesthouseRoom,
 
 	@field:SerializedName("retribution_type")
 	val retributionType: String,
@@ -63,8 +33,9 @@ data class GuesthouseRoomPricing(
 
 	@field:SerializedName("price_per_day")
 	val pricePerDay: Int
-)
+): Parcelable
 
+@Parcelize
 data class GuesthouseRentData(
 
 	@field:SerializedName("renter_id")
@@ -73,8 +44,8 @@ data class GuesthouseRentData(
 	@field:SerializedName("end_date")
 	val endDate: String,
 
-	@field:SerializedName("check_in")
-	val checkIn: String,
+	@field:SerializedName("updated_at")
+	val updatedAt: String,
 
 	@field:SerializedName("rent_status")
 	val rentStatus: String,
@@ -82,81 +53,53 @@ data class GuesthouseRentData(
 	@field:SerializedName("created_at")
 	val createdAt: String,
 
-	@field:SerializedName("slot")
-	val slot: Int,
-
-	@field:SerializedName("renter_gender")
-	val renterGender: String,
-
-	@field:SerializedName("city_hall_pricing")
-	val cityHallPricing: Any,
-
-	@field:SerializedName("check_out")
-	val checkOut: String,
-
-	@field:SerializedName("updated_at")
-	val updatedAt: String,
+	@field:SerializedName("payment")
+	val payment: Payment,
 
 	@field:SerializedName("id")
 	val id: Int,
+
+	@field:SerializedName("slot")
+	val slot: Int,
 
 	@field:SerializedName("guesthouse_room_pricing")
 	val guesthouseRoomPricing: GuesthouseRoomPricing,
 
+	@field:SerializedName("renter_gender")
+	val renterGender: String,
+
+	@field:SerializedName("renter")
+	val renter: Renter,
+
 	@field:SerializedName("start_date")
 	val startDate: String
-)
+) : Parcelable
 
-data class GuesthouseRoomMediaItem(
+@Parcelize
+data class Payment(
 
-	@field:SerializedName("id")
-	val id: Int,
+	@field:SerializedName("amount")
+	val amount: Int,
 
-	@field:SerializedName("url")
-	val url: String
-)
+	@field:SerializedName("payment_gateway_token")
+	val paymentGatewayToken: String,
 
-data class GuesthMediaItem(
+	@field:SerializedName("method")
+	val method: String,
 
-	@field:SerializedName("id")
-	val id: Int,
+	@field:SerializedName("rent_id")
+	val rentId: Int,
 
-	@field:SerializedName("url")
-	val url: String
-)
-
-data class GuesthouseRoomData(
-
-	@field:SerializedName("area_m2")
-	val areaM2: Int,
-
-	@field:SerializedName("available_slot")
-	val availableSlot: Int,
-
-	@field:SerializedName("name")
-	val name: String,
-
-	@field:SerializedName("guesthouse_id")
-	val guesthouseId: Int,
+	@field:SerializedName("payment_confirmed_at")
+	val paymentConfirmedAt: String,
 
 	@field:SerializedName("id")
-	val id: Int,
+	val id: String,
 
-	@field:SerializedName("media")
-	val media: List<GuesthouseRoomMediaItem>,
-
-	@field:SerializedName("type")
-	val type: String,
-
-	@field:SerializedName("facilities")
-	val facilities: String,
-
-	@field:SerializedName("total_slot")
-	val totalSlot: Int,
-
-	@field:SerializedName("guesthouse")
-	val guesthouse: GuesthouseDt,
+	@field:SerializedName("payment_triggered_at")
+	val paymentTriggeredAt: String,
 
 	@field:SerializedName("status")
 	val status: String
-)
+): Parcelable
+

@@ -31,7 +31,7 @@ data class ChangePasswordRequest(
 
 data class CreateGuesthouseRentRequest(
     val guesthouse_room_pricing_id: Int,
-    val city_hall_pricing_id: Int? = null,
+    val city_hall_pricing_id: Int?,
     val slot: Int,
     val start_date: String,
     val end_date: String,

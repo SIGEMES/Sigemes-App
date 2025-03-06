@@ -57,41 +57,41 @@
             app:layout_constraintBottom_toBottomOf="@id/icon_hotel"
             android:layout_marginStart="13dp"/>
 
-        <ImageView
-            android:id="@+id/star"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/star"
-            app:tint="@color/yellow"
-            android:layout_marginEnd="8dp"
-            app:layout_constraintBottom_toBottomOf="@id/rating"
-            app:layout_constraintEnd_toStartOf="@id/rating"
-            app:layout_constraintTop_toTopOf="@id/rating"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/star"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:src="@drawable/star"-->
+<!--            app:tint="@color/yellow"-->
+<!--            android:layout_marginEnd="8dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/rating"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/rating"-->
+<!--            app:layout_constraintTop_toTopOf="@id/rating"/>-->
 
-        <TextView
-            android:id="@+id/rating"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/rating"
-            android:textColor="@color/facility"
-            style="@style/TextBoldH6"
-            android:layout_marginEnd="5dp"
-            app:layout_constraintBottom_toBottomOf="@id/ulasan"
-            app:layout_constraintEnd_toStartOf="@id/ulasan"
-            app:layout_constraintTop_toTopOf="@id/ulasan"/>
+<!--        <TextView-->
+<!--            android:id="@+id/rating"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/rating"-->
+<!--            android:textColor="@color/facility"-->
+<!--            style="@style/TextBoldH6"-->
+<!--            android:layout_marginEnd="5dp"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/ulasan"-->
+<!--            app:layout_constraintEnd_toStartOf="@id/ulasan"-->
+<!--            app:layout_constraintTop_toTopOf="@id/ulasan"/>-->
 
-        <TextView
-            android:id="@+id/ulasan"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/ulasan_count"
-            android:textColor="@color/facility"
-            android:textSize="12sp"
-            android:textStyle="bold"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="16dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/rv_photo"/>
+<!--        <TextView-->
+<!--            android:id="@+id/ulasan"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/ulasan_count"-->
+<!--            android:textColor="@color/facility"-->
+<!--            android:textSize="12sp"-->
+<!--            android:textStyle="bold"-->
+<!--            android:layout_marginTop="16dp"-->
+<!--            android:layout_marginEnd="16dp"-->
+<!--            app:layout_constraintEnd_toEndOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/rv_photo"/>-->
 
         <TextView
             android:id="@+id/text_facilities"
