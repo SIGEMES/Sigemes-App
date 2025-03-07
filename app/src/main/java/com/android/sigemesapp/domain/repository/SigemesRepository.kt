@@ -6,6 +6,10 @@ import androidx.lifecycle.liveData
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.remote.CreateCityHallRentRequest
 import com.android.sigemesapp.data.source.remote.CreateGuesthouseRentRequest
+import com.android.sigemesapp.data.source.remote.response.AddReviewCityHallResponse
+import com.android.sigemesapp.data.source.remote.response.AddReviewGuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.AddedCityHallReview
+import com.android.sigemesapp.data.source.remote.response.AddedGuesthouseReview
 import com.android.sigemesapp.data.source.remote.response.CityHall
 import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
@@ -13,6 +17,8 @@ import com.android.sigemesapp.data.source.remote.response.CityHallReviews
 import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
+import com.android.sigemesapp.data.source.remote.response.GetReviewCityHallByIdResponse
+import com.android.sigemesapp.data.source.remote.response.GetReviewGuesthouseByIdResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
@@ -25,6 +31,12 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
 import kotlinx.coroutines.flow.flowOn
+import okhttp3.MediaType.Companion.toMediaType
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.MultipartBody
+import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import java.io.File
 import javax.inject.Inject
 
 class SigemesRepository @Inject constructor (
@@ -165,6 +177,16 @@ class SigemesRepository @Inject constructor (
         }
     }
 
+    fun cancelGuesthouse(id: Int): Flow<Result<GuesthouseRentData>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.cancelRentGuesthouse(id)
+            emit(Result.Success(response.data))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
     fun getAllRents(): Flow<Result<List<RentsDataItem>>> = flow {
         emit(Result.Loading)
         try {
@@ -224,5 +246,88 @@ class SigemesRepository @Inject constructor (
             emit(Result.Error("Error: ${e.message}"))
         }
     }
+
+    fun addGuesthouseReview(
+        rentId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList()
+    ): Flow<Result<AddedGuesthouseReview>> = flow {
+        emit(Result.Loading)
+        try {
+            val multipartMedia = media.filterNotNull().map { file ->
+                val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+                MultipartBody.Part.createFormData(
+                    "media",
+                    file.name,
+                    requestImageFile
+                )
+            }
+            val ratingBody = rating.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val commentBody = comment.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            Log.e("CheckAddedReview", "$rentId, $ratingBody, $commentBody, $multipartMedia")
+            val response = if (multipartMedia.isEmpty()) {
+                apiService.addGuesthouseReview(rentId, ratingBody, commentBody, emptyList()).data
+            } else {
+                apiService.addGuesthouseReview(rentId, ratingBody, commentBody, multipartMedia).data
+            }
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun addCityHallReview(
+        rentId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList()
+    ): Flow<Result<AddedCityHallReview>> = flow {
+        emit(Result.Loading)
+        try {
+            val multipartMedia = media.filterNotNull().map { file ->
+                val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+                MultipartBody.Part.createFormData(
+                    "media",
+                    file.name,
+                    requestImageFile
+                )
+            }
+            val ratingBody = rating.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val commentBody = comment.toRequestBody("text/plain".toMediaTypeOrNull())
+
+            Log.e("CheckAddedReview", "$rentId, $ratingBody, $commentBody, $multipartMedia")
+            val response = if (multipartMedia.isEmpty()) {
+                apiService.addCityHallReview(rentId, ratingBody, commentBody, emptyList()).data
+            } else {
+                apiService.addCityHallReview(rentId, ratingBody, commentBody, multipartMedia).data
+            }
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getCityHallReviewById(rent_id: Int): Flow<Result<GetReviewCityHallByIdResponse>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getCityHallReviewById(rent_id)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun getGuesthouseReviewById(rent_id: Int): Flow<Result<GetReviewGuesthouseByIdResponse>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService.getGuesthouseReviewById(rent_id)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
 
 }

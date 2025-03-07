@@ -6,13 +6,30 @@
     android:layout_marginEnd="15dp"
     app:cardCornerRadius="20dp">
 
-    <ImageView
-        android:id="@+id/photo"
+    <FrameLayout
         android:layout_width="174dp"
-        android:layout_height="208dp"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        android:src="@drawable/mess"
-        android:scaleType="fitXY"/>
+        android:layout_height="208dp">
+
+        <ImageView
+            android:id="@+id/photo"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/mess"
+            android:scaleType="fitXY" />
+
+        <ImageView
+            android:id="@+id/closeButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_gravity="top|end"
+            android:layout_margin="8dp"
+            android:src="@drawable/delete"
+            app:tint="@color/babyblue"
+            android:visibility="gone"
+            android:contentDescription="Delete"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:clickable="true"
+            android:focusable="true" />
+    </FrameLayout>
 
 </com.google.android.material.card.MaterialCardView>

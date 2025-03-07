@@ -12,16 +12,11 @@ import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityContinuePaymentBinding
-import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.history.HistoryFragment
-import com.android.sigemesapp.presentation.history.HistoryFragment.Companion
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.presentation.home.search.rent.payment.PaymentActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDaysUTC
-import com.android.sigemesapp.utils.calculateNights
 import com.android.sigemesapp.utils.calculateNightsUTC
-import com.android.sigemesapp.utils.convertTimestampToFormattedDate
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
 import com.android.sigemesapp.utils.showAlertDialog
@@ -224,7 +219,12 @@ class ContinuePaymentActivity : AppCompatActivity() {
     }
 
     private fun navigateBack(id: Int) {
-        rentViewModel.cancelCityHallRent(id)
+        if(category == "Mess"){
+            rentViewModel.cancelGuesthouseRent(id)
+        } else {
+            rentViewModel.cancelCityHallRent(id)
+        }
+
         setResult(Activity.RESULT_OK)
         finish()
     }

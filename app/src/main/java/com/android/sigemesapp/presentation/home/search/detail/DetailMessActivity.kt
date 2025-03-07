@@ -21,6 +21,7 @@ import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivi
 import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.presentation.home.search.detail.adapter.PhotoRoomAdapter
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
 import com.android.sigemesapp.presentation.home.search.rent.FillDataActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateNights
@@ -36,6 +37,7 @@ class DetailMessActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailMessBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private val reviewViewModel: ReviewViewModel by viewModels()
     private var startDate : Long = 0
     private var endDate : Long = 0
     private var startDateApi = ""
@@ -281,8 +283,8 @@ class DetailMessActivity : AppCompatActivity() {
     }
 
     private fun setupReviewCount(guesthouseId: Int, roomId: Int) {
-        detailViewModel.getGuesthouseRoomsReviews(guesthouseId, roomId)
-        detailViewModel.guesthouseRoomReviews.observe(this) { result ->
+        reviewViewModel.getGuesthouseRoomsReviews(guesthouseId, roomId)
+        reviewViewModel.guesthouseRoomReviews.observe(this) { result ->
             when(result){
                 is Result.Loading -> {
 

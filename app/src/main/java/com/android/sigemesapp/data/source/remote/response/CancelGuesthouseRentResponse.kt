@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 data class CancelGuesthouseRentResponse(
 
 	@field:SerializedName("data")
-	val data: CancelGuesthouseRentData,
+	val data: GuesthouseRentData,
 
 	@field:SerializedName("message")
 	val message: String,
@@ -52,48 +52,6 @@ data class GuesthouseRoom(
 	@field:SerializedName("status")
 	val status: String
 ): Parcelable
-
-data class CancelGuesthouseRentData(
-
-	@field:SerializedName("renter_id")
-	val renterId: Int,
-
-	@field:SerializedName("end_date")
-	val endDate: String,
-
-	@field:SerializedName("check_in")
-	val checkIn: String,
-
-	@field:SerializedName("rent_status")
-	val rentStatus: String,
-
-	@field:SerializedName("created_at")
-	val createdAt: String,
-
-	@field:SerializedName("slot")
-	val slot: Int,
-
-	@field:SerializedName("renter_gender")
-	val renterGender: String,
-
-	@field:SerializedName("city_hall_pricing")
-	val cityHallPricing: Any,
-
-	@field:SerializedName("check_out")
-	val checkOut: String,
-
-	@field:SerializedName("updated_at")
-	val updatedAt: String,
-
-	@field:SerializedName("id")
-	val id: Int,
-
-	@field:SerializedName("guesthouse_room_pricing")
-	val guesthouseRoomPricing: GuesthouseRoomPricing,
-
-	@field:SerializedName("start_date")
-	val startDate: String
-)
 
 @Parcelize
 data class Guesthouse(

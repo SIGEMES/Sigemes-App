@@ -1,5 +1,6 @@
 package com.android.sigemesapp.presentation.history.detail
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
@@ -11,6 +12,8 @@ import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityDetailHistoryBinding
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
+import com.android.sigemesapp.presentation.home.search.detail.review.AddReviewActivity
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
@@ -22,6 +25,7 @@ import java.util.Locale
 class DetailHistoryActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailHistoryBinding
+    private val reviewViewModel: ReviewViewModel by viewModels()
     private val rentViewModel: RentViewModel by viewModels()
     private var isExpanded: Boolean = false
     private var category = ""
@@ -31,7 +35,6 @@ class DetailHistoryActivity : AppCompatActivity() {
         const val KEY_RENT_ID = "key_rent_id"
         const val EXTRA_CATEGORY = "extra_category"
     }
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -66,11 +69,7 @@ class DetailHistoryActivity : AppCompatActivity() {
                     setGuesthouseData(guesthouse)
                     supportActionBar?.title = "No. Pesanan ${guesthouse.payment.id}"
                     onSuccess()
-                    if(guesthouse.rentStatus == "selesai"){
-                        binding.cardReview.visibility = View.VISIBLE
-                    } else {
-                        binding.cardReview.visibility = View.GONE
-                    }
+                    checkReview(guesthouse.rentStatus)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -115,11 +114,7 @@ class DetailHistoryActivity : AppCompatActivity() {
                     setCityHallData(cityhall)
                     supportActionBar?.title = "No. Pesanan ${cityhall.payment.id}"
                     onSuccess()
-                    if(cityhall.rentStatus == "selesai"){
-                        binding.cardReview.visibility = View.VISIBLE
-                    } else {
-                        binding.cardReview.visibility = View.GONE
-                    }
+                    checkReview(cityhall.rentStatus)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -134,8 +129,6 @@ class DetailHistoryActivity : AppCompatActivity() {
         binding.textDetailTitle.visibility = View.VISIBLE
         binding.progressBar.visibility = View.GONE
         binding.cardRincianPesanan1.visibility = View.VISIBLE
-        binding.leaveReviewTitle.visibility = View.VISIBLE
-        binding.cardReview.visibility = View.VISIBLE
     }
 
     private fun onLoad() {
@@ -201,7 +194,61 @@ class DetailHistoryActivity : AppCompatActivity() {
         }
 
         binding.cardReview.setOnClickListener {
+            val intent = Intent(this, AddReviewActivity::class.java)
+            intent.putExtra(KEY_RENT_ID, rentId)
+            intent.putExtra(EXTRA_CATEGORY, category)
+            startActivity(intent)
+        }
+    }
 
+    private fun checkReview(rentStatus: String) {
+        if(rentStatus == "selesai"){
+            checkAlreadyReviewed(rentId)
+        } else {
+            binding.cardReview.visibility = View.GONE
+            binding.leaveReviewTitle.visibility = View.GONE
+        }
+    }
+
+    private fun checkAlreadyReviewed(rentId: Int) {
+        if(category == "Mess"){
+            reviewViewModel.getGuesthouseReviewById(rentId)
+            reviewViewModel.guesthouseRentReviewById.observe(this) { result ->
+                when(result){
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Success -> {
+                        if(result.data.data == null){
+                            binding.cardReview.visibility = View.VISIBLE
+                            binding.leaveReviewTitle.visibility = View.VISIBLE
+                        }
+
+                    }
+                    is Result.Error -> {
+
+                    }
+                }
+            }
+        } else {
+            reviewViewModel.getCityHallReviewById(rentId)
+            reviewViewModel.cityHallRentReviewById.observe(this) { result ->
+                when(result){
+                    is Result.Loading -> {
+
+                    }
+                    is Result.Success -> {
+                        if(result.data.data == null){
+                            binding.cardReview.visibility = View.VISIBLE
+                            binding.leaveReviewTitle.visibility = View.VISIBLE
+                        }
+
+                    }
+                    is Result.Error -> {
+
+                    }
+                }
+            }
         }
     }
 
