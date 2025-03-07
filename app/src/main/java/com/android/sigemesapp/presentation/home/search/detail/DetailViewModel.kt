@@ -28,12 +28,6 @@ class DetailViewModel @Inject constructor(
     private val _detailCityHall = MutableLiveData<Result<CityHallData>>()
     val detailCityHall: LiveData<Result<CityHallData>> get() = _detailCityHall
 
-    private val _guesthouseRoomReviews = MutableLiveData<Result<List<GuesthouseRoomReviews>>>()
-    val guesthouseRoomReviews: LiveData<Result<List<GuesthouseRoomReviews>>> get() = _guesthouseRoomReviews
-
-    private val _cityHallReviews = MutableLiveData<Result<List<CityHallReviews>>>()
-    val cityHallReviews: LiveData<Result<List<CityHallReviews>>> get() = _cityHallReviews
-
     fun getDetailGuesthouseRoom(guesthouseId: Int, roomId: Int, startDate: String,endDate: String, renterGender: String){
         viewModelScope.launch {
             sigemesRepository.getDetailGuesthouseRoom(guesthouseId, roomId, startDate, endDate, renterGender)
@@ -57,24 +51,6 @@ class DetailViewModel @Inject constructor(
             sigemesRepository.getCityHall(id, startDate, endDate)
                 .collect{ result ->
                     _detailCityHall.value = result
-                }
-        }
-    }
-
-    fun getCityHallReviews(cityhallId: Int){
-        viewModelScope.launch {
-            sigemesRepository.getCityHallReview(cityhallId)
-                .collect{ result ->
-                    _cityHallReviews.value = result
-                }
-        }
-    }
-
-    fun getGuesthouseRoomsReviews(guesthouseId: Int, roomId: Int){
-        viewModelScope.launch {
-            sigemesRepository.getGuesthouseRoomsReview(guesthouseId, roomId)
-                .collect{ result ->
-                    _guesthouseRoomReviews.value = result
                 }
         }
     }

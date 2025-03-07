@@ -9,7 +9,6 @@ import androidx.core.util.Pair
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.ActivitySearchBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.calculateNights
 import com.android.sigemesapp.utils.dialog.FailedDialog

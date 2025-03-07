@@ -20,6 +20,7 @@ class ReviewActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityReviewBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private val reviewViewModel: ReviewViewModel by viewModels()
 
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
@@ -47,8 +48,8 @@ class ReviewActivity : AppCompatActivity() {
 
 
     private fun observeRoomReviews(guesthouseId: Int, roomId: Int) {
-        detailViewModel.getGuesthouseRoomsReviews(guesthouseId, roomId)
-        detailViewModel.guesthouseRoomReviews.observe(this) { result ->
+        reviewViewModel.getGuesthouseRoomsReviews(guesthouseId, roomId)
+        reviewViewModel.guesthouseRoomReviews.observe(this) { result ->
             when(result){
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
@@ -93,8 +94,8 @@ class ReviewActivity : AppCompatActivity() {
     }
 
     private fun observeCityHallReviews(cityHallId: Int) {
-        detailViewModel.getCityHallReviews(cityHallId)
-        detailViewModel.cityHallReviews.observe(this) { result ->
+        reviewViewModel.getCityHallReviews(cityHallId)
+        reviewViewModel.cityHallReviews.observe(this) { result ->
             when(result){
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE

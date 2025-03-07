@@ -19,6 +19,7 @@ import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
 import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
 import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
+import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
 import com.android.sigemesapp.presentation.home.search.rent.FillDataActivity
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDays
@@ -34,6 +35,7 @@ class DetailGedungActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityDetailGedungBinding
     private val detailViewModel: DetailViewModel by viewModels()
+    private val reviewViewModel: ReviewViewModel by viewModels()
     private var startDate : Long = 0
     private var endDate : Long = 0
     private var startDateApi = ""
@@ -218,8 +220,8 @@ class DetailGedungActivity : AppCompatActivity() {
     }
 
     private fun setupReviewCount(id: Int) {
-        detailViewModel.getCityHallReviews(id)
-        detailViewModel.cityHallReviews.observe(this) { result ->
+        reviewViewModel.getCityHallReviews(id)
+        reviewViewModel.cityHallReviews.observe(this) { result ->
             when(result){
                 is Result.Loading -> {
 

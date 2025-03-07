@@ -1,6 +1,5 @@
 package com.android.sigemesapp.presentation.home.search.rent.payment
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.MenuItem
@@ -16,13 +15,11 @@ import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityPaymentBinding
-import com.android.sigemesapp.presentation.home.search.SearchActivity
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateNightsUTC
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.dialog.ExitDialog
-import com.android.sigemesapp.utils.formatDate
 import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.dialog.SuccessDialog
 import com.android.sigemesapp.utils.formatDateUTC

@@ -7,15 +7,20 @@ import com.android.sigemesapp.data.source.remote.LoginRequest
 import com.android.sigemesapp.data.source.remote.RegisterRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
+import com.android.sigemesapp.data.source.remote.response.AddReviewCityHallResponse
+import com.android.sigemesapp.data.source.remote.response.AddReviewGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.AllRentsResponse
 import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
+import com.android.sigemesapp.data.source.remote.response.CancelGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.ChangePasswordResponse
 import com.android.sigemesapp.data.source.remote.response.CityHallResponse
 import com.android.sigemesapp.data.source.remote.response.CityHallReviewsResponse
 import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResponse
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.DetailRoomResponse
+import com.android.sigemesapp.data.source.remote.response.GetReviewCityHallByIdResponse
+import com.android.sigemesapp.data.source.remote.response.GetReviewGuesthouseByIdResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviewsResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomsResponse
@@ -135,6 +140,11 @@ interface ApiService {
         @Path("id") id :Int
     ): CancelCityHallResponse
 
+    @PUT("rents/{id}")
+    suspend fun cancelRentGuesthouse(
+        @Path("id") id :Int
+    ): CancelGuesthouseRentResponse
+
     @GET("rents")
     suspend fun getAllRents(): AllRentsResponse
 
@@ -158,4 +168,32 @@ interface ApiService {
     suspend fun getCityHallReviews(
         @Path("id") id: Int
     ): CityHallReviewsResponse
+
+    @Multipart
+    @POST("rents/{rent_id}/reviews")
+    suspend fun addGuesthouseReview(
+        @Path("rent_id") rent_id: Int,
+        @Part("rating") rating: RequestBody,
+        @Part("comment") comment: RequestBody,
+        @Part media: List<MultipartBody.Part> = emptyList()
+    ): AddReviewGuesthouseResponse
+
+    @Multipart
+    @POST("rents/{rent_id}/reviews")
+    suspend fun addCityHallReview(
+        @Path("rent_id") rent_id: Int,
+        @Part("rating") rating: RequestBody,
+        @Part("comment") comment: RequestBody,
+        @Part media: List<MultipartBody.Part>  = emptyList()
+    ): AddReviewCityHallResponse
+
+    @GET("rents/{rent_id}/reviews")
+    suspend fun getGuesthouseReviewById(
+        @Path("rent_id") rent_id: Int
+    ): GetReviewGuesthouseByIdResponse
+
+    @GET("rents/{rent_id}/reviews")
+    suspend fun getCityHallReviewById(
+        @Path("rent_id") rent_id: Int
+    ): GetReviewCityHallByIdResponse
 }

@@ -29,6 +29,9 @@ class RentViewModel @Inject constructor(
     private val _cancelCityHallResult = MutableLiveData<Result<CityHallRent>>()
     val cancelCityHallResult: LiveData<Result<CityHallRent>> get() = _cancelCityHallResult
 
+    private val _cancelGuesthouseResult = MutableLiveData<Result<GuesthouseRentData>>()
+    val cancelGuesthouseResult: LiveData<Result<GuesthouseRentData>> get() = _cancelGuesthouseResult
+
     private val _allRentsResult = MutableLiveData<Result<List<RentsDataItem>>>()
     val allRentsResult: LiveData<Result<List<RentsDataItem>>> get() = _allRentsResult
 
@@ -37,6 +40,7 @@ class RentViewModel @Inject constructor(
 
     private val _cityhallDetailRent = MutableLiveData<Result<CityHallRent>>()
     val cityhallDetailRent: LiveData<Result<CityHallRent>> get() = _cityhallDetailRent
+
 
     fun createGuesthouseRent(guesthouseRoomPricingId: Int, slot: Int, startDate: String, endDate: String, renterGender: String) {
         viewModelScope.launch {
@@ -61,6 +65,15 @@ class RentViewModel @Inject constructor(
             sigemesRepository.cancelCityHall(id)
                 .collect { result ->
                     _cancelCityHallResult.value = result
+                }
+        }
+    }
+
+    fun cancelGuesthouseRent(id: Int) {
+        viewModelScope.launch {
+            sigemesRepository.cancelGuesthouse(id)
+                .collect { result ->
+                    _cancelGuesthouseResult.value = result
                 }
         }
     }
@@ -91,7 +104,5 @@ class RentViewModel @Inject constructor(
                 }
         }
     }
-
-//    fun getHistory() = sigemesRepository.getHistory()
 
 }
