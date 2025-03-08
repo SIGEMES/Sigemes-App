@@ -17,6 +17,7 @@ import com.android.sigemesapp.presentation.history.detail.ContinuePaymentActivit
 import com.android.sigemesapp.presentation.history.detail.DetailHistoryActivity
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.isoToTimestamp
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -47,17 +48,19 @@ class HistoryFragment : Fragment() {
 
     private fun setupHistoryData() {
         rentViewModel.getAllRents()
-        rentViewModel.allRentsResult.observe(viewLifecycleOwner){ result ->
-            when(result){
+        rentViewModel.allRentsResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is Result.Loading -> {
                     binding.progressBar.visibility = View.VISIBLE
                     binding.rvHistoryCard.visibility = View.GONE
                 }
                 is Result.Success -> {
                     binding.progressBar.visibility = View.GONE
-                    if(result.data.isNotEmpty()){
-                        setupHistory(result.data)
+                    if (result.data.isNotEmpty()) {
+                        setupHistory(result.data.toMutableList())
                         binding.rvHistoryCard.visibility = View.VISIBLE
+                    } else {
+                        binding.rvHistoryCard.visibility = View.GONE
                     }
                 }
                 is Result.Error -> {
@@ -68,42 +71,53 @@ class HistoryFragment : Fragment() {
         }
     }
 
-    private fun setupHistory(data: List<RentsDataItem>) {
-        binding.rvHistoryCard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
-        adapter = HistoryAdapter(data)
-        binding.rvHistoryCard.adapter = adapter
+    private fun setupHistory(data: MutableList<RentsDataItem>) {
+        if (!::adapter.isInitialized) {
+            binding.rvHistoryCard.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.VERTICAL, false)
+            adapter = HistoryAdapter(data)
+            binding.rvHistoryCard.adapter = adapter
 
-        adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback {
-            override fun onItemClicked(data: RentsDataItem) {
-                sendSelectedHistory(data)
-            }
-        })
+            adapter.setOnItemClickCallback(object : HistoryAdapter.OnItemClickCallback {
+                override fun onItemClicked(data: RentsDataItem) {
+                    sendSelectedHistory(data)
+                }
+            })
+        } else {
+            adapter.updateData(data)
+        }
     }
 
     private fun sendSelectedHistory(data: RentsDataItem) {
-        var category = ""
-        if(data.cityHallPricing == null){
-            category = "Mess"
+        val createdAtTimestamp = isoToTimestamp(data.createdAt)
+        val paymentTriggeredAtTimestamp = data.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
+
+        val isExpired = data.rentStatus == "pending" &&
+                ((System.currentTimeMillis() > createdAtTimestamp + 24 * 60 * 60 * 1000) ||
+                        (paymentTriggeredAtTimestamp != null && System.currentTimeMillis() > paymentTriggeredAtTimestamp + 24 * 60 * 60 * 1000))
+
+        if (isExpired) {
+            Toast.makeText(requireContext(), "Pesana kamu sudah kadaluwarsa", Toast.LENGTH_SHORT).show()
+            return
+        }
+
+        val category = if (data.cityHallPricing == null) "Mess" else "Gedung"
+
+        val intent = when (data.rentStatus) {
+            "pending" -> Intent(requireActivity(), ContinuePaymentActivity::class.java)
+            "dikonfirmasi", "selesai" -> Intent(requireActivity(), DetailHistoryActivity::class.java)
+            else -> null
+        }
+
+        if (intent != null) {
+            intent.apply {
+                putExtra(KEY_RENT_ID, data.id)
+                putExtra(EXTRA_CATEGORY, category)
+                startActivityForResult(this, 1)
+            }
         } else {
-            category = "Gedung"
-        }
-        if(data.rentStatus == "pending"){
-            val intent = Intent(requireActivity(), ContinuePaymentActivity::class.java)
-            intent.putExtra(KEY_RENT_ID, data.id)
-            intent.putExtra(EXTRA_CATEGORY, category)
-            startActivity(intent)
-        } else if (data.rentStatus == "dikonfirmasi" || data.rentStatus == "selesai"){
-            val intent = Intent(requireActivity(), DetailHistoryActivity::class.java)
-            intent.putExtra(KEY_RENT_ID, data.id)
-            intent.putExtra(EXTRA_CATEGORY, category)
-            startActivity(intent)
+            Toast.makeText(requireContext(), "Tidak dapat melanjutkan transaksi", Toast.LENGTH_SHORT).show()
         }
 
-    }
-
-    override fun onDestroyView() {
-        super.onDestroyView()
-        _binding = null
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
@@ -116,5 +130,10 @@ class HistoryFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         setupHistoryData()
+    }
+
+    override fun onDestroyView() {
+        super.onDestroyView()
+        _binding = null
     }
 }

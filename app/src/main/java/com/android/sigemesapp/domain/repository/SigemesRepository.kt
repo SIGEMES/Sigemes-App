@@ -25,7 +25,9 @@ import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
 import com.android.sigemesapp.data.source.remote.response.RoomItem
+import com.android.sigemesapp.data.source.remote.response.TransactionStatusResponse
 import com.android.sigemesapp.data.source.remote.retrofit.ApiService
+import com.android.sigemesapp.data.source.remote.retrofit.ApiService2
 import com.android.sigemesapp.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -41,7 +43,8 @@ import javax.inject.Inject
 
 class SigemesRepository @Inject constructor (
     private val userPreference : UserPreference,
-    private val apiService: ApiService
+    private val apiService: ApiService,
+    private val apiService2: ApiService2
 ){
     fun getAllGuesthousesWithDetails(): Flow<Result<List<GuesthouseResponse>>> = flow {
         emit(Result.Loading)
@@ -329,5 +332,14 @@ class SigemesRepository @Inject constructor (
         }
     }
 
+    fun getTransactionStatus(transaction_id: String, credentials: String): Flow<Result<TransactionStatusResponse>> = flow {
+        emit(Result.Loading)
+        try {
+            val response = apiService2.getStatus(transaction_id, credentials)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
 
 }

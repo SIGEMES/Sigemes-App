@@ -173,6 +173,8 @@
     <string name="desc_exit_dialog">Kamu masih dalam proses pembayaran. Kalau masih ragu, kamu bisa cek lagi detail pesanannya dulu yaa</string>
     <string name="cek_detail">Cek detail</string>
     <string name="keluar_halaman">Keluar halaman</string>
+    <string name="expired_text">Pesanan kamu sudah kadaluwarsa.</string>
+    <string name="payment_success">Pembayaran Berhasil!</string>
     <string name="review_text">Yuk, bagikan pengalaman sewa kamu dengan meninggalkan ulasan. Ulasan kamu sangat berarti.</string>
     <string-array name="gender_options">
         <item>Laki-Laki</item>

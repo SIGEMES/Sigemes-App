@@ -6,12 +6,13 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.databinding.ItemRoomBinding
-import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.extractFacilities
 import java.text.NumberFormat
 import java.util.Locale
 
 class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<RoomAdapter.RoomViewHolder>() {
+
+    private val filteredList = listRoom.filter { it.availableSlot > 0 }
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -35,15 +36,16 @@ class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<R
                 NumberFormat.getNumberInstance(Locale("id", "ID")).format(maxPrice)
             )
 
-            binding.rvPhoto.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+            binding.rvPhoto.layoutManager =
+                LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
 
             val photoUrls = room.media.map { it.url }
 
             val photoAdapter = PhotoAdapter(photoUrls)
-
             binding.rvPhoto.adapter = photoAdapter
 
-            binding.facilities.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+            binding.facilities.layoutManager =
+                LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
 
             val facilityList = extractFacilities(room.facilities)
 
@@ -53,7 +55,6 @@ class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<R
             binding.root.setOnClickListener {
                 callback?.onItemClicked(room)
             }
-
         }
     }
 
@@ -62,10 +63,10 @@ class RoomAdapter(private val listRoom: List<RoomItem>) : RecyclerView.Adapter<R
         return RoomViewHolder(binding)
     }
 
-    override fun getItemCount(): Int = listRoom.size
+    override fun getItemCount(): Int = filteredList.size // Return the size of the filtered list
 
     override fun onBindViewHolder(holder: RoomViewHolder, position: Int) {
-        val room = listRoom[position]
+        val room = filteredList[position] // Use the filtered list
         holder.bind(room, onItemClickCallback)
     }
 

@@ -25,6 +25,8 @@ import java.util.Date
 import java.util.Locale
 import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.databinding.ItemHistoryBinding
+import java.time.Instant
+import java.time.format.DateTimeFormatter
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 
@@ -234,6 +236,7 @@ fun setRentStatusColorAndText(binding: ItemHistoryBinding, status: String) {
         "dikonfirmasi" -> "Pembayaran Berhasil"
         "selesai" -> "Selesai"
         "dibatalkan" -> "Pesanan Dibatalkan"
+        "expired" -> "Pesanan sudah kadaluwarsa"
         else -> status
     }
     binding.status.text = statusText
@@ -243,6 +246,7 @@ fun setRentStatusColorAndText(binding: ItemHistoryBinding, status: String) {
         "dikonfirmasi" -> R.color.darkBlue
         "dibatalkan" -> R.color.red
         "selesai" -> R.color.onGreen
+        "expired" -> R.color.red
         else -> null
     }
 
@@ -313,6 +317,13 @@ fun calculateTimeDifference(date: String): String {
             "$diffInSeconds detik"
         }
     }
+}
+
+fun isoToTimestamp(isoString: String): Long {
+    val dateFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.getDefault())
+    dateFormat.timeZone = TimeZone.getTimeZone("UTC")
+    val date = dateFormat.parse(isoString)
+    return date?.time ?: 0L
 }
 
 

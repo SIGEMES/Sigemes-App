@@ -8,6 +8,7 @@ import com.android.sigemesapp.data.source.remote.retrofit.ApiService
 import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.local.dataStore
+import com.android.sigemesapp.data.source.remote.retrofit.ApiService2
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import dagger.Module
@@ -22,12 +23,15 @@ import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 import javax.inject.Singleton
 
 
 @Module
 @InstallIn(SingletonComponent::class)
 object AppModule {
+
+    private const val BASE_URL_MIDTRANS = "https://api.sandbox.midtrans.com/"
 
     @Provides
     @Singleton
@@ -88,7 +92,7 @@ object AppModule {
     @Singleton
     fun provideGson(): Gson {
         return GsonBuilder()
-            .serializeNulls()  // Pastikan null tetap dikirim
+            .serializeNulls()
             .create()
     }
 
@@ -113,6 +117,38 @@ object AppModule {
     fun provideDataStore(@ApplicationContext context: Context): DataStore<Preferences> {
         return context.dataStore
     }
+
+    @Provides
+    @Singleton
+    @Named("no_auth")
+    fun provideOkHttpClient2(
+        loggingInterceptor: HttpLoggingInterceptor
+    ): OkHttpClient {
+        return OkHttpClient.Builder()
+            .addInterceptor(loggingInterceptor)
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    @Named("midtrans")
+    fun provideRetrofit2(
+        @Named("no_auth") okHttpClient: OkHttpClient,
+        gson: Gson
+    ): Retrofit {
+        return Retrofit.Builder()
+            .baseUrl(BASE_URL_MIDTRANS)
+            .client(okHttpClient)
+            .addConverterFactory(GsonConverterFactory.create(gson))
+            .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService2(@Named("midtrans") retrofit: Retrofit): ApiService2 {
+        return retrofit.create(ApiService2::class.java)
+    }
+
 
 //    @Provides
 //    @Singleton

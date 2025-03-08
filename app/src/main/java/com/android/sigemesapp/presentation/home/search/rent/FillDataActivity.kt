@@ -168,6 +168,7 @@ class FillDataActivity : AppCompatActivity() {
         intent.putExtra(KEY_DURATION, receivedDuration)
         intent.putExtra(EXTRA_CATEGORY, category)
         startActivity(intent)
+        finish()
     }
 
     private fun navigateToPaymentGuesthouse() {
@@ -180,6 +181,7 @@ class FillDataActivity : AppCompatActivity() {
         intent.putExtra(KEY_DURATION, receivedDuration)
         intent.putExtra(EXTRA_CATEGORY, category)
         startActivity(intent)
+        finish()
     }
 
 
