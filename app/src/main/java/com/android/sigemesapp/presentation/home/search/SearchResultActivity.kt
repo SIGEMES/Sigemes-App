@@ -147,7 +147,8 @@ class SearchResultActivity : AppCompatActivity() {
     }
 
     private fun setupRoomData(data: List<RoomItem>) {
-        val adapter = RoomAdapter(data)
+        val filteredList = data.filter { it.availableSlot > 0 }
+        val adapter = RoomAdapter(filteredList)
         binding.rvRoomCard.adapter = adapter
 
         adapter.setOnItemClickCallback(object : RoomAdapter.OnItemClickCallback {

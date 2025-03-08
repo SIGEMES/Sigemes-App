@@ -3,11 +3,13 @@ package com.android.sigemesapp.presentation.history.detail
 import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.os.CountDownTimer
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
@@ -18,9 +20,14 @@ import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDaysUTC
 import com.android.sigemesapp.utils.calculateNightsUTC
 import com.android.sigemesapp.utils.dialog.DetailDialog
+import com.android.sigemesapp.utils.dialog.FailedDialog
+import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.formatDateUTC
+import com.android.sigemesapp.utils.isoToTimestamp
 import com.android.sigemesapp.utils.showAlertDialog
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import java.text.NumberFormat
 import java.util.Locale
 
@@ -33,6 +40,8 @@ class ContinuePaymentActivity : AppCompatActivity() {
     private var category = ""
     private var rentId = -1
     private var before = ""
+    private val failedDialog = FailedDialog(this)
+    private var countDownTimer: CountDownTimer? = null
 
     companion object {
         const val KEY_RENT_ID = "key_rent_id"
@@ -145,6 +154,13 @@ class ContinuePaymentActivity : AppCompatActivity() {
             val detailDialog = DetailDialog.newInstance("Mess", guesthouseRentData  = guesthouseRent)
             detailDialog.show(supportFragmentManager, "DetailDialog")
         }
+
+        countDownTimer?.cancel()
+        val payInTimeStamp = guesthouseRent.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
+        val createdAtTimestamp = isoToTimestamp(guesthouseRent.createdAt)
+
+        setCountDown(payInTimeStamp, createdAtTimestamp, guesthouseRent.rentStatus, )
+
     }
 
     private fun setCityHallDetail(cityHall: CityHallRent) {
@@ -165,6 +181,68 @@ class ContinuePaymentActivity : AppCompatActivity() {
         binding.cardRincianPesanan1.setOnClickListener {
             val detailDialog = DetailDialog.newInstance("Gedung", cityhallRentData = cityHall)
             detailDialog.show(supportFragmentManager, "DetailDialog")
+        }
+
+        countDownTimer?.cancel()
+        val payInTimeStamp = cityHall.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
+        val createdAtTimestamp = isoToTimestamp(cityHall.createdAt)
+        setCountDown(payInTimeStamp, createdAtTimestamp, cityHall.rentStatus)
+    }
+
+    private fun setCountDown(payInTimeStamp: Long?, createdAtTimestamp: Long, rentStatus: String) {
+        if (rentStatus == "pending" &&
+            (System.currentTimeMillis() < createdAtTimestamp + 24 * 60 * 60 * 1000) &&
+            payInTimeStamp == null) {
+
+            val countdownTime = (createdAtTimestamp + + 24 * 60 * 60 * 1000) - System.currentTimeMillis()
+
+            countDownTimer = object : CountDownTimer(countdownTime, 1000) {
+                override fun onTick(millisUntilFinished: Long) {
+                    val hours = millisUntilFinished / (60 * 60 * 1000)
+                    val minutes = (millisUntilFinished % (60 * 60 * 1000)) / (60 * 1000)
+                    val seconds = (millisUntilFinished % (60 * 1000)) / 1000
+
+                    val timeLeftFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                    binding.countdown.text = timeLeftFormatted
+                }
+
+                override fun onFinish() {
+                    failedDialog.startFailedDialog(getString(R.string.expired_text))
+                    lifecycleScope.launch {
+                        delay(2000)
+                        failedDialog.dismissDialog()
+                        finish()
+                    }
+                }
+            }.start()
+        } else if (payInTimeStamp != null) {
+            if (rentStatus == "pending" &&
+                (System.currentTimeMillis() < payInTimeStamp + 24 * 60 * 60 * 1000)
+            ) {
+                binding.pilihMetodePembayaranTitle.text = "Bayar dalam"
+                val countdownTime = (payInTimeStamp.plus(24 * 60 * 60 * 1000)).minus(System.currentTimeMillis())
+
+                countDownTimer = object : CountDownTimer(countdownTime, 1000) {
+                    override fun onTick(millisUntilFinished: Long) {
+                        val hours = millisUntilFinished / (60 * 60 * 1000)
+                        val minutes = (millisUntilFinished % (60 * 60 * 1000)) / (60 * 1000)
+                        val seconds = (millisUntilFinished % (60 * 1000)) / 1000
+
+                        val timeLeftFormatted = String.format("%02d:%02d:%02d", hours, minutes, seconds)
+                        binding.countdown.text = timeLeftFormatted
+                    }
+
+                    override fun onFinish() {
+                        failedDialog.startFailedDialog(getString(R.string.expired_text))
+                        lifecycleScope.launch {
+                            delay(2000)
+                            failedDialog.dismissDialog()
+                            finish()
+                        }
+                    }
+
+                }.start()
+            }
         }
     }
 
@@ -215,6 +293,7 @@ class ContinuePaymentActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_CATEGORY, category)
             intent.putExtra(EXTRA_BEFORE, before)
             startActivity(intent)
+            finish()
         }
     }
 

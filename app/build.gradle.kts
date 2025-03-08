@@ -81,4 +81,5 @@ dependencies {
     implementation(libs.glide)
     implementation(libs.circleimageview)
     implementation (libs.uikit)
+    implementation(libs.androidx.work.runtime.ktx)
 }

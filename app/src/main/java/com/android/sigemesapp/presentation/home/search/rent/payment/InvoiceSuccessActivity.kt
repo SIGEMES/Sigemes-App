@@ -1,19 +1,24 @@
-package com.android.sigemesapp.presentation.history.detail
+package com.android.sigemesapp.presentation.home.search.rent.payment
 
 import android.content.Intent
+import android.net.Uri
 import android.os.Bundle
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
+import androidx.core.view.WindowInsetsCompat
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityDetailHistoryBinding
-import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
+import com.android.sigemesapp.databinding.ActivityInvoiceSuccessBinding
 import com.android.sigemesapp.presentation.home.search.detail.review.AddReviewActivity
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
+import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
@@ -22,9 +27,9 @@ import java.text.NumberFormat
 import java.util.Locale
 
 @AndroidEntryPoint
-class DetailHistoryActivity : AppCompatActivity() {
+class InvoiceSuccessActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityDetailHistoryBinding
+    private lateinit var binding: ActivityInvoiceSuccessBinding
     private val reviewViewModel: ReviewViewModel by viewModels()
     private val rentViewModel: RentViewModel by viewModels()
     private var isExpanded: Boolean = false
@@ -39,22 +44,29 @@ class DetailHistoryActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityDetailHistoryBinding.inflate(layoutInflater)
+        binding = ActivityInvoiceSuccessBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-
-        rentId = intent.getIntExtra(KEY_RENT_ID, -1)
-        category = intent.getStringExtra(EXTRA_CATEGORY) ?: "Default Query"
+//        handleDeepLink(intent.data)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.title = "Lanjutkan Pembayaran"
+    }
+
+    private fun handleDeepLink(uri: Uri?) {
+        if (uri != null) {
+            rentId = uri.getQueryParameter("rentId")?.toInt() ?: -1
+            category = uri.getQueryParameter("category") ?: "Default Query"
+            showInvoice()
+        }
+    }
+
+    private fun showInvoice() {
         if(category == "Mess"){
             observeGuesthouseRentData()
         }else if (category == "Gedung"){
             observeCityhallRentData()
         }
         setupAction()
-
     }
 
     private fun observeGuesthouseRentData() {
@@ -82,15 +94,15 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     private fun setGuesthouseData(guesthouse: GuesthouseRentData) {
         binding.totalHarga.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount+ 5550))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount))
         binding.priceItem.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount ))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount - 5550))
         binding.adminFee.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(5000))
         binding.ppn.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
         binding.totalHarga2.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount + 5550))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount))
         binding.dibeliPadaTanggal.text = formatDateUTC(guesthouse.payment.paymentConfirmedAt)
         binding.itemTitle.text = guesthouse.guesthouseRoomPricing.guesthouseRoom.guesthouse.name
         binding.checkInDate.text = formatDateUTC(guesthouse.startDate)

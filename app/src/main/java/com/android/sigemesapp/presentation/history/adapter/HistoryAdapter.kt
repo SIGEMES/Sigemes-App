@@ -3,15 +3,17 @@ package com.android.sigemesapp.presentation.history.adapter
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
 import com.android.sigemesapp.databinding.ItemHistoryBinding
-import com.android.sigemesapp.utils.convertTimestampToFormattedDate
 import com.android.sigemesapp.utils.convertToDateRange
+import com.android.sigemesapp.utils.isoToTimestamp
 import com.android.sigemesapp.utils.setRentStatusColorAndText
+import com.bumptech.glide.Glide
 import java.text.NumberFormat
 import java.util.Locale
 
-class HistoryAdapter(private val listHistory: List<RentsDataItem>) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
+class HistoryAdapter(private val listHistory: MutableList<RentsDataItem>) : RecyclerView.Adapter<HistoryAdapter.HistoryViewHolder>() {
 
     private var onItemClickCallback: OnItemClickCallback? = null
 
@@ -19,21 +21,38 @@ class HistoryAdapter(private val listHistory: List<RentsDataItem>) : RecyclerVie
         fun bind(history: RentsDataItem, callback: OnItemClickCallback?) {
             binding.noPesanan.text = history.payment.id
             binding.totalPrice.text = String.format("Rp %s",
-                NumberFormat.getNumberInstance(Locale("id", "ID")).format(history.payment.amount))
+                NumberFormat.getNumberInstance(Locale("id", "ID")).format(history.payment.amount + 5550))
+
+            var status = ""
+            val createdAtTimestamp = isoToTimestamp(history.createdAt)
+            val paymentTriggeredAtTimestamp = history.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
+
+            status = if (history.rentStatus == "pending" &&
+                ((System.currentTimeMillis() > createdAtTimestamp + 24 * 60 * 60 * 1000) ||
+                        (paymentTriggeredAtTimestamp != null && System.currentTimeMillis() > paymentTriggeredAtTimestamp + 24 * 60 * 60 * 1000))){
+                "expired"
+            } else {
+                history.rentStatus
+            }
+
+            setRentStatusColorAndText(binding, status)
 
             if(history.cityHallPricing == null){
-                val dateTime = convertTimestampToFormattedDate(history.createdAt)
-//                binding.date.text = dateTime
+                Glide.with(binding.photo.context)
+                    .load(history.guesthouseRoomPricing?.guesthouseRoom?.guesthouse?.guesthouseMedia?.first()?.url)
+                    .error(R.drawable.mess)
+                    .into(binding.photo)
                 binding.titlePesanan.text = history.guesthouseRoomPricing?.guesthouseRoom?.guesthouse?.name
                 binding.roomTypeTitle.text = String.format("Kamar ${history.guesthouseRoomPricing?.guesthouseRoom?.name}")
-                setRentStatusColorAndText(binding, history.rentStatus)
+
                 binding.checkInCheckOut.text = convertToDateRange(history.startDate, history.endDate)
             } else if (history.guesthouseRoomPricing == null){
-                val dateTime = convertTimestampToFormattedDate(history.createdAt)
-//                binding.date.text = dateTime
+                Glide.with(binding.photo.context)
+                    .load(history.cityHallPricing.cityHall.media.first().url)
+                    .error(R.drawable.gedung)
+                    .into(binding.photo)
                 binding.titlePesanan.text = history.cityHallPricing.cityHall.name
                 binding.roomTypeTitle.text = String.format("Acara ${history.cityHallPricing.activityType}")
-                setRentStatusColorAndText(binding, history.rentStatus)
                 binding.checkInCheckOut.text = convertToDateRange(history.startDate, history.endDate)
             }
             binding.root.setOnClickListener {
@@ -60,5 +79,16 @@ class HistoryAdapter(private val listHistory: List<RentsDataItem>) : RecyclerVie
 
     fun setOnItemClickCallback(callback: OnItemClickCallback) {
         onItemClickCallback = callback
+    }
+
+    fun updateData(newList: List<RentsDataItem>) {
+        listHistory.clear()
+        listHistory.addAll(newList)
+        notifyDataSetChanged()
+    }
+
+    fun updateItem(position: Int, updatedItem: RentsDataItem) {
+        listHistory[position] = updatedItem
+        notifyItemChanged(position)
     }
 }

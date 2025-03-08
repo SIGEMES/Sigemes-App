@@ -97,7 +97,7 @@ data class Payment(
 	val id: String,
 
 	@field:SerializedName("payment_triggered_at")
-	val paymentTriggeredAt: String,
+	val paymentTriggeredAt: String?,
 
 	@field:SerializedName("status")
 	val status: String

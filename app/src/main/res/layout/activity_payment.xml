@@ -86,6 +86,7 @@
             android:layout_height="wrap_content"
             android:backgroundTint="@color/darkBlue"
             android:layout_marginTop="8dp"
+            android:visibility="visible"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/active_line"
             app:layout_constraintEnd_toEndOf="parent">
@@ -104,7 +105,7 @@
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintTop_toTopOf="parent"
-                    android:layout_marginStart="-25dp"
+                    android:layout_marginStart="-35dp"
                     app:layout_constraintBottom_toBottomOf="parent"
                     style="@style/TextBoldH6"
                     android:textColor="@color/white"/>
@@ -499,25 +500,25 @@
         </com.google.android.material.card.MaterialCardView>
 
         <com.google.android.material.button.MaterialButton
-            android:id="@+id/pay_button"
-            android:layout_width="0dp"
-            android:layout_marginTop="10dp"
-            android:layout_marginHorizontal="20dp"
-            android:paddingHorizontal="2dp"
-            android:text="@string/bayar_sekarang"
-            android:textAllCaps="false"
-            android:layout_height="55dp"
+            android:id="@+id/check_status_button"
             style="@style/TextBoldH5"
+            android:layout_width="0dp"
+            android:layout_height="55dp"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/orange"
+            android:paddingHorizontal="2dp"
+            android:text="Cek Status Pembayaran"
+            android:textAllCaps="false"
             android:textColor="@color/white"
             app:cornerRadius="24dp"
-            android:backgroundTint="@color/orange"
+            android:visibility="visible"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/card_rincian_harga"
-            android:layout_marginBottom="16dp"
             tools:ignore="TouchTargetSizeCheck" />
 
-<!--        <TextView-->
+        <!--        <TextView-->
 <!--            android:id="@+id/lainnya_text"-->
 <!--            android:layout_width="wrap_content"-->
 <!--            android:layout_height="wrap_content"-->

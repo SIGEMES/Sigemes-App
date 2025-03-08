@@ -9,6 +9,7 @@ import com.android.sigemesapp.data.source.remote.response.CreateCityHallRentResp
 import com.android.sigemesapp.data.source.remote.response.CreateGuesthouseRentResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
+import com.android.sigemesapp.data.source.remote.response.TransactionStatusResponse
 import com.android.sigemesapp.domain.repository.SigemesRepository
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -41,6 +42,8 @@ class RentViewModel @Inject constructor(
     private val _cityhallDetailRent = MutableLiveData<Result<CityHallRent>>()
     val cityhallDetailRent: LiveData<Result<CityHallRent>> get() = _cityhallDetailRent
 
+    private val _transactionStatus = MutableLiveData<Result<TransactionStatusResponse>>()
+    val transactionStatus: LiveData<Result<TransactionStatusResponse>> get() = _transactionStatus
 
     fun createGuesthouseRent(guesthouseRoomPricingId: Int, slot: Int, startDate: String, endDate: String, renterGender: String) {
         viewModelScope.launch {
@@ -101,6 +104,15 @@ class RentViewModel @Inject constructor(
             sigemesRepository.getCityHallDetailRent(id)
                 .collect{ result ->
                     _cityhallDetailRent.value = result
+                }
+        }
+    }
+
+    fun getTransactionStatus(transaction_id: String, credentials: String){
+        viewModelScope.launch {
+            sigemesRepository.getTransactionStatus(transaction_id, credentials)
+                .collect{ result ->
+                    _transactionStatus.value = result
                 }
         }
     }
