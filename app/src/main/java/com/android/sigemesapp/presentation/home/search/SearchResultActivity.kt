@@ -118,7 +118,6 @@ class SearchResultActivity : AppCompatActivity() {
 
     private fun setListAvailableRoom(data: List<GuesthouseResponse>) {
         val guesthouseIds = data.map { it.data.id }
-
         for (id in guesthouseIds){
             searchViewModel.getRooms(id, startDateApi, endDateApi, gender)
             searchViewModel.allRooms.observe(this){ result ->

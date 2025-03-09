@@ -33,28 +33,28 @@
             android:layout_marginTop="16dp"
             android:layout_marginStart="16dp"/>
 
-        <ImageView
-            android:id="@+id/icon_hotel"
-            android:layout_width="20dp"
-            android:layout_height="20dp"
-            android:src="@drawable/hotel"
-            app:tint="@color/black"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/room_type"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="16dp"/>
+<!--        <ImageView-->
+<!--            android:id="@+id/icon_hotel"-->
+<!--            android:layout_width="20dp"-->
+<!--            android:layout_height="20dp"-->
+<!--            android:src="@drawable/hotel"-->
+<!--            app:tint="@color/black"-->
+<!--            app:layout_constraintStart_toStartOf="parent"-->
+<!--            app:layout_constraintTop_toBottomOf="@id/room_type"-->
+<!--            android:layout_marginTop="10dp"-->
+<!--            android:layout_marginStart="16dp"/>-->
 
-        <TextView
-            android:id="@+id/mess_text"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/mess_kota"
-            style="@style/TextBoldH6"
-            android:textColor="@color/black"
-            app:layout_constraintStart_toEndOf="@id/icon_hotel"
-            app:layout_constraintTop_toTopOf="@id/icon_hotel"
-            app:layout_constraintBottom_toBottomOf="@id/icon_hotel"
-            android:layout_marginStart="13dp"/>
+<!--        <TextView-->
+<!--            android:id="@+id/mess_text"-->
+<!--            android:layout_width="wrap_content"-->
+<!--            android:layout_height="wrap_content"-->
+<!--            android:text="@string/mess_kota"-->
+<!--            style="@style/TextBoldH6"-->
+<!--            android:textColor="@color/black"-->
+<!--            app:layout_constraintStart_toEndOf="@id/icon_hotel"-->
+<!--            app:layout_constraintTop_toTopOf="@id/icon_hotel"-->
+<!--            app:layout_constraintBottom_toBottomOf="@id/icon_hotel"-->
+<!--            android:layout_marginStart="13dp"/>-->
 
 <!--        <ImageView-->
 <!--            android:id="@+id/star"-->
@@ -99,7 +99,7 @@
             android:text="Fasilitas: "
             android:textColor="@color/facility"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/icon_hotel"
+            app:layout_constraintTop_toBottomOf="@id/room_type"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"/>
 

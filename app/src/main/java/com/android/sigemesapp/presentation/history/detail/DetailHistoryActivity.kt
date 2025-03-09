@@ -2,6 +2,8 @@ package com.android.sigemesapp.presentation.history.detail
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -31,10 +33,12 @@ class DetailHistoryActivity : AppCompatActivity() {
     private var isExpanded: Boolean = false
     private var category = ""
     private var rentId = -1
+    private var before = ""
 
     companion object {
         const val KEY_RENT_ID = "key_rent_id"
         const val EXTRA_CATEGORY = "extra_category"
+        const val EXTRA_BEFORE = "extra_before"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -46,8 +50,11 @@ class DetailHistoryActivity : AppCompatActivity() {
 
         rentId = intent.getIntExtra(KEY_RENT_ID, -1)
         category = intent.getStringExtra(EXTRA_CATEGORY) ?: "Default Query"
+        before = intent.getStringExtra(EXTRA_BEFORE) ?: "Default Query"
+        Log.e("exttra_before", "before $before")
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
+
         if(category == "Mess"){
             observeGuesthouseRentData()
         }else if (category == "Gedung"){
@@ -82,7 +89,7 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     private fun setGuesthouseData(guesthouse: GuesthouseRentData) {
         binding.totalHarga.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount+ 5550))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount + 5550))
         binding.priceItem.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount ))
         binding.adminFee.text = String.format("Rp %s",
@@ -142,15 +149,15 @@ class DetailHistoryActivity : AppCompatActivity() {
 
     private fun setCityHallData(cityhall: CityHallRent) {
         binding.totalHarga.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount + 5550))
         binding.priceItem.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount - 5550))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount))
         binding.adminFee.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(5000))
         binding.ppn.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
         binding.totalHarga2.text = String.format("Rp %s",
-            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount))
+            NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount + 5550))
         binding.dibeliPadaTanggal.text = formatDateUTC(cityhall.payment.paymentConfirmedAt)
         binding.itemTitle.text = cityhall.cityHallPricing.cityHall.name
         binding.checkInDate.text = formatDateUTC(cityhall.startDate)
@@ -253,21 +260,27 @@ class DetailHistoryActivity : AppCompatActivity() {
     }
 
     override fun onBackPressed() {
-        super.onBackPressed()
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("fragmentToLoad", "history")
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish()
+        when (before) {
+            "payment" -> {
+                val intent = Intent(this, MainActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+                finish()
+            }
+            else -> {
+                super.onBackPressed()
+            }
+        }
     }
 
-    override fun onSupportNavigateUp(): Boolean {
-        val intent = Intent(this, MainActivity::class.java)
-        intent.putExtra("fragmentToLoad", "history")
-        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
-        startActivity(intent)
-        finish()
-        return true
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            android.R.id.home -> {
+                onBackPressed()
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
     }
 
 

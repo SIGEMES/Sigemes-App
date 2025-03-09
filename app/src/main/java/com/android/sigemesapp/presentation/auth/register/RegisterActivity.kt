@@ -39,6 +39,7 @@ class RegisterActivity : AppCompatActivity() {
 
         enableEdgeToEdge()
 
+        window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_ADJUST_PAN)
         genderSpinner = binding.spinnerCrops
         setupView()
         setupAction()

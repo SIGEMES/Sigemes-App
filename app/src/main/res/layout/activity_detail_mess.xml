@@ -658,11 +658,11 @@
 
                         <TextView
                             android:id="@+id/reschedule_text"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="5dp"
                             android:textColor="@color/orange"
-                            app:layout_constraintStart_toStartOf="@id/warning_icon"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/warning_text"
                             app:layout_constraintEnd_toEndOf="parent"
                             android:text="@string/reschedule_text"
@@ -671,13 +671,13 @@
                         <TextView
                             android:id="@+id/refund_text"
                             style="@style/TextH6"
-                            android:layout_width="wrap_content"
+                            android:layout_width="0dp"
                             android:layout_height="wrap_content"
                             android:layout_marginTop="4dp"
                             android:text="@string/refund_text"
                             android:textColor="@color/orange"
                             app:layout_constraintEnd_toEndOf="parent"
-                            app:layout_constraintStart_toStartOf="@id/reschedule_text"
+                            app:layout_constraintStart_toStartOf="parent"
                             app:layout_constraintTop_toBottomOf="@id/reschedule_text" />
 
                         <View
