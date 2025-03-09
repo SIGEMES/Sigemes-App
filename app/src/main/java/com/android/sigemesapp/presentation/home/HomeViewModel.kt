@@ -1,14 +1,11 @@
 package com.android.sigemesapp.presentation.home
 
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
-import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
-import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.domain.repository.SigemesRepository
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel

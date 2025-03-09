@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/register"
@@ -8,229 +8,238 @@
     android:background="@color/babyblue"
     tools:context=".presentation.auth.register.RegisterActivity">
 
-    <ImageView
-        android:id="@+id/logo_pemkot"
-        android:layout_width="149dp"
-        android:layout_height="154dp"
-        android:contentDescription="@string/logo_pemkot"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintBottom_toTopOf="@id/card"
-        android:src="@drawable/logo_pemkot"/>
-
-    <androidx.cardview.widget.CardView
-        android:id="@+id/card"
-        app:cardElevation="2dp"
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginVertical="16dp"
+        android:layout_height="wrap_content">
 
-        app:layout_constraintTop_toBottomOf="@id/logo_pemkot"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:cardCornerRadius="12dp">
+        <ImageView
+            android:id="@+id/logo_pemkot"
+            android:layout_width="149dp"
+            android:layout_height="154dp"
+            android:contentDescription="@string/logo_pemkot"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginTop="40dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/card"
+            android:src="@drawable/logo_pemkot"/>
 
-        <LinearLayout
+        <androidx.cardview.widget.CardView
+            android:id="@+id/card"
+            app:cardElevation="2dp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:padding="28dp">
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="16dp"
 
-            <TextView
-                android:id="@+id/welcome_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/welcome"
-                android:textSize="22sp"
-                android:textStyle="bold" />
+            app:layout_constraintTop_toBottomOf="@id/logo_pemkot"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:cardCornerRadius="12dp">
 
-            <TextView
-                android:id="@+id/welcome_desc"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textSize="16sp"
-                android:text="@string/please_register_with_your_information" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="20dp" />
-
-            <TextView
-                android:id="@+id/name_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/your_name"
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_register_name_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/person_24">
+                android:orientation="vertical"
+                android:padding="28dp">
 
-                <com.android.sigemesapp.presentation.customview.CustomFullnameValid
-                    android:id="@+id/ed_register_name"
+                <TextView
+                    android:id="@+id/welcome_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/welcome"
+                    android:textSize="22sp"
+                    android:textColor="@color/black"
+                    android:textStyle="bold" />
+
+                <TextView
+                    android:id="@+id/welcome_desc"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextH5"
+                    android:text="@string/please_register_with_your_information" />
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="20dp" />
+
+                <TextView
+                    android:id="@+id/name_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/your_name"
+                    style="@style/TextH5" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_register_name_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
+                    app:startIconDrawable="@drawable/person_24">
+
+                    <com.android.sigemesapp.presentation.customview.CustomFullnameValid
+                        android:id="@+id/ed_register_name"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:minHeight="48dp"
+                        android:inputType="text"
+                        tools:ignore="SpeakableTextPresentCheck"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:id="@+id/pnum_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/nomor_handphone"
+                    style="@style/TextH5" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_register_pnum_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:startIconDrawable="@drawable/phone_24">
+
+                    <com.android.sigemesapp.presentation.customview.CustomPhoneNumberValid
+                        android:id="@+id/ed_register_pnum"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:minHeight="48dp"
+                        android:inputType="number"
+                        tools:ignore="SpeakableTextPresentCheck"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:id="@+id/email_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/email_address"
+                    style="@style/TextH5" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_login_email_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:startIconDrawable="@drawable/email">
+
+                    <com.android.sigemesapp.presentation.customview.CustomEmailValid
+                        android:id="@+id/ed_register_email"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:minHeight="48dp"
+                        android:inputType="textEmailAddress"
+                        tools:ignore="SpeakableTextPresentCheck"/>
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
+
+                <TextView
+                    android:id="@+id/gender_label"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/jenis_kelamin"
+                    style="@style/TextH5" />
+
+                <com.google.android.material.card.MaterialCardView
+                    android:id="@+id/gender"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:cardCornerRadius="4dp"
                     android:minHeight="48dp"
-                    android:inputType="text"
-                    tools:ignore="SpeakableTextPresentCheck"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:strokeColor="@color/onGray"
+                    app:strokeWidth="1dp">
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                    <Spinner
+                        android:id="@+id/spinner_crops"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:padding="12dp"
+                        android:entries="@array/gender_options"
+                        tools:ignore="TouchTargetSizeCheck" />
 
-            <TextView
-                android:id="@+id/pnum_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/nomor_handphone"
-                android:textSize="16sp" />
+                </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_register_pnum_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/phone_24">
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
 
-                <com.android.sigemesapp.presentation.customview.CustomPhoneNumberValid
-                    android:id="@+id/ed_register_pnum"
+
+                <TextView
+                    android:id="@+id/password_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/password"
+                    style="@style/TextH5" />
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/ed_login_password_layout"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
                     android:minHeight="48dp"
-                    android:inputType="number"
-                    tools:ignore="SpeakableTextPresentCheck"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    app:endIconMode="password_toggle"
+                    app:startIconDrawable="@drawable/lock">
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+                    <com.android.sigemesapp.presentation.customview.CustomPasswordValid
+                        android:id="@+id/ed_login_password"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ems="10"
+                        android:inputType="textPassword"
+                        android:minHeight="48dp"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
 
-            <TextView
-                android:id="@+id/email_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/email_address"
-                android:textSize="16sp" />
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
 
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_login_email_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:startIconDrawable="@drawable/email">
+                <View
+                    android:layout_width="wrap_content"
+                    android:layout_height="10dp" />
 
-                <com.android.sigemesapp.presentation.customview.CustomEmailValid
-                    android:id="@+id/ed_register_email"
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/register_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="50dp"
+                    android:text="@string/register"
+                    style="@style/TextBoldH5"
+                    android:textColor="@color/white"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp" />
+
+                <TextView
+                    android:id="@+id/belum_punya_akun"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:minHeight="48dp"
-                    android:inputType="textEmailAddress"
-                    tools:ignore="SpeakableTextPresentCheck"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                    android:background="?attr/selectableItemBackground"
+                    android:clickable="true"
+                    android:gravity="center"
+                    android:layout_marginTop="10dp"
+                    android:text="@string/sudah_punya_akun"
+                    android:textStyle="bold"
+                    style="@style/TextH5"
+                    tools:ignore="TouchTargetSizeCheck"
+                    android:focusable="true" />
 
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
 
-            <TextView
-                android:id="@+id/gender_label"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/jenis_kelamin"
-                android:textSize="16sp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/gender"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                app:cardCornerRadius="4dp"
-                android:minHeight="48dp"
-                app:strokeColor="@color/onGray"
-                app:strokeWidth="1dp">
-
-                <Spinner
-                    android:id="@+id/spinner_crops"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:padding="12dp"
-                    android:entries="@array/gender_options"
-                    tools:ignore="TouchTargetSizeCheck" />
-
-            </com.google.android.material.card.MaterialCardView>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-
-            <TextView
-                android:id="@+id/password_text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="@string/password"
-                android:textSize="16sp" />
-
-            <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/ed_login_password_layout"
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="48dp"
-                app:endIconMode="password_toggle"
-                app:startIconDrawable="@drawable/lock">
-
-                <com.android.sigemesapp.presentation.customview.CustomPasswordValid
-                    android:id="@+id/ed_login_password"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:ems="10"
-                    android:inputType="textPassword"
-                    android:minHeight="48dp"
-                    tools:ignore="SpeakableTextPresentCheck" />
-            </com.google.android.material.textfield.TextInputLayout>
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <View
-                android:layout_width="wrap_content"
-                android:layout_height="10dp" />
-
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/register_button"
-                android:layout_width="match_parent"
-                android:layout_height="50dp"
-                android:text="@string/register"
-                android:textAllCaps="false"
-                android:textStyle="bold"
-                app:cornerRadius="8dp" />
-
-            <TextView
-                android:id="@+id/belum_punya_akun"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:background="?attr/selectableItemBackground"
-                android:clickable="true"
-                android:gravity="center"
-                android:layout_marginTop="10dp"
-                android:text="@string/sudah_punya_akun"
-                android:textStyle="bold"
-                android:textSize="16sp"
-                tools:ignore="TouchTargetSizeCheck"
-                android:focusable="true" />
-
-        </LinearLayout>
-    </androidx.cardview.widget.CardView>
-
-</androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>

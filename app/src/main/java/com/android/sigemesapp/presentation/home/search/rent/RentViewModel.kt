@@ -108,13 +108,5 @@ class RentViewModel @Inject constructor(
         }
     }
 
-    fun getTransactionStatus(transaction_id: String, credentials: String){
-        viewModelScope.launch {
-            sigemesRepository.getTransactionStatus(transaction_id, credentials)
-                .collect{ result ->
-                    _transactionStatus.value = result
-                }
-        }
-    }
 
 }

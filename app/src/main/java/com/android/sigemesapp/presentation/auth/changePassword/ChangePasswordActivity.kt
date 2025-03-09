@@ -3,8 +3,6 @@ package com.android.sigemesapp.presentation.auth.changePassword
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast

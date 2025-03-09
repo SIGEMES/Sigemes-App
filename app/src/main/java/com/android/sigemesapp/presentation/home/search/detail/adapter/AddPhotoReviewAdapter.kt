@@ -1,6 +1,5 @@
 package com.android.sigemesapp.presentation.home.search.detail.adapter
 
-import android.app.Activity
 import android.net.Uri
 import android.view.LayoutInflater
 import android.view.View
@@ -8,9 +7,6 @@ import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
 import com.android.sigemesapp.R
-import com.android.sigemesapp.databinding.ItemRoomPhotoBinding
-import com.android.sigemesapp.utils.dialog.PhotoDialog
-import com.bumptech.glide.Glide
 
 class AddPhotoReviewAdapter(
     private var photos: List<Uri>,

@@ -10,12 +10,13 @@ import android.net.Uri
 import android.os.Build
 import android.os.Environment
 import android.provider.MediaStore
-import android.widget.TextView
 import androidx.appcompat.app.AlertDialog.Builder
 import androidx.core.content.ContextCompat
 import androidx.core.content.FileProvider
 import androidx.exifinterface.media.ExifInterface
+import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.R
+import com.android.sigemesapp.databinding.ItemHistoryBinding
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -23,10 +24,6 @@ import java.io.InputStream
 import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
-import com.android.sigemesapp.BuildConfig
-import com.android.sigemesapp.databinding.ItemHistoryBinding
-import java.time.Instant
-import java.time.format.DateTimeFormatter
 import java.util.TimeZone
 import java.util.concurrent.TimeUnit
 

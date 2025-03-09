@@ -21,7 +21,6 @@ import com.android.sigemesapp.utils.calculateDaysUTC
 import com.android.sigemesapp.utils.calculateNightsUTC
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.dialog.FailedDialog
-import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.formatDateUTC
 import com.android.sigemesapp.utils.isoToTimestamp
 import com.android.sigemesapp.utils.showAlertDialog

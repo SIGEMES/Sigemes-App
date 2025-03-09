@@ -10,10 +10,8 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.ContextCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.R
-import com.android.sigemesapp.data.source.remote.response.CityHall
 import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.CityHallReviews
-import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityDetailGedungBinding
 import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
 import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter

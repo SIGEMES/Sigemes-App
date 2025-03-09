@@ -3,7 +3,6 @@ package com.android.sigemesapp
 import android.content.Intent
 import android.os.Bundle
 import androidx.activity.viewModels
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
@@ -12,7 +11,9 @@ import androidx.navigation.ui.setupWithNavController
 import com.android.sigemesapp.databinding.ActivityMainBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
+import com.google.android.material.bottomnavigation.BottomNavigationView
 import dagger.hilt.android.AndroidEntryPoint
+
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
@@ -22,7 +23,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
+        checkLogin()
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
@@ -38,7 +39,13 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(navController, appBarConfiguration)
         navView.setupWithNavController(navController)
 
-        checkLogin()
+        if (intent != null && intent.hasExtra("fragmentToLoad")) {
+            val fragmentToLoad = intent.getStringExtra("fragmentToLoad")
+            if (fragmentToLoad == "history") {
+                navController.navigate(R.id.navigation_history)
+            }
+        }
+
     }
 
     private fun checkLogin() {
@@ -53,5 +60,6 @@ class MainActivity : AppCompatActivity() {
             }
         }
     }
+
 
 }

@@ -3,8 +3,6 @@ package com.android.sigemesapp.presentation.auth.forgotPassword
 import android.content.Intent
 import android.os.Build
 import android.os.Bundle
-import android.os.Handler
-import android.os.Looper
 import android.view.WindowInsets
 import android.view.WindowManager
 import android.widget.Toast
@@ -15,11 +13,11 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.lifecycleScope
 import com.android.sigemesapp.R
-import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.databinding.ActivityForgotPasswordBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
 import com.android.sigemesapp.presentation.auth.login.LoginActivity
 import com.android.sigemesapp.presentation.auth.otp.OtpVerificationActivity
+import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.FailedDialog
 import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.dialog.SuccessDialog

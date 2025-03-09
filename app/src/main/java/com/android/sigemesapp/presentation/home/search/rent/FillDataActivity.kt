@@ -2,19 +2,14 @@ package com.android.sigemesapp.presentation.home.search.rent
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
-import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.ActivityFillDataBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.search.detail.DetailViewModel
-import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity
 import com.android.sigemesapp.presentation.home.search.rent.payment.PaymentActivity
-import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.text.SimpleDateFormat

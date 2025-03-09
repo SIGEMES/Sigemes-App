@@ -28,7 +28,6 @@ import com.android.sigemesapp.data.source.remote.response.LoginResponse
 import com.android.sigemesapp.data.source.remote.response.RegisterResponse
 import com.android.sigemesapp.data.source.remote.response.RenterDataResponse
 import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
-import com.android.sigemesapp.data.source.remote.response.TransactionStatusResponse
 import com.android.sigemesapp.data.source.remote.response.UpdateProfileResponse
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
 import okhttp3.MultipartBody

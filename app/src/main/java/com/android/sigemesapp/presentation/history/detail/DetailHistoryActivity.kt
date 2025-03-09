@@ -2,24 +2,25 @@ package com.android.sigemesapp.presentation.history.detail
 
 import android.content.Intent
 import android.os.Bundle
-import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import com.android.sigemesapp.MainActivity
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityDetailHistoryBinding
-import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.presentation.home.search.detail.review.AddReviewActivity
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
+import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Locale
+
 
 @AndroidEntryPoint
 class DetailHistoryActivity : AppCompatActivity() {
@@ -47,7 +48,6 @@ class DetailHistoryActivity : AppCompatActivity() {
         category = intent.getStringExtra(EXTRA_CATEGORY) ?: "Default Query"
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-//        supportActionBar?.title = "Lanjutkan Pembayaran"
         if(category == "Mess"){
             observeGuesthouseRentData()
         }else if (category == "Gedung"){
@@ -252,14 +252,22 @@ class DetailHistoryActivity : AppCompatActivity() {
         }
     }
 
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        return when (item.itemId) {
-            android.R.id.home -> {
-                onBackPressedDispatcher.onBackPressed()
-                true
-            }
-            else -> super.onOptionsItemSelected(item)
-        }
+    override fun onBackPressed() {
+        super.onBackPressed()
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragmentToLoad", "history")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+    }
+
+    override fun onSupportNavigateUp(): Boolean {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.putExtra("fragmentToLoad", "history")
+        intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_NEW_TASK)
+        startActivity(intent)
+        finish()
+        return true
     }
 
 

@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallReviews
 import com.android.sigemesapp.databinding.ItemReviewBinding
-import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
 import com.android.sigemesapp.utils.calculateTimeDifference
 import com.bumptech.glide.Glide
 

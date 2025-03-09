@@ -1,7 +1,6 @@
 package com.android.sigemesapp.presentation.home.search.detail.about
 
 import android.os.Bundle
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -10,11 +9,8 @@ import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
 import com.android.sigemesapp.databinding.ActivityAboutBinding
-import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity.Companion
 import com.android.sigemesapp.presentation.home.search.detail.DetailViewModel
 import com.android.sigemesapp.utils.Result
-import com.android.sigemesapp.utils.calculateDays
 import com.android.sigemesapp.utils.extractFacilities
 import com.google.android.material.card.MaterialCardView
 import dagger.hilt.android.AndroidEntryPoint

@@ -44,13 +44,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/welcome"
                 android:textSize="22sp"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/welcome_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textSize="16sp"
+                style="@style/TextH5"
                 android:text="@string/please_login_with_your_information" />
 
             <View
@@ -62,7 +63,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/email_address"
-                android:textSize="16sp" />
+                style="@style/TextH5" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ed_login_email_layout"
@@ -90,7 +91,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/password"
-                android:textSize="16sp" />
+                style="@style/TextH5" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:id="@+id/ed_login_password_layout"
@@ -122,9 +123,8 @@
                 android:background="?attr/selectableItemBackground"
                 android:clickable="true"
                 android:gravity="center"
-                android:textSize="16sp"
+                style="@style/TextBoldH5"
                 android:text="@string/lupa_kata_sandi"
-                android:textStyle="bold"
                 tools:ignore="TouchTargetSizeCheck"
                 android:focusable="true" />
 
@@ -138,7 +138,8 @@
                 android:layout_height="50dp"
                 android:text="@string/login"
                 android:textAllCaps="false"
-                android:textStyle="bold"
+                style="@style/TextBoldH5"
+                android:textColor="@color/white"
                 app:cornerRadius="8dp" />
 
             <TextView
@@ -150,8 +151,7 @@
                 android:gravity="center"
                 android:layout_marginTop="10dp"
                 android:text="@string/belum_punya_akun"
-                android:textStyle="bold"
-                android:textSize="16sp"
+                style="@style/TextBoldH5"
                 tools:ignore="TouchTargetSizeCheck"
                 android:focusable="true" />
 
