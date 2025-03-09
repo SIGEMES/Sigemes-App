@@ -1,6 +1,7 @@
 package com.android.sigemesapp.presentation.home.search.detail.about
 
 import android.os.Bundle
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
@@ -94,10 +95,8 @@ class AboutActivity : AppCompatActivity() {
 
         binding.btnKebijakan.setOnClickListener {
             if (cityHallId == -1){
-                binding.cardKebijakanMess.visibility = View.VISIBLE
                 scrollToSection(binding.cardKebijakanMess)
             }else{
-                binding.cardKebijakanGedung.visibility = View.VISIBLE
                 scrollToSection(binding.cardKebijakanGedung)
             }
             binding.activeLine1.visibility = View.GONE
@@ -136,6 +135,7 @@ class AboutActivity : AppCompatActivity() {
         binding.lokasiDesc.text = guesthouse.address
         binding.aboutDesc.text = guesthouse.description
         binding.name.text = guesthouse.name
+        binding.cardKebijakanMess.visibility = View.VISIBLE
 
         val facility = extractFacilities(guesthouse.facilities)
         binding.fasilitasUmumDesc.text = String.format("- " + facility.joinToString("\n- "))
@@ -165,6 +165,7 @@ class AboutActivity : AppCompatActivity() {
         binding.fasilitasKamarDesc.visibility = View.VISIBLE
         binding.fasilitasKamarTitle.visibility = View.VISIBLE
         val facility = extractFacilities(room.facilities)
+
         binding.fasilitasKamarDesc.text = String.format("- " + facility.joinToString("\n- "))
     }
 
@@ -193,6 +194,7 @@ class AboutActivity : AppCompatActivity() {
         binding.lokasiDesc.text = cityHall.address
         binding.aboutDesc.text = cityHall.description
         binding.name.text = cityHall.name
+        binding.cardKebijakanGedung.visibility = View.VISIBLE
 
         val area = "${cityHall.areaM2} m²"
         val capacity = "${cityHall.peopleCapacity} orang"
@@ -206,4 +208,6 @@ class AboutActivity : AppCompatActivity() {
         binding.fasilitasKamarTitle.visibility = View.GONE
         binding.fasilitasKamarDesc.visibility = View.GONE
     }
+
+
 }

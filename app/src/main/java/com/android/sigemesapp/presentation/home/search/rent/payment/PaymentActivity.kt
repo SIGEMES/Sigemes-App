@@ -113,14 +113,18 @@ class PaymentActivity : AppCompatActivity() {
 
         if (category == "Mess") {
             if(rentId == -1){
+                before = "payment"
                 createMessRent()
             }else{
+                before = "continuePayment"
                 observeGuesthouseRent(rentId)
             }
         } else {
             if(rentId == -1){
+                before = "payment"
                 createCityhallRent()
             }else{
+                before = "continuePayment"
                 observeCityHallRent(rentId)
             }
         }
@@ -547,6 +551,7 @@ class PaymentActivity : AppCompatActivity() {
         val intent = Intent(this, DetailHistoryActivity::class.java)
         intent.putExtra(KEY_RENT_ID, rentId)
         intent.putExtra(EXTRA_CATEGORY, category)
+        intent.putExtra(EXTRA_BEFORE, before)
         startActivity(intent)
         finish()
     }
@@ -595,28 +600,8 @@ class PaymentActivity : AppCompatActivity() {
         if(before == "continue"){
             finish()
         } else {
-//            if(category == "Mess"){
-//                val intent = Intent(this, SearchActivity::class.java).apply {
-//                    putExtra(EXTRA_STRING, "Mess")
-//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                }
-//                startActivity(intent)
-//
-//            }else{
-//                val intent = Intent(this, SearchActivity::class.java).apply {
-//                    putExtra(EXTRA_STRING, "Gedung")
-//                    addFlags(Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK)
-//                }
-//                startActivity(intent)
-//
-//            }
             finish()
         }
-    }
-
-    override fun onResume() {
-        super.onResume()
-
     }
 
 }

@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import com.android.sigemesapp.R
@@ -32,7 +33,7 @@ class AccountFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        (requireActivity() as AppCompatActivity).supportActionBar?.hide()
         setupRenterData()
         setupAction()
     }
@@ -72,6 +73,11 @@ class AccountFragment : Fragment() {
                 negativeButtonText = "Batal",
                 onPositive = { authViewModel.logout() }
             )
+        }
+
+        binding.hubungiKamiCard.setOnClickListener {
+            val intent = Intent(requireActivity(), ContactUsActivity::class.java)
+            startActivity(intent)
         }
     }
 }

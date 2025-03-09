@@ -33,7 +33,7 @@ class CustomFullnameValid : AppCompatEditText {
             override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {
                 s.toString()
                 error = if ((s?.length ?: 0) < 8) {
-                    context.getString(R.string.password_too_short)
+                    context.getString(R.string.name_too_short)
                 } else {
                     null
                 }

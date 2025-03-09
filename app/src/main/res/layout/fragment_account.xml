@@ -136,7 +136,7 @@
                         android:id="@+id/pusat_bantuan_desc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/lorem"
+                        android:text="Lihat tutorial penggunaan aplikasi SiGEMES"
                         style="@style/TextH6"
                         app:layout_constraintTop_toBottomOf="@id/pusat_bantuan"
                         app:layout_constraintStart_toStartOf="parent"
@@ -196,7 +196,7 @@
                         android:id="@+id/hubungi_kami_desc"
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
-                        android:text="@string/lorem"
+                        android:text="Dapatkan bantuan dari Customer Service kami"
                         style="@style/TextH6"
                         app:layout_constraintTop_toBottomOf="@id/hubungi_kami"
                         app:layout_constraintStart_toStartOf="parent"
@@ -227,58 +227,58 @@
 
             </com.google.android.material.card.MaterialCardView>
 
-            <com.google.android.material.card.MaterialCardView
-                android:id="@+id/pengaturan_card"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:clickable="true"
-                android:focusable="true"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@id/hubungi_kami_card">
+<!--            <com.google.android.material.card.MaterialCardView-->
+<!--                android:id="@+id/pengaturan_card"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintEnd_toEndOf="parent"-->
+<!--                app:layout_constraintTop_toBottomOf="@id/hubungi_kami_card">-->
 
-                <androidx.constraintlayout.widget.ConstraintLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingHorizontal="16dp"
-                    android:paddingTop="16dp">
+<!--                <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:paddingHorizontal="16dp"-->
+<!--                    android:paddingTop="16dp">-->
 
-                    <TextView
-                        android:id="@+id/pengaturan"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/pengaturan"
-                        style="@style/TextBoldH6"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent"/>
+<!--                    <TextView-->
+<!--                        android:id="@+id/pengaturan"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/pengaturan"-->
+<!--                        style="@style/TextBoldH6"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"/>-->
 
-                    <TextView
-                        android:id="@+id/pengaturan_desc"
-                        android:layout_width="0dp"
-                        android:layout_height="wrap_content"
-                        android:text="@string/lorem"
-                        style="@style/TextH6"
-                        app:layout_constraintTop_toBottomOf="@id/pengaturan"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintBottom_toBottomOf="parent"
-                        android:layout_marginBottom="16dp"
-                        app:layout_constraintEnd_toStartOf="@id/nav_next3"
-                        android:maxLines="1"
-                        tools:ignore="SmallSp" />
+<!--                    <TextView-->
+<!--                        android:id="@+id/pengaturan_desc"-->
+<!--                        android:layout_width="0dp"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:text="@string/lorem"-->
+<!--                        style="@style/TextH6"-->
+<!--                        app:layout_constraintTop_toBottomOf="@id/pengaturan"-->
+<!--                        app:layout_constraintStart_toStartOf="parent"-->
+<!--                        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--                        android:layout_marginBottom="16dp"-->
+<!--                        app:layout_constraintEnd_toStartOf="@id/nav_next3"-->
+<!--                        android:maxLines="1"-->
+<!--                        tools:ignore="SmallSp" />-->
 
-                    <ImageView
-                        android:id="@+id/nav_next3"
-                        android:layout_width="30dp"
-                        android:layout_height="30dp"
-                        android:src="@drawable/navigate_next"
-                        app:layout_constraintTop_toTopOf="parent"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintStart_toEndOf="@id/pengaturan_desc"/>
+<!--                    <ImageView-->
+<!--                        android:id="@+id/nav_next3"-->
+<!--                        android:layout_width="30dp"-->
+<!--                        android:layout_height="30dp"-->
+<!--                        android:src="@drawable/navigate_next"-->
+<!--                        app:layout_constraintTop_toTopOf="parent"-->
+<!--                        app:layout_constraintEnd_toEndOf="parent"-->
+<!--                        app:layout_constraintStart_toEndOf="@id/pengaturan_desc"/>-->
 
 
-                </androidx.constraintlayout.widget.ConstraintLayout>
+<!--                </androidx.constraintlayout.widget.ConstraintLayout>-->
 
-            </com.google.android.material.card.MaterialCardView>
+<!--            </com.google.android.material.card.MaterialCardView>-->
 
 
         </androidx.constraintlayout.widget.ConstraintLayout>
