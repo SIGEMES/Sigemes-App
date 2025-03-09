@@ -1,16 +1,11 @@
 package com.android.sigemesapp.domain.repository
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.liveData
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.remote.CreateCityHallRentRequest
 import com.android.sigemesapp.data.source.remote.CreateGuesthouseRentRequest
-import com.android.sigemesapp.data.source.remote.response.AddReviewCityHallResponse
-import com.android.sigemesapp.data.source.remote.response.AddReviewGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.AddedCityHallReview
 import com.android.sigemesapp.data.source.remote.response.AddedGuesthouseReview
-import com.android.sigemesapp.data.source.remote.response.CityHall
 import com.android.sigemesapp.data.source.remote.response.CityHallData
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.CityHallReviews
@@ -25,9 +20,7 @@ import com.android.sigemesapp.data.source.remote.response.GuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.data.source.remote.response.RentsDataItem
 import com.android.sigemesapp.data.source.remote.response.RoomItem
-import com.android.sigemesapp.data.source.remote.response.TransactionStatusResponse
 import com.android.sigemesapp.data.source.remote.retrofit.ApiService
-import com.android.sigemesapp.data.source.remote.retrofit.ApiService2
 import com.android.sigemesapp.utils.Result
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
@@ -43,8 +36,7 @@ import javax.inject.Inject
 
 class SigemesRepository @Inject constructor (
     private val userPreference : UserPreference,
-    private val apiService: ApiService,
-    private val apiService2: ApiService2
+    private val apiService: ApiService
 ){
     fun getAllGuesthousesWithDetails(): Flow<Result<List<GuesthouseResponse>>> = flow {
         emit(Result.Loading)
@@ -332,14 +324,5 @@ class SigemesRepository @Inject constructor (
         }
     }
 
-    fun getTransactionStatus(transaction_id: String, credentials: String): Flow<Result<TransactionStatusResponse>> = flow {
-        emit(Result.Loading)
-        try {
-            val response = apiService2.getStatus(transaction_id, credentials)
-            emit(Result.Success(response))
-        } catch (e: Exception) {
-            emit(Result.Error("Error: ${e.message}"))
-        }
-    }
 
 }

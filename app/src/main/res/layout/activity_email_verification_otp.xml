@@ -32,12 +32,14 @@
                 android:layout_height="wrap_content"
                 android:text="@string/verifikasi_email_anda"
                 android:textSize="32sp"
+                android:textColor="@color/black"
                 android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/otp_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextH5"
                 android:text="@string/silahkan_masukkan_kode_yang_telah_kami_kirim" />
 
             <View
@@ -49,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp"
+                style="@style/TextH5"
                 android:text="@string/test_gmail_com"/>
 
             <com.chaos.view.PinView
@@ -81,6 +83,8 @@
                 android:layout_height="50dp"
                 android:textAllCaps="false"
                 android:textStyle="bold"
+                style="@style/TextBoldH5"
+                android:textColor="@color/white"
                 android:text="@string/kirim_kode"
                 app:cornerRadius="8dp" />
 

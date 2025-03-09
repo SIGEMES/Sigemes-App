@@ -1,10 +1,8 @@
 package com.android.sigemesapp.presentation.home.search.rent.payment
 
 import android.content.Intent
-import android.net.Uri
 import android.os.Bundle
 import android.os.CountDownTimer
-import android.util.Log
 import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
@@ -18,11 +16,7 @@ import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
 import com.android.sigemesapp.databinding.ActivityPaymentBinding
-import com.android.sigemesapp.presentation.history.detail.ContinuePaymentActivity
-import com.android.sigemesapp.presentation.history.detail.ContinuePaymentActivity.Companion
 import com.android.sigemesapp.presentation.history.detail.DetailHistoryActivity
-import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity
-import com.android.sigemesapp.presentation.home.search.detail.DetailMessActivity
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.calculateDaysUTC
@@ -47,7 +41,7 @@ import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import java.text.NumberFormat
-import java.util.*
+import java.util.Locale
 
 @AndroidEntryPoint
 class PaymentActivity : AppCompatActivity() {

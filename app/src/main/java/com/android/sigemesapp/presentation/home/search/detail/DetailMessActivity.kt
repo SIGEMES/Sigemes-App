@@ -17,7 +17,6 @@ import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityDetailMessBinding
 import com.android.sigemesapp.presentation.home.search.adapter.FacilityAdapter
 import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
-import com.android.sigemesapp.presentation.home.search.detail.DetailGedungActivity.Companion.EXTRA_PRICING_ID
 import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.presentation.home.search.detail.adapter.PhotoRoomAdapter
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewActivity

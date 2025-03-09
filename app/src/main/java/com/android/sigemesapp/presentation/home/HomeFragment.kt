@@ -12,8 +12,8 @@ import androidx.fragment.app.viewModels
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.FragmentHomeBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.presentation.home.search.SearchActivity
+import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.utils.Result
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint

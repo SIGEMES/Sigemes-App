@@ -31,6 +31,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="@string/otp_verification"
+                android:textColor="@color/black"
                 android:textSize="32sp"
                 android:textStyle="bold" />
 
@@ -38,6 +39,7 @@
                 android:id="@+id/otp_desc"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                style="@style/TextH5"
                 android:text="@string/silahkan_masukkan_kode_yang_telah_kami_kirim" />
 
             <View
@@ -49,7 +51,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textSize="16sp"
+                style="@style/TextH5"
                 android:text="@string/test_gmail_com"/>
 
             <com.chaos.view.PinView
@@ -76,8 +78,9 @@
                 android:layout_width="match_parent"
                 android:layout_height="50dp"
                 android:text="@string/kirim_kode"
-                android:textStyle="bold"
                 android:textAllCaps="false"
+                style="@style/TextBoldH5"
+                android:textColor="@color/white"
                 app:cornerRadius="8dp" />
 
             <TextView
@@ -89,7 +92,7 @@
                 android:clickable="true"
                 android:gravity="center"
                 android:text="@string/kembali_ke_halaman_lupa_password"
-                android:textStyle="bold"
+                style="@style/TextBoldH5"
                 tools:ignore="TouchTargetSizeCheck" />
             <View
                 android:layout_width="wrap_content"

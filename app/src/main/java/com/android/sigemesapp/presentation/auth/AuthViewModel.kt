@@ -13,12 +13,11 @@ import com.android.sigemesapp.data.source.remote.response.RegisterResponse
 import com.android.sigemesapp.data.source.remote.response.RenterData
 import com.android.sigemesapp.data.source.remote.response.SendOtpResponse
 import com.android.sigemesapp.data.source.remote.response.UpdateProfileResponse
-import com.android.sigemesapp.data.source.remote.response.UpdatedData
 import com.android.sigemesapp.data.source.remote.response.VerifyEmailResponse
 import com.android.sigemesapp.domain.repository.AuthRepository
+import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
-import com.android.sigemesapp.utils.Result
 import java.io.File
 import javax.inject.Inject
 

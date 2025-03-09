@@ -5,10 +5,8 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.android.sigemesapp.data.source.remote.response.CityHallData
-import com.android.sigemesapp.data.source.remote.response.CityHallReviews
 import com.android.sigemesapp.data.source.remote.response.DetailRoom
 import com.android.sigemesapp.data.source.remote.response.GuesthouseData
-import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.domain.repository.SigemesRepository
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.lifecycle.HiltViewModel

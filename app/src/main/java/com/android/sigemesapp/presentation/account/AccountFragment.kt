@@ -1,20 +1,16 @@
 package com.android.sigemesapp.presentation.account
 
 import android.content.Intent
-import androidx.fragment.app.viewModels
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.FragmentAccountBinding
 import com.android.sigemesapp.presentation.account.edit.EditProfileActivity
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.home.search.detail.DetailMessActivity
-import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.showAlertDialog
 import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
