@@ -28,7 +28,7 @@ class HistoryAdapter(private val listHistory: MutableList<RentsDataItem>) : Recy
             val paymentTriggeredAtTimestamp = history.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
 
             status = if (history.rentStatus == "pending" &&
-                ((System.currentTimeMillis() > createdAtTimestamp + 24 * 60 * 60 * 1000) ||
+                ((System.currentTimeMillis() > createdAtTimestamp + 5 * 60 * 1000) ||
                         (paymentTriggeredAtTimestamp != null && System.currentTimeMillis() > paymentTriggeredAtTimestamp + 24 * 60 * 60 * 1000))){
                 "expired"
             } else {

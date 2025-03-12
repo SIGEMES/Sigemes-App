@@ -2,7 +2,7 @@ package com.android.sigemesapp.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
-data class AddReviewCityHallResponse(
+data class ReviewCityHallResponse(
 
     @field:SerializedName("data")
     val data: AddedCityHallReview,

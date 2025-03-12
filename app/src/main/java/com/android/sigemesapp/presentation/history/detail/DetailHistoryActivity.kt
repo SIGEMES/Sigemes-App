@@ -1,5 +1,6 @@
 package com.android.sigemesapp.presentation.history.detail
 
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
@@ -8,17 +9,24 @@ import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.MainActivity
 import com.android.sigemesapp.R
 import com.android.sigemesapp.data.source.remote.response.CityHallRent
+import com.android.sigemesapp.data.source.remote.response.CityHallReviews
+import com.android.sigemesapp.data.source.remote.response.GetReviewCityHallByIdResponse
 import com.android.sigemesapp.data.source.remote.response.GuesthouseRentData
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityDetailHistoryBinding
+import com.android.sigemesapp.presentation.home.search.detail.adapter.PhotoRoomAdapter
 import com.android.sigemesapp.presentation.home.search.detail.review.AddReviewActivity
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.calculateTimeDifference
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
+import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.NumberFormat
 import java.util.Locale
@@ -34,11 +42,13 @@ class DetailHistoryActivity : AppCompatActivity() {
     private var category = ""
     private var rentId = -1
     private var before = ""
+    private var rentStatus = ""
 
     companion object {
         const val KEY_RENT_ID = "key_rent_id"
         const val EXTRA_CATEGORY = "extra_category"
         const val EXTRA_BEFORE = "extra_before"
+        const val EXTRA_ACTION = "extra_action"
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -76,7 +86,8 @@ class DetailHistoryActivity : AppCompatActivity() {
                     setGuesthouseData(guesthouse)
                     supportActionBar?.title = "No. Pesanan ${guesthouse.payment.id}"
                     onSuccess()
-                    checkReview(guesthouse.rentStatus)
+                    rentStatus = guesthouse.rentStatus
+                    checkReview(rentStatus)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -121,7 +132,8 @@ class DetailHistoryActivity : AppCompatActivity() {
                     setCityHallData(cityhall)
                     supportActionBar?.title = "No. Pesanan ${cityhall.payment.id}"
                     onSuccess()
-                    checkReview(cityhall.rentStatus)
+                    rentStatus = cityhall.rentStatus
+                    checkReview(rentStatus)
                 }
                 is Result.Error -> {
                     binding.progressBar.visibility = View.GONE
@@ -204,6 +216,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             val intent = Intent(this, AddReviewActivity::class.java)
             intent.putExtra(KEY_RENT_ID, rentId)
             intent.putExtra(EXTRA_CATEGORY, category)
+            intent.putExtra(EXTRA_ACTION, "add")
             startActivity(intent)
         }
     }
@@ -229,6 +242,19 @@ class DetailHistoryActivity : AppCompatActivity() {
                         if(result.data.data == null){
                             binding.cardReview.visibility = View.VISIBLE
                             binding.leaveReviewTitle.visibility = View.VISIBLE
+                        } else {
+                            binding.leaveReviewTitle.text = "Ulasan Anda"
+                            binding.leaveReviewTitle.visibility = View.VISIBLE
+                            binding.editCommentButton.visibility = View.VISIBLE
+                            setupCommentGuesthouse(result.data.data)
+                            binding.commentCard.visibility = View.VISIBLE
+                            binding.editCommentButton.setOnClickListener {
+                                val intent = Intent(this, AddReviewActivity::class.java)
+                                intent.putExtra(KEY_RENT_ID, rentId)
+                                intent.putExtra(EXTRA_CATEGORY, category)
+                                intent.putExtra(EXTRA_ACTION, "update")
+                                startActivity(intent)
+                            }
                         }
 
                     }
@@ -248,6 +274,19 @@ class DetailHistoryActivity : AppCompatActivity() {
                         if(result.data.data == null){
                             binding.cardReview.visibility = View.VISIBLE
                             binding.leaveReviewTitle.visibility = View.VISIBLE
+                        } else {
+                            binding.leaveReviewTitle.text = "Ulasan Anda"
+                            binding.leaveReviewTitle.visibility = View.VISIBLE
+                            binding.editCommentButton.visibility = View.VISIBLE
+                            setupCommentCityHall(result.data.data)
+                            binding.commentCard.visibility = View.VISIBLE
+                            binding.editCommentButton.setOnClickListener {
+                                val intent = Intent(this, AddReviewActivity::class.java)
+                                intent.putExtra(KEY_RENT_ID, rentId)
+                                intent.putExtra(EXTRA_CATEGORY, category)
+                                intent.putExtra(EXTRA_ACTION, "update")
+                                startActivity(intent)
+                            }
                         }
 
                     }
@@ -256,6 +295,72 @@ class DetailHistoryActivity : AppCompatActivity() {
                     }
                 }
             }
+        }
+    }
+
+    private fun setupCommentGuesthouse(review: GuesthouseRoomReviews) {
+        binding.desc.text = review.comment
+        binding.username.text = review.rent.renter.fullname
+        Glide.with(binding.profilePic.context)
+            .load(review.rent.renter.profilePicture)
+            .error(R.drawable.person_24)
+            .into(binding.profilePic)
+
+        binding.rvPhotoReview.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+        val photoUrls = review.reviewMedia.map { it.url }
+        if(photoUrls.isNotEmpty()){
+            binding.rvPhotoReview.visibility = View.VISIBLE
+            val photoAdapter = PhotoRoomAdapter(binding.root.context as Activity, photoUrls)
+            binding.rvPhotoReview.adapter = photoAdapter
+        } else {
+            binding.rvPhotoReview.visibility = View.GONE
+        }
+
+        val createdAt = review.createdAt
+        val hoursDifference = calculateTimeDifference(createdAt)
+        binding.hour.text = hoursDifference
+
+        binding.rating.text = String.format("${review.rating}/5")
+
+        if(review.reviewReply == null){
+            binding.cardAdminReply.visibility = View.GONE
+        }else{
+            binding.cardAdminReply.visibility = View.VISIBLE
+            binding.hour2.text = calculateTimeDifference(review.reviewReply.createdAt)
+            binding.adminReply.text = review.reviewReply.comment
+        }
+    }
+
+    private fun setupCommentCityHall(review: CityHallReviews) {
+        binding.desc.text = review.comment
+        binding.username.text = review.rent.renter.fullname
+        Glide.with(binding.profilePic.context)
+            .load(review.rent.renter.profilePicture)
+            .error(R.drawable.person_24)
+            .into(binding.profilePic)
+
+        binding.rvPhotoReview.layoutManager = LinearLayoutManager(binding.root.context, LinearLayoutManager.HORIZONTAL, false)
+        val photoUrls = review.reviewMedia.map { it.url }
+        if(photoUrls.isNotEmpty()){
+            binding.rvPhotoReview.visibility = View.VISIBLE
+            val photoAdapter = PhotoRoomAdapter(binding.root.context as Activity, photoUrls)
+            binding.rvPhotoReview.adapter = photoAdapter
+        } else {
+            binding.rvPhotoReview.visibility = View.GONE
+        }
+
+        val createdAt = review.createdAt
+        val hoursDifference = calculateTimeDifference(createdAt)
+        binding.hour.text = hoursDifference
+
+        binding.rating.text = String.format("${review.rating}/5")
+
+        if(review.reviewReply == null){
+            binding.cardAdminReply.visibility = View.GONE
+        }else{
+            binding.cardAdminReply.visibility = View.VISIBLE
+            binding.hour2.text = calculateTimeDifference(review.reviewReply.createdAt)
+            binding.adminReply.text = review.reviewReply.comment
         }
     }
 
@@ -281,6 +386,11 @@ class DetailHistoryActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onResume() {
+        super.onResume()
+        checkReview(rentStatus)
     }
 
 

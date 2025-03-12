@@ -235,7 +235,29 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/ed_review"
+            android:layout_marginBottom="16dp"
+            tools:ignore="TouchTargetSizeCheck" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/cancel_button"
+            android:layout_width="0dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginHorizontal="20dp"
+            android:paddingHorizontal="2dp"
+            android:text="Batalkan"
+            android:visibility="gone"
+            android:textAllCaps="false"
+            android:layout_height="55dp"
+            style="@style/TextBoldH5"
+            android:backgroundTint="@color/white"
+            android:textColor="@color/red"
+            app:cornerRadius="24dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/submit_button"
             app:layout_constraintBottom_toBottomOf="parent"
+            app:strokeColor="@color/red"
+            app:strokeWidth="2dp"
             android:layout_marginBottom="16dp"
             tools:ignore="TouchTargetSizeCheck" />
 

@@ -57,3 +57,14 @@ data class CreateCityHallRentRequest(
     @SerializedName("renter_gender")
     val renterGender: String
 )
+
+data class DeletedMediaObject(
+    val id: Int,
+    val url: String
+)
+
+data class ReviewMedia(
+    val id: Int,
+    val url: String,
+    var uri: String? = null
+)

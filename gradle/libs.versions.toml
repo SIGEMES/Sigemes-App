@@ -39,6 +39,7 @@ androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomRunt
 androidx-room-runtime = { module = "androidx.room:room-runtime", version.ref = "roomRuntime" }
 androidx-work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "workRuntimeKtx" }
 circleimageview = { module = "de.hdodenhof:circleimageview", version.ref = "circleimageview" }
+compiler = { module = "com.github.bumptech.glide:compiler", version.ref = "glide" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "retrofit" }
 glide = { module = "com.github.bumptech.glide:glide", version.ref = "glide" }
 jetbrains-kotlinx-coroutines-android = { module = "org.jetbrains.kotlinx:kotlinx-coroutines-android", version.ref = "kotlinxCoroutinesAndroid" }

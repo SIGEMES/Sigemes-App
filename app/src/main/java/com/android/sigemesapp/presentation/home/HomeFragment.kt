@@ -2,6 +2,7 @@ package com.android.sigemesapp.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -9,13 +10,16 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.R
+import com.android.sigemesapp.data.source.remote.response.CityHallMediaItem
 import com.android.sigemesapp.databinding.FragmentHomeBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
+import com.android.sigemesapp.presentation.history.adapter.HistoryAdapter
 import com.android.sigemesapp.presentation.home.search.SearchActivity
+import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
 import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.utils.Result
-import com.bumptech.glide.Glide
 import dagger.hilt.android.AndroidEntryPoint
 import java.text.SimpleDateFormat
 import java.util.Calendar
@@ -31,6 +35,8 @@ class HomeFragment : Fragment() {
     private val homeViewModel: HomeViewModel by viewModels()
     private val authViewModel: AuthViewModel by viewModels()
 
+    private val photoUrls: MutableList<String> = mutableListOf()
+    private lateinit var photoAdapter: MenuAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -43,21 +49,15 @@ class HomeFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
         (requireActivity() as AppCompatActivity).supportActionBar?.hide()
 
         setupWelcome()
-
     }
 
     private fun setupWelcome() {
         authViewModel.getSession().observe(viewLifecycleOwner) { user ->
-            if (user.isLogin){
+            if (user.isLogin) {
                 binding.username.text = "Halo, ${user.fullname}"
-                Glide.with(binding.profilePic.context)
-                    .load(user.profile_picture)
-                    .error(R.drawable.ic_android_black_24dp)
-                    .into(binding.profilePic)
                 setupAction()
                 setupAboutGedung()
                 setupAboutMess()
@@ -65,27 +65,33 @@ class HomeFragment : Fragment() {
         }
     }
 
+    private fun setupAdapter() {
+        binding.rvPhotoView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
+
+        val adapter = MenuAdapter(photoUrls)
+        binding.rvPhotoView.adapter = adapter
+    }
+
     private fun setupAboutMess() {
         homeViewModel.getGuesthouse(1)
 
-        homeViewModel.guesthouseResult.observe(viewLifecycleOwner){ result ->
-            when(result){
+        homeViewModel.guesthouseResult.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is Result.Loading -> {
-                    binding.cardAboutMessPemko.visibility = View.GONE
-                }
 
+                }
                 is Result.Success -> {
-                    binding.cardAboutMessPemko.visibility = View.VISIBLE
-                    binding.tentangMessText.text = result.data.description
-                    binding.cardAboutMessPemko.setOnClickListener {
+                    result.data.guesthouseMedia.firstOrNull()?.url?.let { url ->
+                        photoUrls.add(url)
+                    }
+
+                    binding.aboutMess.setOnClickListener {
                         val intent = Intent(requireActivity(), AboutActivity::class.java)
                         intent.putExtra(AboutActivity.KEY_GUESTHOUSE_ID, result.data.id)
                         startActivity(intent)
                     }
                 }
-
                 is Result.Error -> {
-                    binding.cardAboutMessPemko.visibility = View.GONE
                     Toast.makeText(requireActivity(), "Tidak dapat mengambil data tentang Mess Pemko", Toast.LENGTH_SHORT).show()
                 }
             }
@@ -103,38 +109,38 @@ class HomeFragment : Fragment() {
 
         homeViewModel.getCityHall(1, startDate, endDate)
 
-        homeViewModel.cityHall.observe(viewLifecycleOwner){ result ->
-            when(result){
+        homeViewModel.cityHall.observe(viewLifecycleOwner) { result ->
+            when (result) {
                 is Result.Loading -> {
-                    binding.cardAboutGedung.visibility = View.GONE
                 }
-
                 is Result.Success -> {
-                    binding.cardAboutGedung.visibility = View.VISIBLE
-                    binding.tentangGedungText.text = result.data.description
-                    binding.cardAboutGedung.setOnClickListener {
+                    result.data.media.firstOrNull()?.url?.let { url ->
+                        photoUrls.add(url)
+                        Log.e("photoUrls", "photo2 $photoUrls")
+
+                    }
+                    setupAdapter()
+                    binding.aboutGedung.setOnClickListener {
                         val intent = Intent(requireActivity(), AboutActivity::class.java)
                         intent.putExtra(AboutActivity.KEY_CITYHALL_ID, result.data.id)
                         startActivity(intent)
                     }
                 }
-
                 is Result.Error -> {
-                    binding.cardAboutGedung.visibility = View.GONE
-                    Toast.makeText(requireActivity(), "Tidak dapat mengambil data tentang gedung adam malik", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireActivity(), "Tidak dapat mengambil data tentang Gedung Adam Malik", Toast.LENGTH_SHORT).show()
                 }
             }
         }
     }
 
     private fun setupAction() {
-        binding.cardMessMenu.setOnClickListener {
+        binding.cardPesanMess.setOnClickListener {
             val intent = Intent(requireActivity(), SearchActivity::class.java)
             intent.putExtra(SearchActivity.EXTRA_STRING, "Mess")
             startActivity(intent)
         }
 
-        binding.cardBuildingMenu.setOnClickListener {
+        binding.cardPesanGedung.setOnClickListener {
             val intent = Intent(requireActivity(), SearchActivity::class.java)
             intent.putExtra(SearchActivity.EXTRA_STRING, "Gedung")
             startActivity(intent)
@@ -146,4 +152,5 @@ class HomeFragment : Fragment() {
         _binding = null
     }
 }
+
 

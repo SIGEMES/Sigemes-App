@@ -4,6 +4,7 @@ import android.util.Log
 import com.android.sigemesapp.data.source.local.UserPreference
 import com.android.sigemesapp.data.source.remote.CreateCityHallRentRequest
 import com.android.sigemesapp.data.source.remote.CreateGuesthouseRentRequest
+import com.android.sigemesapp.data.source.remote.DeletedMediaObject
 import com.android.sigemesapp.data.source.remote.response.AddedCityHallReview
 import com.android.sigemesapp.data.source.remote.response.AddedGuesthouseReview
 import com.android.sigemesapp.data.source.remote.response.CityHallData
@@ -22,6 +23,7 @@ import com.android.sigemesapp.data.source.remote.response.RentsDataItem
 import com.android.sigemesapp.data.source.remote.response.RoomItem
 import com.android.sigemesapp.data.source.remote.retrofit.ApiService
 import com.android.sigemesapp.utils.Result
+import com.google.gson.Gson
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.flow
@@ -318,6 +320,97 @@ class SigemesRepository @Inject constructor (
         emit(Result.Loading)
         try {
             val response = apiService.getGuesthouseReviewById(rent_id)
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun updateGuesthouseReview(
+        rentId: Int,
+        reviewId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList(),
+        deletedMediaObjects: List<DeletedMediaObject> = emptyList()
+    ): Flow<Result<AddedGuesthouseReview>> = flow {
+        emit(Result.Loading)
+        try {
+            val multipartMedia = media.filterNotNull().map { file ->
+                val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+                MultipartBody.Part.createFormData(
+                    "media",
+                    file.name,
+                    requestImageFile
+                )
+            }
+
+            val deletedMediaObjectJson = if (deletedMediaObjects.isNotEmpty()) {
+                val gson = Gson()
+                gson.toJson(deletedMediaObjects)
+            } else {
+                null
+            }
+
+            val ratingBody = rating.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val commentBody = comment.toRequestBody("text/plain".toMediaTypeOrNull())
+            val deletedMediaObjectBody = deletedMediaObjectJson?.toRequestBody("application/json".toMediaTypeOrNull())
+
+            val response = apiService.updateReviewGuesthouse(
+                rentId,
+                reviewId,
+                ratingBody,
+                commentBody,
+                multipartMedia,
+                deletedMediaObjectBody
+            ).data
+
+            emit(Result.Success(response))
+        } catch (e: Exception) {
+            emit(Result.Error("Error: ${e.message}"))
+        }
+    }
+
+    fun updateCityHallReview(
+        rentId: Int,
+        reviewId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList(),
+        deletedMediaObjects: List<DeletedMediaObject> = emptyList()
+    ): Flow<Result<AddedCityHallReview>> = flow {
+        emit(Result.Loading)
+        try {
+            val multipartMedia = media.filterNotNull().map { file ->
+                val requestImageFile = file.asRequestBody("image/jpeg".toMediaType())
+                MultipartBody.Part.createFormData(
+                    "media",
+                    file.name,
+                    requestImageFile
+                )
+            }
+
+            val deletedMediaObjectJson = if (deletedMediaObjects.isNotEmpty()) {
+                val gson = Gson()
+                gson.toJson(deletedMediaObjects)
+            } else {
+                null
+            }
+
+            val ratingBody = rating.toString().toRequestBody("text/plain".toMediaTypeOrNull())
+            val commentBody = comment.toRequestBody("text/plain".toMediaTypeOrNull())
+            val deletedMediaObjectBody = deletedMediaObjectJson?.toRequestBody("application/json".toMediaTypeOrNull())
+
+            Log.e("CheckAddedReview", "$rentId, $ratingBody, $commentBody, $multipartMedia")
+            val response = apiService.updateReviewCityHall(
+                rentId,
+                reviewId,
+                ratingBody,
+                commentBody,
+                multipartMedia,
+                deletedMediaObjectBody
+            ).data
+
             emit(Result.Success(response))
         } catch (e: Exception) {
             emit(Result.Error("Error: ${e.message}"))
