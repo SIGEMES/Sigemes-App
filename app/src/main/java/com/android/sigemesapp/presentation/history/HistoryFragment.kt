@@ -95,7 +95,7 @@ class HistoryFragment : Fragment() {
         val paymentTriggeredAtTimestamp = data.payment.paymentTriggeredAt?.let { isoToTimestamp(it) }
 
         val isExpired = data.rentStatus == "pending" &&
-                ((System.currentTimeMillis() > createdAtTimestamp + 24 * 60 * 60 * 1000) ||
+                ((System.currentTimeMillis() > createdAtTimestamp + 5 * 60 * 1000) ||
                         (paymentTriggeredAtTimestamp != null && System.currentTimeMillis() > paymentTriggeredAtTimestamp + 24 * 60 * 60 * 1000))
 
         if (isExpired) {

@@ -13,19 +13,21 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.android.sigemesapp.R
+import com.android.sigemesapp.data.source.remote.ReviewMedia
+import com.android.sigemesapp.data.source.remote.response.CityHallReviews
+import com.android.sigemesapp.data.source.remote.response.GuesthouseRoomReviews
 import com.android.sigemesapp.databinding.ActivityAddReviewBinding
 import com.android.sigemesapp.presentation.home.search.detail.adapter.AddPhotoReviewAdapter
 import com.android.sigemesapp.utils.Result
 import com.android.sigemesapp.utils.dialog.FailedDialog
 import com.android.sigemesapp.utils.dialog.LoadingDialog
 import com.android.sigemesapp.utils.dialog.SuccessDialog
+import com.android.sigemesapp.utils.downloadImageAndGetUri
 import com.android.sigemesapp.utils.reduceFileImage
 import com.android.sigemesapp.utils.uriToFile
+import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+import kotlinx.coroutines.*
 import java.io.File
 
 @AndroidEntryPoint
@@ -36,6 +38,8 @@ class AddReviewActivity : AppCompatActivity() {
     private lateinit var adapter: AddPhotoReviewAdapter
     private var rentId = -1
     private var category = ""
+    private var action = ""
+    private var reviewId = -1
     private val successDialog = SuccessDialog(this)
     private val loadingDialog = LoadingDialog(this)
     private val failedDialog = FailedDialog(this)
@@ -43,11 +47,15 @@ class AddReviewActivity : AppCompatActivity() {
     companion object {
         const val KEY_RENT_ID = "key_rent_id"
         const val EXTRA_CATEGORY = "extra_category"
+        const val EXTRA_ACTION = "extra_action"
     }
 
     private val pickImages = registerForActivityResult(ActivityResultContracts.PickMultipleVisualMedia()) { uris ->
         if (uris.isNotEmpty()) {
             reviewViewModel.addPhotos(uris)
+            if(action == "update") {
+                reviewViewModel.addNewPhotos(uris)
+            }
         }
     }
 
@@ -58,14 +66,160 @@ class AddReviewActivity : AppCompatActivity() {
 
         rentId = intent.getIntExtra(KEY_RENT_ID, -1)
         category = intent.getStringExtra(EXTRA_CATEGORY) ?: "Default Category"
+        action = intent.getStringExtra(EXTRA_ACTION) ?: "Default Category"
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Beri Ulasan"
 
-        setupStars()
-        setupRecyclerView()
-        setupSendButton()
-        setupPhotoSelection()
+        if (action == "add"){
+            supportActionBar?.title = "Beri Ulasan"
+            setupStars()
+            setupRecyclerView()
+            setupSendButton()
+            setupPhotoSelection()
+        } else if (action == "update"){
+            supportActionBar?.title = "Edit Ulasan"
+            if(category == "Mess"){
+                observeMessComment()
+            } else {
+                observeCommentGedung()
+            }
+        }
+
     }
+
+    private fun observeCommentGedung() {
+        reviewViewModel.getCityHallReviewById(rentId)
+        reviewViewModel.cityHallRentReviewById.observe(this) { result ->
+            when(result){
+                is Result.Loading -> {
+
+                }
+                is Result.Success -> {
+                    setupCommentGedung(result.data.data)
+                }
+                is Result.Error -> {
+
+                }
+            }
+        }
+    }
+
+    private fun observeMessComment() {
+        reviewViewModel.getGuesthouseReviewById(rentId)
+        reviewViewModel.guesthouseRentReviewById.observe(this) { result ->
+            when (result) {
+                is Result.Loading -> {
+
+                }
+
+                is Result.Success -> {
+                    setupCommentMess(result.data.data)
+                }
+
+                is Result.Error -> {
+
+                }
+            }
+        }
+    }
+
+    private fun setupCommentGedung(data: CityHallReviews?) {
+        if (data != null) {
+            reviewId = data.id
+        }
+        data?.rating?.let { reviewViewModel.setRating(it) }
+        setupStars()
+
+        data?.comment?.let { reviewViewModel.setComment(it) }
+        binding.edReview.findViewById<TextInputEditText>(R.id.in_review)?.setText(reviewViewModel.comment.value)
+
+        val photoUrls = data?.reviewMedia?.map { it.url }.orEmpty()
+
+        val mediaList = data?.reviewMedia?.map { media ->
+            ReviewMedia(
+                id = media.id,
+                url = media.url,
+                uri = null
+            )
+        }.orEmpty()
+        reviewViewModel.addDownloadedMedia(mediaList)
+
+        if (reviewViewModel.downloadedPhotoUris.isEmpty()) {
+            lifecycleScope.launch {
+                val updatedMediaList = photoUrls.mapNotNull { url ->
+                    val downloadedUri = withContext(Dispatchers.IO) {
+                        downloadImageAndGetUri(this@AddReviewActivity, url)
+                    }
+
+                    reviewViewModel.downloadedMedia.find { it.url == url }?.apply {
+                        uri = downloadedUri.toString()
+                    }
+
+                    downloadedUri
+                }
+
+                reviewViewModel.addPhotos(updatedMediaList)
+            }
+        }
+
+        setupRecyclerView()
+        setupPhotoSelection()
+
+        binding.cancelButton.visibility = View.VISIBLE
+        binding.cancelButton.setOnClickListener {
+            finish()
+        }
+        setupSendButton()
+    }
+
+    private fun setupCommentMess(data: GuesthouseRoomReviews?) {
+        if (data != null) {
+            reviewId = data.id
+        }
+        data?.rating?.let { reviewViewModel.setRating(it) }
+        setupStars()
+
+        data?.comment?.let { reviewViewModel.setComment(it) }
+        binding.edReview.findViewById<TextInputEditText>(R.id.in_review)?.setText(reviewViewModel.comment.value)
+
+        val photoUrls = data?.reviewMedia?.map { it.url }.orEmpty()
+
+        val mediaList = data?.reviewMedia?.map { media ->
+            ReviewMedia(
+                id = media.id,
+                url = media.url,
+                uri = null
+            )
+        }.orEmpty()
+        reviewViewModel.addDownloadedMedia(mediaList)
+
+        if (reviewViewModel.downloadedPhotoUris.isEmpty()) {
+            lifecycleScope.launch {
+                val updatedMediaList = photoUrls.mapNotNull { url ->
+                    val downloadedUri = withContext(Dispatchers.IO) {
+                        downloadImageAndGetUri(this@AddReviewActivity, url)
+                    }
+
+                    reviewViewModel.downloadedMedia.find { it.url == url }?.apply {
+                        uri = downloadedUri.toString()
+                    }
+
+                    downloadedUri
+                }
+
+                reviewViewModel.addPhotos(updatedMediaList)
+            }
+        }
+
+        setupRecyclerView()
+        setupPhotoSelection()
+
+        binding.cancelButton.visibility = View.VISIBLE
+        binding.cancelButton.setOnClickListener {
+            finish()
+        }
+        setupSendButton()
+    }
+
 
     private fun setupStars() {
         val stars = listOf(binding.star1, binding.star2, binding.star3, binding.star4, binding.star5)
@@ -113,9 +267,11 @@ class AddReviewActivity : AppCompatActivity() {
         binding.rvPhotoReview.layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL, false)
         binding.rvPhotoReview.adapter = adapter
 
+
         reviewViewModel.photos.observe(this) { photos ->
             adapter.updatePhotos(photos)
             updatePhotoVisibility()
+            binding.textAddPhoto2.text = String.format("Tambah foto (${reviewViewModel.photos.value?.size}/5)")
         }
     }
 
@@ -123,7 +279,12 @@ class AddReviewActivity : AppCompatActivity() {
         val hasPhotos = reviewViewModel.photos.value?.isNotEmpty() == true
         binding.cardAddPhoto.visibility = if (hasPhotos) View.GONE else View.VISIBLE
         binding.rvPhotoReview.visibility = if (hasPhotos) View.VISIBLE else View.GONE
-        binding.cardAddPhoto2.visibility = if (hasPhotos) View.VISIBLE else View.GONE
+        if(reviewViewModel.photos.value?.size!! >= 5){
+            binding.cardAddPhoto2.visibility = View.GONE
+        } else {
+            binding.cardAddPhoto2.visibility = if (hasPhotos) View.VISIBLE else View.GONE
+        }
+
     }
 
 
@@ -145,7 +306,10 @@ class AddReviewActivity : AppCompatActivity() {
     }
 
     private fun sendGuesthouseReview() {
-        val photos = reviewViewModel.photos.value ?: emptyList()
+        val photos = when (action) {
+            "add" -> reviewViewModel.photos.value.orEmpty()
+            else -> reviewViewModel.newPhotos.value.orEmpty()
+        }
 
         lifecycleScope.launch {
             try {
@@ -160,14 +324,21 @@ class AddReviewActivity : AppCompatActivity() {
                 }
 
                 uploadGuesthouseReview(rentId, reviewViewModel.rating.value ?: 0, reviewViewModel.comment.value ?: "", files)
+
             } catch (e: Exception) {
                 Toast.makeText(this@AddReviewActivity, "Gagal mengirim ulasan: ${e.message}", Toast.LENGTH_SHORT).show()
             }
         }
     }
 
+
     private fun uploadGuesthouseReview(rentId: Int, rating: Int, comment: String, files: List<File>) {
-        reviewViewModel.addGuesthouseReview(rentId, rating, comment, files)
+        if(action == "add"){
+            reviewViewModel.addGuesthouseReview(rentId, rating, comment, files)
+        } else {
+            reviewViewModel.updateGuesthouseReview(rentId, reviewId, rating, comment, files, reviewViewModel.deletedMediaObjects)
+        }
+
         reviewViewModel.guesthouseReviewResult.observe(this){ result ->
             when(result){
                 is Result.Loading -> {
@@ -190,7 +361,10 @@ class AddReviewActivity : AppCompatActivity() {
     }
 
     private fun sendCityHallReview() {
-        val photos = reviewViewModel.photos.value ?: emptyList()
+        val photos = when (action) {
+            "add" -> reviewViewModel.photos.value.orEmpty()
+            else -> reviewViewModel.newPhotos.value.orEmpty()
+        }
 
         lifecycleScope.launch {
             try {
@@ -213,7 +387,12 @@ class AddReviewActivity : AppCompatActivity() {
     }
 
     private fun uploadCityHallReview(rentId: Int, rating: Int, comment: String, files: List<File>) {
-        reviewViewModel.addCityHallReview(rentId, rating, comment, files)
+        if(action == "add"){
+            reviewViewModel.addCityHallReview(rentId, rating, comment, files)
+        } else {
+            reviewViewModel.updateCityHallReview(rentId, reviewId, rating, comment, files, reviewViewModel.deletedMediaObjects)
+        }
+
         reviewViewModel.cityhallReviewResult.observe(this){ result ->
             when(result){
                 is Result.Loading -> {
@@ -262,6 +441,5 @@ class AddReviewActivity : AppCompatActivity() {
             finish()
         }
     }
-
 
 }

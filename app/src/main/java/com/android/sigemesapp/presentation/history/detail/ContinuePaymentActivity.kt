@@ -190,10 +190,10 @@ class ContinuePaymentActivity : AppCompatActivity() {
 
     private fun setCountDown(payInTimeStamp: Long?, createdAtTimestamp: Long, rentStatus: String) {
         if (rentStatus == "pending" &&
-            (System.currentTimeMillis() < createdAtTimestamp + 24 * 60 * 60 * 1000) &&
+            (System.currentTimeMillis() < createdAtTimestamp + 5 * 60 * 1000) &&
             payInTimeStamp == null) {
 
-            val countdownTime = (createdAtTimestamp + + 24 * 60 * 60 * 1000) - System.currentTimeMillis()
+            val countdownTime = (createdAtTimestamp + 5 * 60 * 1000) - System.currentTimeMillis()
 
             countDownTimer = object : CountDownTimer(countdownTime, 1000) {
                 override fun onTick(millisUntilFinished: Long) {

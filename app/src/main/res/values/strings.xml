@@ -181,10 +181,12 @@
         <item>Perempuan</item>
     </string-array>
 
-    <string-array name="reservations_options">
-        <item>--Pilih Jenis Pemesanan--</item>
-        <item>Mess Kota Padangsidimpuan</item>
-        <item>Gedung Adam Malik</item>
-    </string-array>
+    <integer-array name="image_resources">
+        <item>@drawable/gedung</item>
+        <item>@drawable/mess</item>
+    </integer-array>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
 
 </resources>

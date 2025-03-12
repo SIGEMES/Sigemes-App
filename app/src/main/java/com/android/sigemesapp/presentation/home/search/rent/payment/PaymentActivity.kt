@@ -407,7 +407,7 @@ class PaymentActivity : AppCompatActivity() {
             }
         } else {
             binding.pilihMetodePembayaranTitle.text = "Pilih metode pembayaran"
-            val countdownTime = (createdAt + 24 * 60 * 60 * 1000) - System.currentTimeMillis()
+            val countdownTime = (createdAt + 5 * 60 * 1000) - System.currentTimeMillis()
 
             countDownTimer = object : CountDownTimer(countdownTime, 1000) {
                 override fun onTick(millisUntilFinished: Long) {
@@ -430,7 +430,6 @@ class PaymentActivity : AppCompatActivity() {
             }.start()
         }
     }
-
 
     private fun handleTransactionResult(transactionResult: TransactionResult?) {
         if (transactionResult != null) {

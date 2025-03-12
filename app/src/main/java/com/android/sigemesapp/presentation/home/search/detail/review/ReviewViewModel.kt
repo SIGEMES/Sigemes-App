@@ -1,10 +1,13 @@
 package com.android.sigemesapp.presentation.home.search.detail.review
 
 import android.net.Uri
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.android.sigemesapp.data.source.remote.DeletedMediaObject
+import com.android.sigemesapp.data.source.remote.ReviewMedia
 import com.android.sigemesapp.data.source.remote.response.AddedCityHallReview
 import com.android.sigemesapp.data.source.remote.response.AddedGuesthouseReview
 import com.android.sigemesapp.data.source.remote.response.CityHallReviews
@@ -50,6 +53,18 @@ class ReviewViewModel @Inject constructor(
     private val _photos = MutableLiveData<List<Uri>>()
     val photos: LiveData<List<Uri>> get() = _photos
 
+    private val _newPhotos = MutableLiveData<List<Uri>>()
+    val newPhotos: LiveData<List<Uri>> get() = _newPhotos
+
+    private val _downloadedPhotoUris = mutableListOf<Uri>()
+    val downloadedPhotoUris: List<Uri> get() = _downloadedPhotoUris
+
+    private val _downloadedMedia = mutableListOf<ReviewMedia>()
+    val downloadedMedia: List<ReviewMedia> get() = _downloadedMedia
+
+    private val _deletedMediaObjects = mutableListOf<DeletedMediaObject>()
+    val deletedMediaObjects: List<DeletedMediaObject> get() = _deletedMediaObjects
+
     init {
         _photos.value = emptyList()
     }
@@ -57,11 +72,36 @@ class ReviewViewModel @Inject constructor(
     fun addPhotos(newPhotos: List<Uri>) {
         val currentPhotos = _photos.value ?: emptyList()
         _photos.value = currentPhotos + newPhotos
+        _downloadedPhotoUris.addAll(currentPhotos + newPhotos)
+    }
+
+    fun addNewPhotos(newPhotos: List<Uri>) {
+        val currentPhotos = _newPhotos.value ?: emptyList()
+        _newPhotos.value = currentPhotos + newPhotos
+    }
+
+    fun addDownloadedMedia(media: List<ReviewMedia>) {
+        _downloadedMedia.addAll(media)
     }
 
     fun removePhoto(uri: Uri) {
         val currentPhotos = _photos.value ?: emptyList()
+        val currentNewPhotos = _newPhotos.value ?: emptyList()
+        _downloadedPhotoUris.remove(uri)
+        _newPhotos.value = currentNewPhotos.filter { it != uri }
         _photos.value = currentPhotos.filter { it != uri }
+        val removedMedia = _downloadedMedia.find {
+            it.uri == uri.toString()
+        }
+        if (removedMedia != null) {
+            _deletedMediaObjects.add(
+                DeletedMediaObject(
+                    id = removedMedia.id,
+                    url = removedMedia.url
+                )
+            )
+            _downloadedMedia.remove(removedMedia)
+        }
     }
 
     fun setRating(rating: Int) {
@@ -132,6 +172,38 @@ class ReviewViewModel @Inject constructor(
             sigemesRepository.getGuesthouseReviewById(rent_id)
                 .collect{ result ->
                     _guesthouseRentReviewById.value = result
+                }
+        }
+    }
+
+    fun updateGuesthouseReview(
+        rentId: Int,
+        reviewId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList(),
+        deletedMediaObjects: List<DeletedMediaObject> = emptyList()
+    ){
+        viewModelScope.launch {
+            sigemesRepository.updateGuesthouseReview(rentId, reviewId, rating, comment, media, deletedMediaObjects)
+                .collect{ result ->
+                    _guesthouseReviewResult.value = result
+                }
+        }
+    }
+
+    fun updateCityHallReview(
+        rentId: Int,
+        reviewId: Int,
+        rating: Int,
+        comment: String,
+        media: List<File?> = emptyList(),
+        deletedMediaObjects: List<DeletedMediaObject> = emptyList()
+    ){
+        viewModelScope.launch {
+            sigemesRepository.updateCityHallReview(rentId, reviewId, rating, comment, media, deletedMediaObjects)
+                .collect{ result ->
+                    _cityhallReviewResult.value = result
                 }
         }
     }

@@ -17,6 +17,8 @@ import androidx.exifinterface.media.ExifInterface
 import com.android.sigemesapp.BuildConfig
 import com.android.sigemesapp.R
 import com.android.sigemesapp.databinding.ItemHistoryBinding
+import com.bumptech.glide.Glide
+import kotlinx.coroutines.CoroutineScope
 import java.io.ByteArrayOutputStream
 import java.io.File
 import java.io.FileOutputStream
@@ -197,17 +199,6 @@ fun formatDateUTC(inputDate: String): String {
     return date?.let { outputFormat.format(it) } ?: "Tanggal tidak valid"
 }
 
-fun convertTimestampToFormattedDate(timestamp: String): String {
-    val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH)
-    inputFormat.timeZone = TimeZone.getTimeZone("UTC")
-
-    val outputFormat = SimpleDateFormat("EEE, dd MMM yyyy, hh:mm a", Locale("id", "ID"))
-    outputFormat.timeZone = TimeZone.getDefault()
-
-    val date = inputFormat.parse(timestamp)
-    return date?.let { outputFormat.format(it) } ?: "Tanggal tidak valid"
-}
-
 fun convertToDateRange(timestamp1: String, timestamp2: String): String {
     val inputFormat = SimpleDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSS'Z'", Locale.ENGLISH).apply {
         timeZone = TimeZone.getTimeZone("UTC")
@@ -233,7 +224,7 @@ fun setRentStatusColorAndText(binding: ItemHistoryBinding, status: String) {
         "dikonfirmasi" -> "Pembayaran Berhasil"
         "selesai" -> "Selesai"
         "dibatalkan" -> "Pesanan Dibatalkan"
-        "expired" -> "Pesanan sudah kadaluwarsa"
+        "expired" -> "Pesanan Sudah Kadaluwarsa"
         else -> status
     }
     binding.status.text = statusText
@@ -321,6 +312,26 @@ fun isoToTimestamp(isoString: String): Long {
     dateFormat.timeZone = TimeZone.getTimeZone("UTC")
     val date = dateFormat.parse(isoString)
     return date?.time ?: 0L
+}
+
+suspend fun downloadImageAndGetUri(context: Context, imageUrl: String): Uri? {
+    return try {
+        val bitmap = Glide.with(context)
+            .asBitmap()
+            .load(imageUrl)
+            .submit()
+            .get()
+
+        val file = File(context.cacheDir, "downloaded_${System.currentTimeMillis()}.jpg")
+        FileOutputStream(file).use { out ->
+            bitmap.compress(Bitmap.CompressFormat.JPEG, 100, out)
+        }
+
+        Uri.fromFile(file)
+    } catch (e: Exception) {
+        e.printStackTrace()
+        null
+    }
 }
 
 

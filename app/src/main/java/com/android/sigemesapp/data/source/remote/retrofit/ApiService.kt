@@ -7,8 +7,8 @@ import com.android.sigemesapp.data.source.remote.LoginRequest
 import com.android.sigemesapp.data.source.remote.RegisterRequest
 import com.android.sigemesapp.data.source.remote.SendOtpRequest
 import com.android.sigemesapp.data.source.remote.VerifyOtpRequest
-import com.android.sigemesapp.data.source.remote.response.AddReviewCityHallResponse
-import com.android.sigemesapp.data.source.remote.response.AddReviewGuesthouseResponse
+import com.android.sigemesapp.data.source.remote.response.ReviewCityHallResponse
+import com.android.sigemesapp.data.source.remote.response.ReviewGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.AllGuesthouseResponse
 import com.android.sigemesapp.data.source.remote.response.AllRentsResponse
 import com.android.sigemesapp.data.source.remote.response.CancelCityHallResponse
@@ -176,7 +176,7 @@ interface ApiService {
         @Part("rating") rating: RequestBody,
         @Part("comment") comment: RequestBody,
         @Part media: List<MultipartBody.Part> = emptyList()
-    ): AddReviewGuesthouseResponse
+    ): ReviewGuesthouseResponse
 
     @Multipart
     @POST("rents/{rent_id}/reviews")
@@ -185,7 +185,7 @@ interface ApiService {
         @Part("rating") rating: RequestBody,
         @Part("comment") comment: RequestBody,
         @Part media: List<MultipartBody.Part>  = emptyList()
-    ): AddReviewCityHallResponse
+    ): ReviewCityHallResponse
 
     @GET("rents/{rent_id}/reviews")
     suspend fun getGuesthouseReviewById(
@@ -196,4 +196,26 @@ interface ApiService {
     suspend fun getCityHallReviewById(
         @Path("rent_id") rent_id: Int
     ): GetReviewCityHallByIdResponse
+
+    @Multipart
+    @PUT("rents/{rent_id}/reviews/{review-id}")
+    suspend fun updateReviewGuesthouse(
+        @Path("rent_id") rent_id: Int,
+        @Path("review-id") review_id: Int,
+        @Part("rating") rating: RequestBody,
+        @Part("comment") comment: RequestBody,
+        @Part media: List<MultipartBody.Part>  = emptyList(),
+        @Part("deleted_media_object") deletedMediaObject: RequestBody? = null
+    ): ReviewGuesthouseResponse
+
+    @Multipart
+    @PUT("rents/{rent_id}/reviews/{review-id}")
+    suspend fun updateReviewCityHall(
+        @Path("rent_id") rent_id: Int,
+        @Path("review-id") review_id: Int,
+        @Part("rating") rating: RequestBody,
+        @Part("comment") comment: RequestBody,
+        @Part media: List<MultipartBody.Part>  = emptyList(),
+        @Part("deleted_media_object") deletedMediaObject: RequestBody? = null
+    ): ReviewCityHallResponse
 }

@@ -2,11 +2,9 @@ package com.android.sigemesapp.presentation.home.search.detail.adapter
 
 import android.net.Uri
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageView
 import androidx.recyclerview.widget.RecyclerView
-import com.android.sigemesapp.R
+import com.android.sigemesapp.databinding.ItemRoomPhotoBinding
 
 class AddPhotoReviewAdapter(
     private var photos: List<Uri>,
@@ -14,13 +12,12 @@ class AddPhotoReviewAdapter(
 ) : RecyclerView.Adapter<AddPhotoReviewAdapter.PhotoViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PhotoViewHolder {
-        val view = LayoutInflater.from(parent.context).inflate(R.layout.item_room_photo, parent, false)
-        return PhotoViewHolder(view)
+        val binding = ItemRoomPhotoBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return PhotoViewHolder(binding)
     }
 
     override fun onBindViewHolder(holder: PhotoViewHolder, position: Int) {
-        val photoUri = photos[position]
-        holder.bind(photoUri)
+        holder.bind(photos[position])
     }
 
     override fun getItemCount(): Int = photos.size
@@ -30,16 +27,13 @@ class AddPhotoReviewAdapter(
         notifyDataSetChanged()
     }
 
-    inner class PhotoViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
-        private val photo: ImageView = itemView.findViewById(R.id.photo)
-        private val closeButton: ImageView = itemView.findViewById(R.id.closeButton)
+    inner class PhotoViewHolder(private val binding: ItemRoomPhotoBinding) :
+        RecyclerView.ViewHolder(binding.root) {
 
         fun bind(photoUri: Uri) {
-            photo.setImageURI(photoUri)
-            closeButton.visibility = View.VISIBLE
-            closeButton.setOnClickListener {
-                onDeleteClick(photoUri)
-            }
+            binding.photo.setImageURI(photoUri)
+            binding.closeButton.visibility = android.view.View.VISIBLE
+            binding.closeButton.setOnClickListener { onDeleteClick(photoUri) }
         }
     }
 }
