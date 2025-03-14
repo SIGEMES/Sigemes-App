@@ -472,7 +472,7 @@
                 android:layout_height="wrap_content"
                 android:paddingHorizontal="16dp"
                 android:paddingVertical="12dp"
-                android:text="Batalkan Pembelian Ini"
+                android:text="Batalkan Pemesanan Ini"
                 android:textColor="@color/red" />
 
         </com.google.android.material.card.MaterialCardView>

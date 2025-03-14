@@ -5,6 +5,49 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:padding="16dp"
     tools:context=".presentation.account.TutorialActivity">
+
+    <TextView
+        android:id="@+id/selamat_datang_title"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="@string/title_tutorial"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        style="@style/TextBoldH45"/>
+
+    <TextView
+        android:id="@+id/desc"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/selamat_datang_title"
+        android:layout_marginTop="10dp"
+        style="@style/TextBoldH6"
+        android:text="@string/desc_tutorial"/>
+
+    <TextView
+        android:id="@+id/mohon_perhatikan"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        style="@style/TextBoldH6"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/desc"
+        android:layout_marginTop="15dp"
+        android:text="@string/warning_tutorial"/>
+
+
+    <com.pierfrancescosoffritti.androidyoutubeplayer.core.player.views.YouTubePlayerView
+        android:id="@+id/youtube_player_view"
+        android:layout_width="match_parent"
+        android:layout_height="300dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/mohon_perhatikan"
+        android:layout_marginTop="20dp"/>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

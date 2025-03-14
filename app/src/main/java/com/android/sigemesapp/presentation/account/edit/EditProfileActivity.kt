@@ -59,7 +59,7 @@ class EditProfileActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
-        supportActionBar?.title = "Edit Profile"
+        supportActionBar?.title = "Ubah Data Akun"
 
         val userId = intent.getIntExtra(KEY_USER_ID, -1)
 

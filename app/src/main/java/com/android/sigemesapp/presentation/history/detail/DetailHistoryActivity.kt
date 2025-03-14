@@ -23,6 +23,8 @@ import com.android.sigemesapp.presentation.home.search.detail.review.AddReviewAc
 import com.android.sigemesapp.presentation.home.search.detail.review.ReviewViewModel
 import com.android.sigemesapp.presentation.home.search.rent.RentViewModel
 import com.android.sigemesapp.utils.Result
+import com.android.sigemesapp.utils.calculateDaysUTC
+import com.android.sigemesapp.utils.calculateNightsUTC
 import com.android.sigemesapp.utils.calculateTimeDifference
 import com.android.sigemesapp.utils.dialog.DetailDialog
 import com.android.sigemesapp.utils.formatDateUTC
@@ -109,6 +111,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
         binding.totalHarga2.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouse.payment.amount + 5550))
+        binding.priceItemName.text = String.format("Kamar ${guesthouse.guesthouseRoomPricing.guesthouseRoom.name}, ${guesthouse.guesthouseRoomPricing.retributionType}, ${calculateNightsUTC(guesthouse.startDate, guesthouse.endDate)} malam")
         binding.dibeliPadaTanggal.text = formatDateUTC(guesthouse.payment.paymentConfirmedAt)
         binding.itemTitle.text = guesthouse.guesthouseRoomPricing.guesthouseRoom.guesthouse.name
         binding.checkInDate.text = formatDateUTC(guesthouse.startDate)
@@ -170,6 +173,7 @@ class DetailHistoryActivity : AppCompatActivity() {
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
         binding.totalHarga2.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(cityhall.payment.amount + 5550))
+        binding.priceItemName.text = String.format("${cityhall.cityHallPricing.cityHall.name}, Acara ${cityhall.cityHallPricing.activityType}, ${calculateDaysUTC(cityhall.startDate, cityhall.endDate)} hari")
         binding.dibeliPadaTanggal.text = formatDateUTC(cityhall.payment.paymentConfirmedAt)
         binding.itemTitle.text = cityhall.cityHallPricing.cityHall.name
         binding.checkInDate.text = formatDateUTC(cityhall.startDate)

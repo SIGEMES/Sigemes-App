@@ -40,8 +40,11 @@ class ReviewActivity : AppCompatActivity() {
 
         if(cityHallId == -1){
             observeRoomReviews(guesthouseId, roomId)
+            supportActionBar?.title = "Ulasan Kamar Mess"
+
         }else{
             observeCityHallReviews(cityHallId)
+            supportActionBar?.title = "Ulasan Gedung Adam Malik"
         }
 
     }

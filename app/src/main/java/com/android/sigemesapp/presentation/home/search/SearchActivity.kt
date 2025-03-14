@@ -2,6 +2,7 @@ package com.android.sigemesapp.presentation.home.search
 
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import android.view.MenuItem
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -119,16 +120,26 @@ class SearchActivity : AppCompatActivity() {
         }
         val yesterday = normalizeToStartOfDay(calendarYesterday.timeInMillis)
 
+        val calendarTwoWeeksLater = Calendar.getInstance().apply {
+            add(Calendar.DAY_OF_YEAR, 14)
+        }
+        val twoWeeksLater = normalizeToStartOfDay(calendarTwoWeeksLater.timeInMillis)
+
         datePicker.addOnPositiveButtonClickListener { selection ->
             val startDate = selection.first
+
+            Log.e("startDate", "Start date; $startDate, today: $today")
             val endDate = selection.second
 
             if (binding.title.text == getString(R.string.text_gedung)) {
-                if (startDate == today) {
+                if (normalizeToStartOfDay(startDate) == today) {
                     failedDialog.startFailedDialog("Tidak dapat memesan gedung hari ini. Gedung dapat dipesan mulai esok hari")
                     return@addOnPositiveButtonClickListener
                 } else if (startDate < today) {
                     failedDialog.startFailedDialog("Tidak dapat memesan tanggal yang sudah lewat")
+                    return@addOnPositiveButtonClickListener
+                } else if (startDate > twoWeeksLater || endDate > twoWeeksLater){
+                    failedDialog.startFailedDialog("Gedung hanya dapat dipesan untuk maksimal 2 minggu ke depan")
                     return@addOnPositiveButtonClickListener
                 }
             }

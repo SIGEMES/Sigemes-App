@@ -83,4 +83,5 @@ dependencies {
     implementation (libs.uikit)
     ksp(libs.compiler)
     implementation(libs.androidx.work.runtime.ktx)
+    implementation(libs.core)
 }

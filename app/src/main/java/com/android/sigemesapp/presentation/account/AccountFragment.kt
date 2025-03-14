@@ -79,5 +79,10 @@ class AccountFragment : Fragment() {
             val intent = Intent(requireActivity(), ContactUsActivity::class.java)
             startActivity(intent)
         }
+
+        binding.pusatInfo.setOnClickListener {
+            val intent = Intent(requireActivity(), TutorialActivity::class.java)
+            startActivity(intent)
+        }
     }
 }

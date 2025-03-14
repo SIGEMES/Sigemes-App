@@ -2,7 +2,6 @@ package com.android.sigemesapp.presentation.home
 
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,13 +10,9 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.android.sigemesapp.R
-import com.android.sigemesapp.data.source.remote.response.CityHallMediaItem
 import com.android.sigemesapp.databinding.FragmentHomeBinding
 import com.android.sigemesapp.presentation.auth.AuthViewModel
-import com.android.sigemesapp.presentation.history.adapter.HistoryAdapter
 import com.android.sigemesapp.presentation.home.search.SearchActivity
-import com.android.sigemesapp.presentation.home.search.adapter.PhotoAdapter
 import com.android.sigemesapp.presentation.home.search.detail.about.AboutActivity
 import com.android.sigemesapp.utils.Result
 import dagger.hilt.android.AndroidEntryPoint
@@ -61,6 +56,7 @@ class HomeFragment : Fragment() {
                 setupAction()
                 setupAboutGedung()
                 setupAboutMess()
+
             }
         }
     }
@@ -68,8 +64,10 @@ class HomeFragment : Fragment() {
     private fun setupAdapter() {
         binding.rvPhotoView.layoutManager = LinearLayoutManager(requireContext(), LinearLayoutManager.HORIZONTAL, false)
 
-        val adapter = MenuAdapter(photoUrls)
+        val adapter = MenuAdapter(homeViewModel.dashboardPhoto)
         binding.rvPhotoView.adapter = adapter
+        binding.rvPhotoView.visibility = View.VISIBLE
+        binding.progressBar.visibility = View.GONE
     }
 
     private fun setupAboutMess() {
@@ -82,7 +80,7 @@ class HomeFragment : Fragment() {
                 }
                 is Result.Success -> {
                     result.data.guesthouseMedia.firstOrNull()?.url?.let { url ->
-                        photoUrls.add(url)
+                        sendUrl(url)
                     }
 
                     binding.aboutMess.setOnClickListener {
@@ -94,6 +92,15 @@ class HomeFragment : Fragment() {
                 is Result.Error -> {
                     Toast.makeText(requireActivity(), "Tidak dapat mengambil data tentang Mess Pemko", Toast.LENGTH_SHORT).show()
                 }
+            }
+        }
+    }
+
+    private fun sendUrl(url: String) {
+        if(homeViewModel.dashboardPhoto.count() < 2 && homeViewModel.dashboardPhoto.firstOrNull() != url){
+            homeViewModel.addPhotos(url)
+            if(homeViewModel.dashboardPhoto.count() == 2){
+                setupAdapter()
             }
         }
     }
@@ -115,11 +122,9 @@ class HomeFragment : Fragment() {
                 }
                 is Result.Success -> {
                     result.data.media.firstOrNull()?.url?.let { url ->
-                        photoUrls.add(url)
-                        Log.e("photoUrls", "photo2 $photoUrls")
-
+                        sendUrl(url)
                     }
-                    setupAdapter()
+
                     binding.aboutGedung.setOnClickListener {
                         val intent = Intent(requireActivity(), AboutActivity::class.java)
                         intent.putExtra(AboutActivity.KEY_CITYHALL_ID, result.data.id)
@@ -150,6 +155,12 @@ class HomeFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onResume() {
+        super.onResume()
+        homeViewModel.clearDashboardPhotos()
+        setupWelcome()
     }
 }
 

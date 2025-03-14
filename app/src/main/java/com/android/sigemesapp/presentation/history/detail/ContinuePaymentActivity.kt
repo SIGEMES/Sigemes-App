@@ -176,7 +176,7 @@ class ContinuePaymentActivity : AppCompatActivity() {
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(5000))
         binding.ppn.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
-        binding.priceItemName.text = String.format("Kamar ${cityHall.cityHallPricing.cityHall.name}, Acara ${cityHall.cityHallPricing.activityType}, ${calculateDaysUTC(cityHall.startDate, cityHall.endDate)} hari")
+        binding.priceItemName.text = String.format("${cityHall.cityHallPricing.cityHall.name}, Acara ${cityHall.cityHallPricing.activityType}, ${calculateDaysUTC(cityHall.startDate, cityHall.endDate)} hari")
         binding.cardRincianPesanan1.setOnClickListener {
             val detailDialog = DetailDialog.newInstance("Gedung", cityhallRentData = cityHall)
             detailDialog.show(supportFragmentManager, "DetailDialog")
@@ -278,7 +278,7 @@ class ContinuePaymentActivity : AppCompatActivity() {
             showAlertDialog(
                 this,
                 title = "Apakah Anda Yakin?",
-                message = "Apakah Anda Ingin Membatalkan Pesanan?",
+                message = "Apakah Anda Ingin Membatalkan Pemesanan Ini?",
                 positiveButtonText = "Ya, Batalkan",
                 negativeButtonText = "Kembali",
                 onPositive = { navigateBack(rentId) }
@@ -315,6 +315,11 @@ class ContinuePaymentActivity : AppCompatActivity() {
             }
             else -> super.onOptionsItemSelected(item)
         }
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer?.cancel()
     }
 
 }

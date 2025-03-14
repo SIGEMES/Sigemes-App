@@ -1,5 +1,6 @@
 package com.android.sigemesapp.presentation.home
 
+import android.net.Uri
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -22,6 +23,17 @@ class HomeViewModel @Inject constructor(
 
     private val _cityHall = MutableLiveData<Result<CityHallData>>()
     val cityHall: LiveData<Result<CityHallData>> get() = _cityHall
+
+    private val _dashboardPhoto = mutableListOf<String>()
+    val dashboardPhoto: List<String> get() = _dashboardPhoto
+
+    fun addPhotos(newPhotos: String) {
+        _dashboardPhoto.add(newPhotos)
+    }
+
+    fun clearDashboardPhotos() {
+        _dashboardPhoto.clear()
+    }
 
     fun getCityHall(id: Int, startDate: String, endDate: String){
         viewModelScope.launch {

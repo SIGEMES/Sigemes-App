@@ -4,6 +4,7 @@ import android.content.Intent
 import android.net.Uri
 import android.os.Bundle
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
@@ -86,11 +87,26 @@ class DetailGedungActivity : AppCompatActivity() {
         detailViewModel.detailCityHall.observe(this){ result ->
             when (result) {
                 is Result.Loading -> {
-
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.rvPhotoCityhall.visibility = View.GONE
+                    binding.cardGeneralInfo.visibility = View.GONE
+                    binding.cardAbout.visibility = View.GONE
+                    binding.cardUlasan.visibility = View.GONE
+                    binding.cardSelectEventType.visibility = View.GONE
+                    binding.cardRincianHarga.visibility = View.GONE
+                    binding.checkoutButton.visibility = View.GONE
                 }
                 is Result.Success -> {
                     val cityHall = result.data
                     setCityHallDetail(cityHall)
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvPhotoCityhall.visibility = View.VISIBLE
+                    binding.cardGeneralInfo.visibility = View.VISIBLE
+                    binding.cardAbout.visibility = View.VISIBLE
+                    binding.cardUlasan.visibility = View.VISIBLE
+                    binding.cardSelectEventType.visibility = View.VISIBLE
+                    binding.cardRincianHarga.visibility = View.VISIBLE
+                    binding.checkoutButton.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
                     Toast.makeText(this, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
