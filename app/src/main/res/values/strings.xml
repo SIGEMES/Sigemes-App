@@ -142,13 +142,13 @@
     <string name="kebijakan_khusus">Kebijakan Khusus</string>
     <string name="refund_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar kemudian Anda membatalkan pesanan, maka biaya pemesanan tidak dapat dikembalikan.</string>
     <string name="reschedule_text_cityhall">- Apabila Gedung sudah dipesan dan sudah dibayar, maka Anda tidak dapat mengganti jadwal pemesanan.</string>
-    <string name="cityhall_payment_info_text">- Pembayaran untuk penyewaan Gedung Adam Malik dapat dilakukan paling lambat satu minggu sebelum acara.</string>
+    <string name="cityhall_payment_info_text">- Penyewaan Gedung Adam Malik hanya dapat dilakukan untuk maksimal 2 minggu dari hari ini.</string>
     <string name="kebijakan_cityhall">- Kami mohon pengertiannya. Jika pada tanggal yang sama terdapat acara pemerintahan, pesanan Anda mungkin perlu dibatalkan atau dijadwalkan ulang sesuai ketentuan Peraturan Walikota.</string>
     <string name="kategori_acara">- Kategori Acara:</string>
     <string name="durasi_sewa_gedung">- Durasi sewa gedung:</string>
     <string name="_1_hari">1 hari</string>
     <string name="checkout_gedung_ini">Checkout Gedung Ini</string>
-    <string name="edit_profil">Edit Profil</string>
+    <string name="edit_profil">Ubah Data Akun</string>
     <string name="durasi_sewa">- Durasi Sewa</string>
     <string name="tentang_mess_pemko">Tentang Mess Pemko</string>
     <string name="tentang_gedung_adam_malik">Tentang Gedung Adam Malik</string>
@@ -187,6 +187,9 @@
     </integer-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="desc_tutorial">💡 Di video ini, terdapat 4 tutorial:\n\n00:06 - Tutorial pemesanan mess\n01:34 - Tutorial pembatalan pemesanan mess \n02:03 - Tutorial pemesanan gedung Adam Malik\n02:54 - Tutorial pembatalan pemesanan gedung Adam Malik</string>
+    <string name="title_tutorial">Selamat datang di tutorial penggunaan aplikasi SiGEMES! 🎉</string>
+    <string name="warning_tutorial">*mohon diperhatikan bahwa pembatalan pemesanan hanya dapat dilakukan apabila belum melakukan pembayaran. Selamat menyaksikan. Terima kasih.</string>
 
 
 </resources>

@@ -83,8 +83,8 @@ class DetailMessActivity : AppCompatActivity() {
         startDateApi = ymf.format(Date(startDate))
         endDateApi = ymf.format(Date(endDate))
 
-        setupReviewCount(guesthouseId, roomId)
         observeGuesthouseData(guesthouseId)
+        setupReviewCount(guesthouseId, roomId)
         observeRoomData(guesthouseId, roomId)
         setupAction()
 
@@ -94,7 +94,6 @@ class DetailMessActivity : AppCompatActivity() {
         binding.backButton.setOnClickListener {
             finish()
         }
-
     }
 
     private fun observeGuesthouseData(guesthouseId: Int) {
@@ -103,11 +102,20 @@ class DetailMessActivity : AppCompatActivity() {
         detailViewModel.guesthouseResult.observe(this){ result ->
             when (result) {
                 is Result.Loading -> {
-
+                    binding.progressBar.visibility = View.VISIBLE
+                    binding.rvPhotoMess.visibility = View.GONE
+                    binding.cardUlasan.visibility = View.GONE
+                    binding.generalInfoCard.visibility = View.GONE
+                    binding.cardAbout.visibility = View.GONE
                 }
                 is Result.Success -> {
                     val guesthouse = result.data
                     setGuesthouseDetail(guesthouse)
+                    binding.progressBar.visibility = View.GONE
+                    binding.rvPhotoMess.visibility = View.VISIBLE
+                    binding.cardUlasan.visibility = View.VISIBLE
+                    binding.generalInfoCard.visibility = View.VISIBLE
+                    binding.cardAbout.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
                     Toast.makeText(this, "Error: ${result.message}", Toast.LENGTH_SHORT).show()
@@ -123,11 +131,12 @@ class DetailMessActivity : AppCompatActivity() {
         detailViewModel.detailRoom.observe(this){ result ->
             when (result) {
                 is Result.Loading -> {
-
+                    binding.cardDetailRoom.visibility = View.GONE
                 }
                 is Result.Success -> {
                     val room = result.data
                     setRoomDetail(room, guesthouseId, roomId)
+                    binding.cardDetailRoom.visibility = View.VISIBLE
                 }
                 is Result.Error -> {
                     Toast.makeText(this, "Error: ${result.message}", Toast.LENGTH_SHORT).show()

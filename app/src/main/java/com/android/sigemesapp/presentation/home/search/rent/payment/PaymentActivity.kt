@@ -596,11 +596,12 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun navigateBack() {
-        if(before == "continue"){
-            finish()
-        } else {
-            finish()
-        }
+        finish()
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        countDownTimer?.cancel()
     }
 
 }
