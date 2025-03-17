@@ -142,7 +142,7 @@ class PaymentActivity : AppCompatActivity() {
     }
 
     private fun createMessRent() {
-        rentViewModel.createGuesthouseRent(pricingId, 1, startDate, endDate, gender)
+        rentViewModel.createGuesthouseRent(pricingId, slot, startDate, endDate, gender)
         rentViewModel.guesthouseRentResult.observe(this){ result ->
             when (result) {
                 is Result.Loading -> {
@@ -354,6 +354,7 @@ class PaymentActivity : AppCompatActivity() {
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(550))
         binding.priceRange.text = String.format("Rp %s",
             NumberFormat.getNumberInstance(Locale("id", "ID")).format(guesthouseRent.payment.amount + 5550))
+
 
         binding.paymentMethodCard.setOnClickListener {
             initializeMidtransSDK()

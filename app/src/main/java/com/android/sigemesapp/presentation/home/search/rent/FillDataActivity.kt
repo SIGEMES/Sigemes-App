@@ -32,6 +32,7 @@ class FillDataActivity : AppCompatActivity() {
     private var itemName = ""
     private var pricingId = -1
     private var category = ""
+    private var slot = -1
 
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
@@ -70,6 +71,7 @@ class FillDataActivity : AppCompatActivity() {
         receivedDuration = intent.getIntExtra(KEY_DURATION, -1)
         pricePerDay = intent.getIntExtra(EXTRA_PRICE_PER_NIGHT, -1)
         pricingId = intent.getIntExtra(EXTRA_PRICING_ID, -1)
+        slot = intent.getIntExtra(EXTRA_SLOT, -1)
 
         val ymf = SimpleDateFormat("yyyy-MM-dd", Locale("id", "ID"))
 
@@ -169,7 +171,7 @@ class FillDataActivity : AppCompatActivity() {
     private fun navigateToPaymentGuesthouse() {
         val intent = Intent(this, PaymentActivity::class.java)
         intent.putExtra(EXTRA_PRICING_ID, pricingId)
-        intent.putExtra(EXTRA_SLOT, 1)
+        intent.putExtra(EXTRA_SLOT, slot)
         intent.putExtra(EXTRA_START_DATE, startDateApi)
         intent.putExtra(EXTRA_END_DATE, endDateApi)
         intent.putExtra(EXTRA_GENDER, gender)
