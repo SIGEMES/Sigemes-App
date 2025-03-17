@@ -45,6 +45,7 @@ class DetailGedungActivity : AppCompatActivity() {
     private var pricingId = -1
     private var gender = ""
 
+
     companion object {
         const val KEY_CITYHALL_ID = "key_cityhall_id"
         const val EXTRA_START_DATE = "extra_start_date"

@@ -47,6 +47,7 @@ class DetailMessActivity : AppCompatActivity() {
     private var pricePerNight = -1
     private var itemName = ""
     private var pricingId = -1
+    private var slot = -1
 
     companion object {
         const val KEY_ROOM_ID = "key_room_id"
@@ -60,6 +61,7 @@ class DetailMessActivity : AppCompatActivity() {
         const val EXTRA_PRICE_PER_NIGHT = "extra_price_per_night"
         const val EXTRA_ITEM_NAME = "extra_item_name"
         const val EXTRA_PRICING_ID = "extra_pricing_id"
+        const val EXTRA_SLOT = "extra_slot"
 
     }
 
@@ -170,6 +172,7 @@ class DetailMessActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
     }
 
     private fun setRoomDetail(room: DetailRoom, guesthouseId: Int, roomId: Int) {
@@ -247,6 +250,12 @@ class DetailMessActivity : AppCompatActivity() {
             binding.renterType.text = pricing[index].retributionType
             rentType = pricing[index].retributionType
 
+            if(rentType.contains("kamar", ignoreCase = true)){
+                slot = room.totalSlot
+            } else {
+                slot = 1
+            }
+
             binding.pricePerNight.text = String.format("Rp %s",
                 NumberFormat.getNumberInstance(Locale("id", "ID")).format(pricePerDay))
 
@@ -286,6 +295,7 @@ class DetailMessActivity : AppCompatActivity() {
             intent.putExtra(EXTRA_PRICE_PER_NIGHT, pricePerNight)
             intent.putExtra(EXTRA_ITEM_NAME, itemName)
             intent.putExtra(EXTRA_PRICING_ID, pricingId)
+            intent.putExtra(EXTRA_SLOT, slot)
             startActivity(intent)
         }
     }
