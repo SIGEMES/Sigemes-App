@@ -8,7 +8,7 @@
     <string name="riwayat">Riwayat</string>
     <string name="akun">Akun</string>
     <string name="password_too_short">Kata sandi terlalu pendek, harus lebih dari 8 karakter</string>
-    <string name="name_too_short">Karakter nama terlalu pendek, harus lebih dari 2 karakter</string>
+    <string name="name_too_short">Karakter nama terlalu pendek, harus lebih dari 8 karakter</string>
     <string name="phoneNum_too_short">Nomor handphone terlalu pendek, harus lebih dari 9 karakter</string>
     <string name="invalid_email">Email tidak valid, format: nama@domain.com</string>
     <string name="welcome">Selamat Datang!</string>
