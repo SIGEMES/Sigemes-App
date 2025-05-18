@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/softblue"
+    tools:context=".presentation.home.search.SearchActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/menu_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toTopOf="parent"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="20dp">
+
+                <TextView
+                    android:id="@+id/title"
+                    style="@style/TextBoldH5"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:text="@string/title_1"
+                    android:textAlignment="center"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/pick_range_date"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextH6"
+                    android:text="@string/pilih_rentang_tanggal_check_in_dan_check_out"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/title"/>
+
+                <com.google.android.material.textfield.TextInputLayout
+                    android:id="@+id/mtrl_picker_text_input_date"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:layout_marginTop="5dp"
+                    app:layout_constraintTop_toBottomOf="@id/pick_range_date"
+                    android:minHeight="48dp"
+                    app:startIconDrawable="@drawable/calendar"
+                    app:startIconTint="@color/facility">
+
+                    <com.google.android.material.textfield.TextInputEditText
+                        android:id="@+id/date_picker_actions"
+                        android:layout_width="match_parent"
+                        android:layout_height="43dp"
+                        android:ems="10"
+                        android:inputType="date"
+                        android:focusable="false"
+                        android:clickable="true"
+                        tools:ignore="SpeakableTextPresentCheck" />
+                </com.google.android.material.textfield.TextInputLayout>
+
+                <TextView
+                    android:id="@+id/malam_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextH6"
+                    android:text="1"
+                    android:textColor="@color/facility"
+                    app:layout_constraintStart_toStartOf="parent"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginStart="16dp"
+                    app:layout_constraintTop_toBottomOf="@id/mtrl_picker_text_input_date"/>
+
+                <TextView
+                    android:id="@+id/malam_or_days"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    style="@style/TextH6"
+                    android:text="malam"
+                    android:textColor="@color/facility"
+                    app:layout_constraintStart_toEndOf="@id/malam_count"
+                    app:layout_constraintBottom_toBottomOf="@id/malam_count"
+                    android:layout_marginStart="5dp"
+                    app:layout_constraintTop_toTopOf="@id/malam_count"/>
+
+<!--                <TextView-->
+<!--                    android:id="@+id/pick_room_person"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:text="Pilih jumlah kamar / tamu"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/malam_count"/>-->
+
+
+<!--                <com.google.android.material.textfield.TextInputLayout-->
+<!--                    android:id="@+id/room_person_picker"-->
+<!--                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:visibility="visible"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    android:clickable="true"-->
+<!--                    android:focusable="false"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/pick_room_person"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    app:startIconDrawable="@drawable/room_person"-->
+<!--                    app:startIconTint="@color/facility">-->
+
+<!--                    <com.google.android.material.textfield.TextInputEditText-->
+<!--                        android:id="@+id/room_person"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="43dp"-->
+<!--                        android:ems="10"-->
+<!--                        android:inputType="date"-->
+<!--                        android:focusable="false"-->
+<!--                        android:clickable="true"-->
+<!--                        tools:ignore="SpeakableTextPresentCheck" />-->
+<!--                </com.google.android.material.textfield.TextInputLayout>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/pick_data_pemesan"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:text="Data Pemesan"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    android:layout_marginTop="10dp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/malam_or_days"/>-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/card_data_pemesan"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintEnd_toEndOf="parent"-->
+<!--                    app:strokeWidth="1dp"-->
+<!--                    app:strokeColor="@color/onGray"-->
+<!--                    app:cardCornerRadius="8dp"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    app:layout_constraintTop_toBottomOf="@+id/pick_data_pemesan">-->
+
+<!--                    <androidx.constraintlayout.widget.ConstraintLayout-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="16dp">-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/user_name"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="Tiara Fitra Ramadhani Siregar"-->
+<!--                            style="@style/TextH6"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintTop_toTopOf="parent"/>-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/user_email"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/email_address"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            style="@style/TextH6"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/user_name"/>-->
+
+<!--                        <TextView-->
+<!--                            android:id="@+id/user_gender"-->
+<!--                            android:layout_width="wrap_content"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            android:text="@string/jenis_kelamin"-->
+<!--                            app:layout_constraintTop_toTopOf="@id/user_email"-->
+<!--                            app:layout_constraintBottom_toBottomOf="@id/user_email"-->
+<!--                            style="@style/TextH6"-->
+<!--                            app:layout_constraintStart_toEndOf="@id/user_email"-->
+<!--                            android:layout_marginStart="10dp"/>-->
+
+<!--                        <View-->
+<!--                            android:id="@+id/divider2"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="1dp"-->
+<!--                            android:background="@color/onGray"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/user_gender"/>-->
+
+<!--                        <RadioGroup-->
+<!--                            android:id="@+id/radio_group_pemesan"-->
+<!--                            android:layout_width="match_parent"-->
+<!--                            android:layout_height="wrap_content"-->
+<!--                            app:layout_constraintTop_toBottomOf="@id/divider2"-->
+<!--                            android:layout_marginTop="5dp"-->
+<!--                            app:layout_constraintStart_toStartOf="parent"-->
+<!--                            app:layout_constraintEnd_toEndOf="parent"-->
+<!--                            android:orientation="vertical">-->
+
+<!--                            <RadioButton-->
+<!--                                android:id="@+id/radio_pribadi"-->
+<!--                                style="@style/TextH6"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="25dp"-->
+<!--                                android:text="Saya pesan untuk pribadi"-->
+<!--                                tools:ignore="TouchTargetSizeCheck" />-->
+
+<!--                            <RadioButton-->
+<!--                                android:id="@+id/radio_orang_lain"-->
+<!--                                style="@style/TextH6"-->
+<!--                                android:layout_width="wrap_content"-->
+<!--                                android:layout_height="30dp"-->
+<!--                                android:text="Saya pesan untuk orang lain"-->
+<!--                                tools:ignore="TouchTargetSizeCheck" />-->
+<!--                        </RadioGroup>-->
+
+
+
+
+
+<!--                    </androidx.constraintlayout.widget.ConstraintLayout>-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+<!--                <TextView-->
+<!--                    android:id="@+id/pick_gender"-->
+<!--                    style="@style/TextH6"-->
+<!--                    android:layout_width="wrap_content"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    android:layout_marginTop="8dp"-->
+<!--                    android:text="Pilih Jenis Kelamin"-->
+<!--                    android:visibility="gone"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/card_data_pemesan" />-->
+
+<!--                <com.google.android.material.card.MaterialCardView-->
+<!--                    android:id="@+id/gender"-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="wrap_content"-->
+<!--                    app:cardCornerRadius="4dp"-->
+<!--                    android:minHeight="48dp"-->
+<!--                    android:visibility="gone"-->
+<!--                    android:layout_marginTop="5dp"-->
+<!--                    app:strokeColor="@color/onGray"-->
+<!--                    app:layout_constraintStart_toStartOf="parent"-->
+<!--                    app:layout_constraintTop_toBottomOf="@id/pick_gender"-->
+<!--                    app:strokeWidth="1dp">-->
+
+<!--                    <Spinner-->
+<!--                        android:id="@+id/spinner_crops"-->
+<!--                        android:layout_width="match_parent"-->
+<!--                        android:layout_height="wrap_content"-->
+<!--                        android:padding="12dp"-->
+<!--                        android:entries="@array/gender_options"-->
+<!--                        tools:ignore="TouchTargetSizeCheck" />-->
+
+<!--                </com.google.android.material.card.MaterialCardView>-->
+
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/search_button"
+                    android:layout_width="match_parent"
+                    android:layout_height="45dp"
+                    android:layout_marginTop="10dp"
+                    android:text="Cari Ketersediaan"
+                    android:textAllCaps="false"
+                    app:cornerRadius="8dp"
+                    app:backgroundTint="@color/babyblue"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/malam_or_days"
+                    app:layout_constraintStart_toStartOf="parent"
+                    tools:ignore="TouchTargetSizeCheck" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+        <com.google.android.material.card.MaterialCardView
+            android:id="@+id/rule_date_card"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginHorizontal="20dp"
+            android:layout_marginTop="16dp"
+            app:layout_constraintTop_toBottomOf="@id/menu_card"
+            app:cardCornerRadius="20dp"
+            app:strokeWidth="1.5dp"
+            app:strokeColor="@color/black">
+
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingVertical="16dp"
+                android:paddingHorizontal="20dp">
+
+                <ImageView
+                    android:id="@+id/warning_icon"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    app:tint="@color/orange"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    android:src="@drawable/baseline_warning_amber_24"/>
+
+                <TextView
+                    android:id="@+id/title_rule"
+                    style="@style/TextBoldH6"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Ketentuan Pemilihan Tanggal Penyewaan"
+                    android:textAlignment="center"
+                    android:textColor="@color/orange"
+                    android:layout_marginStart="8dp"
+                    app:layout_constraintBottom_toBottomOf="@+id/warning_icon"
+                    app:layout_constraintStart_toEndOf="@+id/warning_icon"
+                    app:layout_constraintTop_toTopOf="@+id/warning_icon" />
+
+                <TextView
+                    android:id="@+id/rule1"
+                    style="@style/TextH6"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:text="Tanggal"
+                    android:layout_marginStart="5dp"
+                    android:textColor="@color/orange"
+                    app:layout_constraintStart_toStartOf="@+id/warning_icon"
+                    app:layout_constraintTop_toBottomOf="@+id/title_rule" />
+
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </com.google.android.material.card.MaterialCardView>
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</ScrollView>
